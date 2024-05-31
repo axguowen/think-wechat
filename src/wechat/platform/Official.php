@@ -31,10 +31,10 @@ class Official extends Platform
         'appsecret' => '',
         // 是否使用稳定版接口调用凭证
         'stable_access_token' => false,
-        // 消息接收服务器Token
-        'token' => 'itzjj',
-        // 消息接收服务器加解密密钥
-        'encodingaeskey' => '',
+        // 接收消息时的校验Token
+        'token' => '',
+        // 消息加解密密钥
+        'encoding_aes_key' => '',
     ];
 
     /**

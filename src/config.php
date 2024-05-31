@@ -24,10 +24,10 @@ return [
             'appsecret' => '',
             // 是否使用稳定版接口调用凭证
             'stable_access_token' => false,
-            // 消息接收服务器Token
+            // 接收消息时的校验Token
             'token' => '',
-            // 消息接收服务器加解密密钥
-            'encodingaeskey' => '',
+            // 消息加解密密钥
+            'encoding_aes_key' => '',
         ],
         // 开放平台
         'open' => [
@@ -57,6 +57,10 @@ return [
             'corpid' => '',
             // 服务商的secret
             'provider_secret' => '',
+            // 接收消息时的校验Token
+            'token' => '',
+            // 消息加解密密钥
+            'encoding_aes_key' => '',
         ],
         // 企业微信服务商第三方应用(或代开发应用模板)
         'work_suite' => [
