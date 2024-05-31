@@ -126,7 +126,7 @@ abstract class Platform
     protected function init()
     {
         // 初始化缓存器
-        $this->initAccessTokenCacheHandler();
+        $this->initCacheHandler();
         // 如果配置了接口调用凭证
         if (isset($this->options['access_token']) && !empty($this->options['access_token'])) {
             // 设置接口调用凭证
@@ -142,11 +142,11 @@ abstract class Platform
     }
 
 	/**
-     * 初始化接口调用凭证缓存器
+     * 初始化缓存器
      * @access protected
      * @return void
      */
-    protected function initAccessTokenCacheHandler()
+    protected function initCacheHandler()
     {
         // 设置默认接口调用凭证缓存获取器
         $this->accessTokenGetter = Cache::class . '::get';
@@ -167,31 +167,30 @@ abstract class Platform
 
     /**
      * 获取接口调用凭证
-     * @access protected
+     * @access public
+     * @param array $options 配置参数
      * @return array
      */
-    protected function getAccessToken()
+    public function getAccessToken(array $options = [])
     {
         // 当前已存在
         if (!empty($this->accessToken)) {
             return [$this->accessToken, null];
         }
         // 从缓存获取
-        $this->accessToken = $this->getAccessTokenCache();
+        $this->accessToken = $this->getAccessTokenCache($options);
         // 缓存存在
         if (!empty($this->accessToken)) {
             return [$this->accessToken, null];
         }
         // 在线获取
-        $getAccessTokenResult = $this->getAccessTokenOnline();
+        $getAccessTokenResult = $this->getAccessTokenOnline($options);
         // 失败
         if(is_null($getAccessTokenResult[0])){
             return $getAccessTokenResult;
         }
-        // 获取缓存数据
-        $accessTokenData = $getAccessTokenResult[0];
         // 更新当前凭证
-        $this->updateAccessToken($accessTokenData['access_token'], $accessTokenData['expires_in']);
+        $this->updateAccessToken($getAccessTokenResult[0]);
         // 返回
         return [$this->accessToken, null];
     }
@@ -199,9 +198,10 @@ abstract class Platform
     /**
      * 获取接口调用凭证缓存
      * @access protected
+     * @param array $options 配置参数
      * @return string
      */
-    protected function getAccessTokenCache()
+    protected function getAccessTokenCache(array $options = [])
     {
         // 如果是接口调用凭证已经无效
         if ($this->accessTokenInvalid) {
@@ -210,24 +210,37 @@ abstract class Platform
         // 获取缓存键名
         $cacheKey = $this->getAccessCacheKey();
         // 返回
-        return call_user_func_array($this->accessTokenGetter, [$cacheKey]);
+        return call_user_func_array($this->accessTokenGetter, [$cacheKey, $options]);
     }
 
     /**
      * 更新当前接口调用凭证
-     * @access public
-     * @param string $accessToken
-     * @param int $expiresIn
-     * @return bool
+     * @access protected
+     * @param array $data
+     * @return $this
      */
-    public function updateAccessToken(string $accessToken, int $expiresIn)
+    protected function updateAccessToken(array $data = [])
     {
-        // 设置调用凭证
-        $this->accessToken = $accessToken;
+        // 调用凭证
+        $accessToken = '';
+        if(!empty($data['access_token'])){
+            $accessToken = $data['access_token'];
+        }
+        
+        // 到期时间
+        $expiresIn = 0;
+        if(!empty($data['expires_in'])){
+            // 设置调用凭证
+            $expiresIn = $data['expires_in'];
+        }
         // 获取缓存键名
         $cacheKey = $this->getAccessCacheKey();
+        // 设置调用凭证
+        $this->accessToken = $accessToken;
+        // 调用缓存修改器方法
+        call_user_func_array($this->accessTokenSetter, [$cacheKey, $accessToken, $expiresIn]);
         // 返回
-        return call_user_func_array($this->accessTokenSetter, [$cacheKey, $accessToken, $expiresIn]);
+        return $this;
     }
 
     /**
@@ -425,7 +438,8 @@ abstract class Platform
     /**
      * 在线获取接口调用凭证
      * @access protected
+     * @param array $options 配置参数
      * @return array
      */
-    abstract protected function getAccessTokenOnline();
+    abstract protected function getAccessTokenOnline(array $options = []);
 }

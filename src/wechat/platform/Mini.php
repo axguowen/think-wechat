@@ -16,32 +16,28 @@ use think\wechat\utils\HttpClient;
 use think\wechat\utils\Tools;
 
 /**
- * 微信公众号平台
+ * 微信小程序平台
  */
-class Official extends Platform
+class Mini extends Platform
 {
 	/**
      * 平台配置参数
      * @var array
      */
     protected $options = [
-        // 开发者ID
+        // 小程序ID
         'appid' => '',
-        // 开发者密码
+        // 小程序密钥
         'appsecret' => '',
         // 是否使用稳定版接口调用凭证
         'stable_access_token' => false,
-        // 消息接收服务器Token
-        'token' => 'itzjj',
-        // 消息接收服务器加解密密钥
-        'encodingaeskey' => '',
     ];
 
     /**
      * 服务的命名空间
      * @var string
      */
-    protected $serviceNamespace = '\\think\\wechat\\platform\\service\\official\\';
+    protected $serviceNamespace = '\\think\\wechat\\platform\\service\\mini\\';
 
     /**
      * 获取接口调用凭证缓存键名
@@ -50,7 +46,7 @@ class Official extends Platform
      */
     protected function getAccessCacheKey()
     {
-        return 'official_access_token_' . $this->options['appid'];
+        return 'mini_access_token_' . $this->options['appid'];
     }
 
     /**
