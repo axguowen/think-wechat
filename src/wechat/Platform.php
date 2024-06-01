@@ -118,6 +118,27 @@ abstract class Platform
         return $this->init();
     }
 
+    /**
+     * 获取平台配置
+     * @access public
+     * @param null|string $name 名称
+     * @param mixed $default 默认值
+     * @return mixed
+     */
+    public function getConfig(string $name = null, $default = null)
+    {
+        // 如果未指定则获取全部
+        if(empty($name)) {
+            return $this->options;
+        }
+        // 如果存在配置
+        if (isset($this->options[$name])) {
+            return $this->options[$name];
+        }
+        // 返回默认
+        return $default;
+    }
+
 	/**
      * 初始化
      * @access protected
@@ -168,23 +189,22 @@ abstract class Platform
     /**
      * 获取接口调用凭证
      * @access public
-     * @param array $options 配置参数
      * @return array
      */
-    public function getAccessToken(array $options = [])
+    public function getAccessToken()
     {
         // 当前已存在
         if (!empty($this->accessToken)) {
             return [$this->accessToken, null];
         }
         // 从缓存获取
-        $this->accessToken = $this->getAccessTokenCache($options);
+        $this->accessToken = $this->getAccessTokenCache();
         // 缓存存在
         if (!empty($this->accessToken)) {
             return [$this->accessToken, null];
         }
         // 在线获取
-        $getAccessTokenResult = $this->getAccessTokenOnline($options);
+        $getAccessTokenResult = $this->getAccessTokenForce();
         // 失败
         if(is_null($getAccessTokenResult[0])){
             return $getAccessTokenResult;
@@ -198,10 +218,9 @@ abstract class Platform
     /**
      * 获取接口调用凭证缓存
      * @access protected
-     * @param array $options 配置参数
      * @return string
      */
-    protected function getAccessTokenCache(array $options = [])
+    protected function getAccessTokenCache()
     {
         // 如果是接口调用凭证已经无效
         if ($this->accessTokenInvalid) {
@@ -210,16 +229,16 @@ abstract class Platform
         // 获取缓存键名
         $cacheKey = $this->getAccessCacheKey();
         // 返回
-        return call_user_func_array($this->accessTokenGetter, [$cacheKey, $options]);
+        return call_user_func_array($this->accessTokenGetter, [$cacheKey]);
     }
 
     /**
      * 更新当前接口调用凭证
-     * @access protected
+     * @access public
      * @param array $data
      * @return $this
      */
-    protected function updateAccessToken(array $data = [])
+    public function updateAccessToken(array $data = [])
     {
         // 调用凭证
         $accessToken = '';
@@ -352,11 +371,11 @@ abstract class Platform
 
     /**
      * 解析接口响应数据
-     * @access protected
+     * @access public
      * @param string $response
      * @return array
      */
-    protected function parseResponseData($response)
+    public function parseResponseData($response)
     {
         // 默认数据
         $data = [];
@@ -436,10 +455,9 @@ abstract class Platform
     abstract protected function getAccessCacheKey();
 
     /**
-     * 在线获取接口调用凭证
+     * 强制重新获取接口调用凭证
      * @access protected
-     * @param array $options 配置参数
      * @return array
      */
-    abstract protected function getAccessTokenOnline(array $options = []);
+    abstract protected function getAccessTokenForce();
 }

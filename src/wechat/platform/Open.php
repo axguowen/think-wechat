@@ -111,28 +111,10 @@ class Open extends Platform
     /**
      * 在线获取接口调用凭证
      * @access protected
-     * @param array $options 配置参数
      * @return array
      */
-    protected function getAccessTokenOnline(array $options = [])
+    protected function getAccessTokenForce()
     {
-        // 如果存在code参数则直接获取token
-        if(!empty($options['code'])){
-            // 接口请求地址
-            $requestUrl = 'https://api.weixin.qq.com/sns/oauth2/access_token';
-            // 参数
-            $query = [
-                'grant_type' => 'authorization_code',
-                'appid' => $this->options['appid'],
-                'secret' => $this->options['appsecret'],
-                'code' => $options['code'],
-            ];
-            // 获取请求结果
-            $response = HttpClient::get($requestUrl, $query);
-            // 获取解析结果
-            return $this->parseResponseData($response);
-        }
-        // 刷新access_token
         // 接口请求地址
         $requestUrl = 'https://api.weixin.qq.com/sns/oauth2/refresh_token';
         // 获取刷新token
@@ -156,7 +138,6 @@ class Open extends Platform
     /**
      * 获取刷新Token
      * @access protected
-     * @param array $options 配置参数
      * @return array
      */
     protected function getRefreshToken()
@@ -166,7 +147,7 @@ class Open extends Platform
             return [$this->refreshToken, null];
         }
         // 从缓存获取
-        $this->refreshToken = $this->getRefreshTokenCache($options);
+        $this->refreshToken = $this->getRefreshTokenCache();
         // 缓存存在
         if (!empty($this->refreshToken)) {
             return [$this->refreshToken, null];
@@ -190,11 +171,11 @@ class Open extends Platform
 
     /**
      * 更新当前接口调用凭证
-     * @access protected
+     * @access public
      * @param array $data
      * @return $this
      */
-    protected function updateAccessToken(array $data = [])
+    public function updateAccessToken(array $data = [])
     {
         // 调用凭证
         $accessToken = '';

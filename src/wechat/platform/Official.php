@@ -54,32 +54,31 @@ class Official extends Platform
     }
 
     /**
-     * 在线获取接口调用凭证
+     * 强制重新获取接口调用凭证
      * @access protected
-     * @param array $options 配置参数
      * @return array
      */
-    protected function getAccessTokenOnline(array $options = [])
+    protected function getAccessTokenForce()
     {
         // 如果使用稳定版接口调用凭证
         if($this->options['stable_access_token']){
             // 获取请求结果
-            $response = $this->getStableAccessToken();
+            $response = $this->forceStableAccessToken();
             // 返回解析结果
             return $this->parseResponseData($response);
         }
         // 获取稳定接口调用凭证请求结果
-        $response = $this->getGeneralAccessToken();
+        $response = $this->forceGeneralAccessToken();
         // 返回解析结果
         return $this->parseResponseData($response);
     }
 
     /**
-     * 在线获取普通接口调用凭证
+     * 强制重新获取普通接口调用凭证
      * @access protected
      * @return string
      */
-    protected function getGeneralAccessToken()
+    protected function forceGeneralAccessToken()
     {
         // 接口请求地址
         $requestUrl = 'https://api.weixin.qq.com/cgi-bin/token';
@@ -94,11 +93,11 @@ class Official extends Platform
     }
 
     /**
-     * 在线获取稳定版接口调用凭证
+     * 强制重新获取稳定版接口调用凭证
      * @access protected
      * @return string
      */
-    protected function getStableAccessToken()
+    protected function forceStableAccessToken()
     {
         // 接口请求地址
         $requestUrl = 'https://api.weixin.qq.com/cgi-bin/stable_token';
