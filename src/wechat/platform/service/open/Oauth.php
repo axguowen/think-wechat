@@ -29,9 +29,68 @@ class Oauth extends Base
      */
     public function getOauthRedirect($redirectUrl, $state = '', $scope = 'snsapi_base')
     {
-        $appid = $this->platform->options['appid'];
+        $appid = $this->platform->getConfig('appid');
         $redirect_uri = urlencode($redirectUrl);
         return "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope={$scope}&state={$state}#wechat_redirect";
+    }
+
+    /**
+     * 通过 code 获取 AccessToken 和 openid
+     * @access public
+     * @param string $code 授权Code值，不传则取GET参数
+     * @return array
+     */
+    public function getOauthAccessToken($code = '')
+    {
+        $appid = $this->platform->getConfig('appid');
+        $secret = $this->platform->getConfig('appsecret');
+        $code = $code;
+        $url = 'https://api.weixin.qq.com/sns/oauth2/access_token';
+        $query = [
+            'grant_type' => 'authorization_code',
+            'appid' => $appid,
+            'secret' => $secret,
+            'code' => $code,
+        ];
+        // 获取请求结果
+        $response = HttpClient::get($url, $query);
+        // 获取解析结果
+        $parseResponseDataResult = $this->parseResponseData($response);
+        // 成功
+        if(!is_null($parseResponseDataResult[0])){
+            // 更新token
+            $this->platform->updateAccessToken($parseResponseDataResult[0]);
+        }
+        // 返回结果
+        return $parseResponseDataResult;
+    }
+
+    /**
+     * 刷新AccessToken并续期
+     * @access public
+     * @param string $refreshToken
+     * @return array
+     */
+    public function getOauthRefreshToken($refreshToken)
+    {
+        $appid = $this->platform->getConfig('appid');
+        $url = 'https://api.weixin.qq.com/sns/oauth2/refresh_token';
+        $query = [
+            'grant_type' => 'refresh_token',
+            'appid' => $appid,
+            'refresh_token' => $refreshToken,
+        ];
+        // 获取请求结果
+        $response = HttpClient::get($url, $query);
+        // 获取解析结果
+        $parseResponseDataResult = $this->parseResponseData($response);
+        // 成功
+        if(!is_null($parseResponseDataResult[0])){
+            // 更新token
+            $this->platform->updateAccessToken($parseResponseDataResult[0]);
+        }
+        // 返回结果
+        return $parseResponseDataResult;
     }
 
     /**
@@ -43,17 +102,18 @@ class Oauth extends Base
      */
     public function checkOauthAccessToken($openid, $accessToken = 'ACCESS_TOKEN')
     {
+        // 如果为空
+        if(empty($accessToken)){
+            $accessToken = 'ACCESS_TOKEN';
+        }
         // 请求地址
         $url = "https://api.weixin.qq.com/sns/auth?access_token={$accessToken}&openid={$openid}";
         // 如果传入了access_token，则直接使用
-        if (!empty($accessToken) && $accessToken != 'ACCESS_TOKEN') {
-            // 获取解析结果
-            $result = json_decode(HttpClient::get($url), true);
-            // 不是数组
-            if(!is_array($result)){
-                return [null, new InvalidResponseException('Invalid response.')];
-            }
-            return [$result, null];
+        if ($accessToken != 'ACCESS_TOKEN') {
+            // 获取请求结果
+            $response = HttpClient::get($url);
+            // 返回解析
+            return $this->parseResponseData($response);
         }
         // 使用当前Token
         return $this->platform->callGetApi($url);
@@ -69,17 +129,18 @@ class Oauth extends Base
      */
     public function getUserInfo($openid, $accessToken = 'ACCESS_TOKEN', $lang = 'zh_CN')
     {
+        // 如果为空
+        if(empty($accessToken)){
+            $accessToken = 'ACCESS_TOKEN';
+        }
         // 请求地址
         $url = "https://api.weixin.qq.com/sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}";
         // 如果传入了access_token，则直接使用
-        if (!empty($accessToken) && $accessToken != 'ACCESS_TOKEN') {
-            // 获取解析结果
-            $result = json_decode(HttpClient::get($url), true);
-            // 不是数组
-            if(!is_array($result)){
-                return [null, new InvalidResponseException('Invalid response.')];
-            }
-            return [$result, null];
+        if ($accessToken != 'ACCESS_TOKEN') {
+            // 获取请求结果
+            $response = HttpClient::get($url);
+            // 返回解析
+            return $this->parseResponseData($response);
         }
         // 使用当前Token
         return $this->platform->callGetApi($url);
