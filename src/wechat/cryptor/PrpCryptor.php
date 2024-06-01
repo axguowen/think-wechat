@@ -73,7 +73,7 @@ class PrpCryptor
             $content = substr($result, 16, strlen($result));
             $len_list = unpack('N', substr($content, 0, 4));
             $xml_len = $len_list[1];
-            return [0, substr($content, 4, $xml_len), substr($content, $xml_len + 4)];
+            return [ErrorCode::$OK, substr($content, 4, $xml_len), substr($content, $xml_len + 4)];
         } catch (\Exception $e) {
             return [ErrorCode::$IllegalBuffer, null];
         }
