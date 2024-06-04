@@ -16,23 +16,22 @@ namespace think\wechat\cryptor;
  */
 class PKCS7Encoder
 {
-
     /**
      * 补位块大小
      * @var int
      */
-    public static $blockSize = 32;
+    protected static $blockSize = 32;
 
     /**
      * 对需要加密的明文进行填充补位
      * @param string $text 需要进行填充补位操作的明文
      * @return string 补齐明文字符串
      */
-    function encode($text)
+    public static function encode($text)
     {
-        $amount_to_pad = PKCS7Encoder::$blockSize - (strlen($text) % PKCS7Encoder::$blockSize);
+        $amount_to_pad = static::$blockSize - (strlen($text) % static::$blockSize);
         if ($amount_to_pad == 0) {
-            $amount_to_pad = PKCS7Encoder::$blockSize;
+            $amount_to_pad = static::$blockSize;
         }
         list($pad_chr, $tmp) = [chr($amount_to_pad), ''];
         for ($index = 0; $index < $amount_to_pad; $index++) {
@@ -46,13 +45,12 @@ class PKCS7Encoder
      * @param string $text 解密后的明文
      * @return string 删除填充补位后的明文
      */
-    function decode($text)
+    public static function decode($text)
     {
         $pad = ord(substr($text, -1));
-        if ($pad < 1 || $pad > PKCS7Encoder::$blockSize) {
+        if ($pad < 1 || $pad > static::$blockSize) {
             $pad = 0;
         }
         return substr($text, 0, strlen($text) - $pad);
     }
-
 }

@@ -9,7 +9,7 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform\service\work\provider;
+namespace think\wechat\platform\service\work\suite;
 
 use think\wechat\cryptor\MsgCryptor;
 use think\wechat\cryptor\ErrorCode;
@@ -32,8 +32,8 @@ class EventReceive extends Base
      */
     public function decrypt($encrypted, $msgSignature, $timestamp, $nonce, $verification = false)
     {
-		// 企业ID
-		$corpid = $this->platform->getConfig('corpid');
+		// 应用SuiteID
+		$suiteId = $this->platform->getConfig('suite_id');
         // 获取token
         $token = $this->platform->getConfig('token');
         // 加密密钥
@@ -58,7 +58,7 @@ class EventReceive extends Base
 		}
 
         // receiveId不正确
-        if ($result[2] != $corpid) {
+        if ($result[2] != $suiteId) {
             return [null, new InvalidArgumentException(ErrorCode::getErrText(ErrorCode::$ValidateReceiveIdError))];
         }
         // 返回

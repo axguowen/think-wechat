@@ -13,7 +13,7 @@ namespace think\wechat\platform\contract;
 
 use think\wechat\utils\DataArray;
 use think\wechat\utils\Tools;
-use think\wechat\cryptor\PrpCryptor;
+use think\wechat\cryptor\MsgCryptor;
 use think\wechat\exception\InvalidArgumentException;
 use think\wechat\exception\InvalidDecryptException;
 use think\wechat\exception\InvalidResponseException;
@@ -95,9 +95,8 @@ class BasicPushEvent
                 if (empty($options['encodingaeskey'])) {
                     throw new InvalidArgumentException("Missing Config -- [encodingaeskey]");
                 }
-                $prpcrypt = new PrpCryptor($this->config->get('encodingaeskey'));
                 $result = Tools::xml2arr($this->postxml);
-                $array = $prpcrypt->decrypt($result['Encrypt']);
+                $array = MsgCryptor::decrypt($result['Encrypt'], $this->config->get('encodingaeskey'));
                 if (intval($array[0]) > 0) {
                     throw new InvalidResponseException($array[1], $array[0]);
                 }
@@ -150,11 +149,10 @@ class BasicPushEvent
     {
         $xml = Tools::arr2xml(empty($data) ? $this->message : $data);
         if ($this->isEncrypt() || $isEncrypt) {
-            $prpcrypt = new PrpCryptor($this->config->get('encodingaeskey'));
             // 如果是第三方平台，加密得使用 component_appid
             $component_appid = $this->config->get('component_appid');
             $appid = empty($component_appid) ? $this->appid : $component_appid;
-            $array = $prpcrypt->encrypt($xml, $appid);
+            $array = MsgCryptor::encrypt($xml, $appid, $this->config->get('encodingaeskey'));
             if ($array[0] > 0) throw new InvalidDecryptException('Encrypt Error.', '0');
             list($timestamp, $encrypt) = [time(), $array[1]];
             $nonce = rand(77, 999) * rand(605, 888) * rand(11, 99);

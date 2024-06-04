@@ -31,6 +31,7 @@ class ErrorCode
     public static $DecodeBase64Error        = 40010;
     public static $GenReturnXmlError        = 40011;
     public static $IllegalIv                = 40012;
+    public static $ValidateReceiveIdError   = 40013;
     public static $errCode = [
         '0'     => '处理成功',
         '40001' => '校验签名失败',
@@ -44,7 +45,8 @@ class ErrorCode
         '40009' => 'Base64编码失败',
         '40010' => 'Base64解码失败',
         '40011' => '生成回包xml失败',
-        '41012' => '不合法的向量',
+        '40012' => '不合法的向量',
+        '40013' => 'ReceiveId校验失败',
     ];
 
     /**
