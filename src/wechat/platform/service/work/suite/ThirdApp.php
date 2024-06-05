@@ -172,4 +172,34 @@ class ThirdApp extends Base
         ];
         return $this->platform->callPostApi($url, $data);
     }
+
+    // +=======================
+    // | 收银台/应用版本付费
+    // +=======================
+    /**
+     * 获取订单列表
+     * @access public
+     * @param int $startTime 起始时间
+     * @param int $endTime 结束时间
+     * @param int $testMode 指定拉取正式或测试授权的订单, 0正式授权, 1测试授权。
+     * @return array
+     */
+    public function getOrderList($startTime, $endTime, $testMode = 0)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_order_list?suite_access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url, ['start_time' => $startTime, 'end_time' => $endTime, 'test_mode' => $testMode,]);
+    }
+
+    /**
+     * 延长试用期
+     * @access public
+     * @param string $buyerCorpid 购买方corpid
+     * @param int $prolongDays 延长天数
+     * @return array
+     */
+    public function prolongTry($buyerCorpid, $prolongDays)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/prolong_try?suite_access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url, ['buyer_corpid' => $buyerCorpid, 'prolong_days' => $prolongDays,]);
+    }
 }

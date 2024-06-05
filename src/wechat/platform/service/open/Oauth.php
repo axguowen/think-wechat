@@ -22,16 +22,20 @@ class Oauth extends Base
     /**
      * Oauth 授权跳转接口
      * @access public
-     * @param string $redirectUrl 授权回跳地址
+     * @param string $redirectUri 授权回跳地址
      * @param string $state 为重定向后会带上state参数(填写a-zA-Z0-9的参数值，最多128字节)
      * @param string $scope 授权类类型(可选值snsapi_base|snsapi_userinfo)
      * @return string
      */
-    public function getOauthRedirect($redirectUrl, $state = '', $scope = 'snsapi_base')
+    public function getOauthRedirect($redirectUri, $state = '', $scope = 'snsapi_base')
     {
         $appid = $this->platform->getConfig('appid');
-        $redirect_uri = urlencode($redirectUrl);
-        return "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope={$scope}&state={$state}#wechat_redirect";
+        // 如果未编码
+        if(!preg_match('/^http(s)?%3A%2F%2F/', $redirectUri)){
+            $redirectUri = urlencode($redirectUri);
+        }
+        $redirectUri = urlencode($redirectUri);
+        return "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirectUri}&response_type=code&scope={$scope}&state={$state}#wechat_redirect";
     }
 
     /**

@@ -22,9 +22,22 @@ class General extends Base
      * @param string $corpid 授权方明文corpid
      * @return array
      */
-    public function getAdminList($corpid)
+    public function corpidToOpencorpid($corpid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/corpid_to_opencorpid?provider_access_token=ACCESS_TOKEN';
         return $this->platform->callPostApi($url, ['corpid' => $corpid]);
+    }
+
+    /**
+     * ID迁移完成状态的设置
+     * @access public
+     * @param string $corpid 授权方明文corpid
+     * @param array $openidType id类型 1-userid与corpid; 3-external_userid
+     * @return array
+     */
+    public function finishOpenidMigration($corpid, array $openidType)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/finish_openid_migration?provider_access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url, ['corpid' => $corpid, 'openid_type' => $openidType]);
     }
 }
