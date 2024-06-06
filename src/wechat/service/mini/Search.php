@@ -9,16 +9,24 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat\service\mini;
+
+use think\wechat\Service;
 
 /**
- * 企业微信服务商第三方应用
+ * 小程序搜索
  */
-class WorkSuiteThird extends contract\WorkSuite
+class Search extends Service
 {
     /**
-     * 服务的命名空间
-     * @var string
+     * 提交小程序页面url及参数信息
+     * @access public
+     * @param array $pages
+     * @return array
      */
-    protected $serviceNamespace = '\\think\\wechat\\service\\work\\suitethird\\';
+    public function submitPages($pages)
+    {
+        $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguideacct?access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url, ['pages' => $pages]);
+    }
 }

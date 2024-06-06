@@ -9,16 +9,13 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat\service\work\suitethird;
+
+use think\wechat\service\work\contract\suite\EventMessage as Service;
 
 /**
- * 企业微信服务商第三方应用
+ * 事件消息服务
  */
-class WorkSuiteThird extends contract\WorkSuite
+class EventMessage extends Service
 {
-    /**
-     * 服务的命名空间
-     * @var string
-     */
-    protected $serviceNamespace = '\\think\\wechat\\service\\work\\suitethird\\';
 }

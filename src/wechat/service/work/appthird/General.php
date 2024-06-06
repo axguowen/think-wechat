@@ -9,16 +9,13 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat\service\work\external;
+
+use think\wechat\service\work\common\General as Base;
 
 /**
- * 企业微信服务商第三方应用
+ * 企业微信通用公共服务
  */
-class WorkSuiteThird extends contract\WorkSuite
+class General extends Base
 {
-    /**
-     * 服务的命名空间
-     * @var string
-     */
-    protected $serviceNamespace = '\\think\\wechat\\service\\work\\suitethird\\';
 }

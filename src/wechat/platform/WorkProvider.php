@@ -39,7 +39,7 @@ class WorkProvider extends Platform
      * 服务的命名空间
      * @var string
      */
-    protected $serviceNamespace = '\\think\\wechat\\platform\\service\\work\\provider\\';
+    protected $serviceNamespace = '\\think\\wechat\\service\\work\\provider\\';
 
     /**
      * 获取接口调用凭证缓存键名

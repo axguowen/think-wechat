@@ -41,7 +41,7 @@ class Official extends Platform
      * 服务的命名空间
      * @var string
      */
-    protected $serviceNamespace = '\\think\\wechat\\platform\\service\\official\\';
+    protected $serviceNamespace = '\\think\\wechat\\service\\official\\';
 
     /**
      * 获取接口调用凭证缓存键名

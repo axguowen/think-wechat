@@ -9,16 +9,25 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat\service\mini;
+
+use think\wechat\Service;
 
 /**
- * 企业微信服务商第三方应用
+ * 小程序运维中心
  */
-class WorkSuiteThird extends contract\WorkSuite
+class Operation extends Service
 {
+
     /**
-     * 服务的命名空间
-     * @var string
+     * 实时日志查询
+     * @access public
+     * @param array $data
+     * @return array
      */
-    protected $serviceNamespace = '\\think\\wechat\\service\\work\\suitethird\\';
+    public function realtimelogSearch($data)
+    {
+        $url = 'https://api.weixin.qq.com/wxaapi/userlog/userlog_search?access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url, $data);
+    }
 }

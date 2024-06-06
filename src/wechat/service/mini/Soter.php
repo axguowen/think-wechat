@@ -9,16 +9,24 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat\service\mini;
+
+use think\wechat\Service;
 
 /**
- * 企业微信服务商第三方应用
+ * 小程序生物认证
  */
-class WorkSuiteThird extends contract\WorkSuite
+class Soter extends Service
 {
     /**
-     * 服务的命名空间
-     * @var string
+     * SOTER 生物认证秘钥签名验证
+     * @access public
+     * @param array $data
+     * @return array
      */
-    protected $serviceNamespace = '\\think\\wechat\\service\\work\\suitethird\\';
+    public function verifySignature($data)
+    {
+        $url = 'https://api.weixin.qq.com/cgi-bin/soter/verify_signature?access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url, $data);
+    }
 }

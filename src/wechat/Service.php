@@ -9,16 +9,28 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat;
 
 /**
- * 企业微信服务商第三方应用
+ * 服务基础类
  */
-class WorkSuiteThird extends contract\WorkSuite
+abstract class Service
 {
-    /**
-     * 服务的命名空间
-     * @var string
+	/**
+     * 当前所属平台
+     * @var Platform
      */
-    protected $serviceNamespace = '\\think\\wechat\\service\\work\\suitethird\\';
+	protected $platform;
+
+    /**
+     * 架构函数
+     * @access public
+     * @param Platform $platform 当前所属平台
+     * @return void
+     */
+    public function __construct(Platform $platform)
+    {
+        // 当前所属平台
+        $this->platform = $platform;
+    }
 }

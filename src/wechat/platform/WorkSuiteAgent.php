@@ -20,5 +20,5 @@ class WorkSuiteAgent extends contract\WorkSuite
      * 服务的命名空间
      * @var string
      */
-    protected $serviceNamespace = '\\think\\wechat\\platform\\service\\work\\suiteagent\\';
+    protected $serviceNamespace = '\\think\\wechat\\service\\work\\suiteagent\\';
 }

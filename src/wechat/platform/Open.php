@@ -11,10 +11,9 @@
 
 namespace think\wechat\platform;
 
+use think\facade\Cache;
 use think\wechat\Platform;
 use think\wechat\utils\HttpClient;
-use think\wechat\utils\Tools;
-use think\wechat\exception\InvalidArgumentException;
 use think\wechat\exception\LocalCacheException;
 
 /**
@@ -37,7 +36,7 @@ class Open extends Platform
      * 服务的命名空间
      * @var string
      */
-    protected $serviceNamespace = '\\think\\wechat\\platform\\service\\open\\';
+    protected $serviceNamespace = '\\think\\wechat\\service\\open\\';
 
     /**
      * 刷新Token

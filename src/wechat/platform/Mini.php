@@ -37,7 +37,7 @@ class Mini extends Platform
      * 服务的命名空间
      * @var string
      */
-    protected $serviceNamespace = '\\think\\wechat\\platform\\service\\mini\\';
+    protected $serviceNamespace = '\\think\\wechat\\service\\mini\\';
 
     /**
      * 获取接口调用凭证缓存键名
