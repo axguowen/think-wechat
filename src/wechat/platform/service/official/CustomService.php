@@ -11,12 +11,13 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
 use think\wechat\utils\Tools;
 
 /**
  * 客服消息处理
  */
-class CustomService extends Base
+class CustomService extends Service
 {
     /**
      * 添加客服帐号

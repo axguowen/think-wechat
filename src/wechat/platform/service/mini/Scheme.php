@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 小程序 URL-Scheme
  */
-class Scheme extends Base
+class Scheme extends Service
 {
 
     /**

@@ -11,12 +11,13 @@
 
 namespace think\wechat\platform\service\official;
 
-use axguowen\wechat\utils\Tools;
+use think\wechat\platform\service\Service;
+use think\wechat\utils\Tools;
 
 /**
  * 揺一揺周边
  */
-class Shake extends Base
+class Shake extends Service
 {
     /**
      * 申请开通功能

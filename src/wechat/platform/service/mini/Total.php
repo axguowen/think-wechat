@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 微信小程序数据接口
  */
-class Total extends Base
+class Total extends Service
 {
     /**
      * 数据分析接口

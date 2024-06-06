@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\work\provider;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 企业微信服务商推广二维码服务
  */
-class PublicizeQrcode extends Base
+class PublicizeQrcode extends Service
 {
     /**
      * 获取注册码

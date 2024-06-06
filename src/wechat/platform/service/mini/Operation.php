@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 小程序运维中心
  */
-class Operation extends Base
+class Operation extends Service
 {
 
     /**

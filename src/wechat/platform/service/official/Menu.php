@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 微信菜单管理
  */
-class Menu extends Base
+class Menu extends Service
 {
     /**
      * 自定义菜单查询接口

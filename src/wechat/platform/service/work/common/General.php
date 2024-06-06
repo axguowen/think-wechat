@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\work\common;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 企业微信通用公共服务基础类
  */
-abstract class General extends Base
+abstract class General extends Service
 {
     /**
      * 获取企业微信回调通知服务器的ip段
@@ -23,7 +25,7 @@ abstract class General extends Base
      */
     public function getCallbackIp()
     {
-        $url = 'https://qyapi.weixin.qq.com/cgi-bin/getcallbackip?access_token=ACCESS_TOKEN&debug=1';
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/getcallbackip?access_token=ACCESS_TOKEN';
         return $this->platform->callGetApi($url);
     }
 

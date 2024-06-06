@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 微信小程序地址管理
  */
-class Poi extends Base
+class Poi extends Service
 {
     /**
      * 添加地点

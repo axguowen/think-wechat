@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 小程序动态消息
  */
-class Message extends Base
+class Message extends Service
 {
     /**
      * 动态消息，创建被分享动态消息的 activity_id

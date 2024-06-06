@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 小程序发货信息管理服务
  */
-class Shipping extends Base
+class Shipping extends Service
 {
     /**
      * 发货信息录入接口

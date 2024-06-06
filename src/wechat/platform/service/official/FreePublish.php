@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 发布能力
  */
-class FreePublish extends Base
+class FreePublish extends Service
 {
     /**
      * 发布接口

@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\work\provider;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 企业微信服务商通用服务
  */
-class General extends Base
+class General extends Service
 {
     /**
      * 明文corpid转换为加密corpid

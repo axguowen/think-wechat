@@ -9,13 +9,30 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform\service\work\suite;
+namespace think\wechat\platform\service;
 
-use think\wechat\platform\service\Base as BaseService;
+use think\wechat\Platform;
 
 /**
- * 企业微信第三方应用或代开发应用模板服务基础类
+ * 服务基础类
  */
-abstract class Base extends BaseService
+abstract class Service
 {
+	/**
+     * 当前所属平台
+     * @var Platform
+     */
+	protected $platform;
+
+    /**
+     * 架构函数
+     * @access public
+     * @param Platform $platform 当前所属平台
+     * @return void
+     */
+    public function __construct(Platform $platform)
+    {
+        // 当前所属平台
+        $this->platform = $platform;
+    }
 }

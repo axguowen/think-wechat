@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 小程序直播接口
  */
-class Live extends Base
+class Live extends Service
 {
     /**
      * 创建直播间

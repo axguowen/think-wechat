@@ -1,8 +1,8 @@
 <?php
 // +----------------------------------------------------------------------
-// | WeChat SDK [WeChat SDK for PHP]
+// | ThinkPHP Wechat [Simple Wechat Development Kit For ThinkPHP]
 // +----------------------------------------------------------------------
-// | WeChat SDK
+// | ThinkPHP 微信开发工具包
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
@@ -11,12 +11,12 @@
 
 namespace axguowen\wechat\services\mini;
 
-use axguowen\WeChat;
+use think\wechat\platform\service\Service;
 
 /**
  * 小程序即时配送
  */
-class Delivery extends WeChat
+class Delivery extends Service
 {
 
     /**
@@ -28,7 +28,7 @@ class Delivery extends WeChat
     public function abnormalConfirm($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/local/business/order/confirm_return?access_token=ACCESS_TOKEN';
-        return $this->callPostApi($url, $data);
+        return $this->platform->callPostApi($url, $data);
     }
 
     /**
@@ -40,7 +40,7 @@ class Delivery extends WeChat
     public function addOrder($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/local/business/order/add?access_token=ACCESS_TOKEN';
-        return $this->callPostApi($url, $data);
+        return $this->platform->callPostApi($url, $data);
     }
 
     /**
@@ -52,7 +52,7 @@ class Delivery extends WeChat
     public function addTip($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/local/business/order/addtips?access_token=ACCESS_TOKEN';
-        return $this->callPostApi($url, $data);
+        return $this->platform->callPostApi($url, $data);
     }
 
     /**
@@ -64,7 +64,7 @@ class Delivery extends WeChat
     public function cancelOrder($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/local/business/order/cancel?access_token=ACCESS_TOKEN';
-        return $this->callPostApi($url, $data);
+        return $this->platform->callPostApi($url, $data);
     }
 
     /**
@@ -76,7 +76,7 @@ class Delivery extends WeChat
     public function getAllImmeDelivery($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/local/business/delivery/getall?access_token=ACCESS_TOKEN';
-        return $this->callPostApi($url, $data);
+        return $this->platform->callPostApi($url, $data);
     }
 
     /**
@@ -88,7 +88,7 @@ class Delivery extends WeChat
     public function getBindAccount($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/local/business/shop/get?access_token=ACCESS_TOKEN';
-        return $this->callPostApi($url, $data);
+        return $this->platform->callPostApi($url, $data);
     }
 
     /**
@@ -100,7 +100,7 @@ class Delivery extends WeChat
     public function getOrder($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/local/business/order/get?access_token=ACCESS_TOKEN';
-        return $this->callPostApi($url, $data);
+        return $this->platform->callPostApi($url, $data);
     }
 
     /**
@@ -112,7 +112,7 @@ class Delivery extends WeChat
     public function mockUpdateOrder($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/local/business/test_update_order?access_token=ACCESS_TOKEN';
-        return $this->callPostApi($url, $data);
+        return $this->platform->callPostApi($url, $data);
     }
 
     /**
@@ -124,7 +124,7 @@ class Delivery extends WeChat
     public function preAddOrder($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/local/business/order/pre_add?access_token=ACCESS_TOKEN';
-        return $this->callPostApi($url, $data);
+        return $this->platform->callPostApi($url, $data);
     }
 
     /**
@@ -136,7 +136,7 @@ class Delivery extends WeChat
     public function preCancelOrder($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/local/business/order/precancel?access_token=ACCESS_TOKEN';
-        return $this->callPostApi($url, $data);
+        return $this->platform->callPostApi($url, $data);
     }
 
     /**
@@ -148,7 +148,7 @@ class Delivery extends WeChat
     public function reOrder($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/local/business/order/readd?access_token=ACCESS_TOKEN';
-        return $this->callPostApi($url, $data);
+        return $this->platform->callPostApi($url, $data);
     }
 
 }

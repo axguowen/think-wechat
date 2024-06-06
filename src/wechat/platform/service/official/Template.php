@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 模板消息
  */
-class Template extends Base
+class Template extends Service
 {
     /**
      * 设置所属行业

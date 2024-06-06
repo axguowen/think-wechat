@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 小程序图像处理
  */
-class Image extends Base
+class Image extends Service
 {
     /**
      * 本接口提供基于小程序的图片智能裁剪能力

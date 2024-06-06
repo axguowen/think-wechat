@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 扫一扫接入管理
  */
-class Scan extends Base
+class Scan extends Service
 {
     /**
      * 获取商户信息

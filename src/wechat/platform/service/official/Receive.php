@@ -11,7 +11,7 @@
 
 namespace think\wechat\platform\service\official;
 
-use axguowen\wechat\platform\contract\BasicPushEvent;
+use think\wechat\platform\contract\BasicPushEvent;
 
 /**
  * 公众号推送管理

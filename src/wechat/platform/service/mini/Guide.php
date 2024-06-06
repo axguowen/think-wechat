@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 小程序导购助手
  */
-class Guide extends Base
+class Guide extends Service
 {
     /**
      * 服务号添加导购

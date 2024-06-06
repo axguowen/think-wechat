@@ -11,13 +11,14 @@
 
 namespace think\wechat\platform\service\work\suite;
 
+use think\wechat\platform\service\Service;
 use think\wechat\utils\HttpClient;
 use think\wechat\exception\InvalidResponseException;
 
 /**
  * 第三方应用服务
  */
-class ThirdApp extends Base
+class ThirdApp extends Service
 {
     /**
      * 获取预授权码

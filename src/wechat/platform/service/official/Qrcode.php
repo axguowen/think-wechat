@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 二维码管理
  */
-class Qrcode extends Base
+class Qrcode extends Service
 {
 
     /**

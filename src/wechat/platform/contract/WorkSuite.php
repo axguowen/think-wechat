@@ -9,14 +9,14 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat\platform\contract;
 
 use think\wechat\Platform;
 use think\wechat\utils\HttpClient;
 use think\wechat\utils\Tools;
 
 /**
- * 企业微信服务商第三方应用(或代开发应用模板)
+ * 企业微信服务商应用套件基础类
  */
 class WorkSuite extends Platform
 {
@@ -32,12 +32,6 @@ class WorkSuite extends Platform
         // 企业微信后台推送的ticket
         'suite_ticket' => '',
     ];
-
-    /**
-     * 服务的命名空间
-     * @var string
-     */
-    protected $serviceNamespace = '\\think\\wechat\\platform\\service\\work\\suite\\';
 
     /**
      * 获取接口调用凭证缓存键名

@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 小程序搜索
  */
-class Search extends Base
+class Search extends Service
 {
     /**
      * 提交小程序页面url及参数信息

@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 微信草稿箱管理
  */
-class Draft extends Base
+class Draft extends Service
 {
     /**
      * 新建草稿

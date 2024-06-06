@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 公众号小程序模板消息支持
  */
-class Template extends Base
+class Template extends Service
 {
     /**
      * 获取小程序模板库标题列表

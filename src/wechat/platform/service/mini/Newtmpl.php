@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 小程序模板
  */
-class Newtmpl extends Base
+class Newtmpl extends Service
 {
     /**
      * 添加小程序账号类目

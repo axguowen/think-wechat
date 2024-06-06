@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 商店管理
  */
-class Product extends Base
+class Product extends Service
 {
     /**
      * 提交审核/取消发布商品

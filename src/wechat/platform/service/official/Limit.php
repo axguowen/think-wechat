@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 接口调用频次限制
  */
-class Limit extends Base
+class Limit extends Service
 {
 
     /**

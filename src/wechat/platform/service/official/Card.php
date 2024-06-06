@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 卡券管理
  */
-class Card extends Base
+class Card extends Service
 {
     /**
      * 创建卡券

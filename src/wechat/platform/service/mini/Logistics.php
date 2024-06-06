@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 小程序物流助手
  */
-class Logistics extends Base
+class Logistics extends Service
 {
     /**
      * 生成运单

@@ -12,6 +12,7 @@
 namespace think\wechat\platform\service\official;
 
 use think\facade\Cache;
+use think\wechat\platform\service\Service;
 use think\wechat\utils\Tools;
 use think\wechat\exception\InvalidResponseException;
 use think\wechat\exception\InvalidArgumentException;
@@ -19,7 +20,7 @@ use think\wechat\exception\InvalidArgumentException;
 /**
  * 微信前端支持
  */
-class Script extends Base
+class Script extends Service
 {
     /**
      * 删除JSAPI授权TICKET

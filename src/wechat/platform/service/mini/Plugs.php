@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 微信小程序插件管理
  */
-class Plugs extends Base
+class Plugs extends Service
 {
     /**
      * 1.申请使用插件

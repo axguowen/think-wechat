@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 小程序ORC服务
  */
-class Ocr extends Base
+class Ocr extends Service
 {
     /**
      * 本接口提供基于小程序的银行卡 OCR 识别

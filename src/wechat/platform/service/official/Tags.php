@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 用户标签管理
  */
-class Tags extends Base
+class Tags extends Service
 {
     /**
      * 获取粉丝标签列表

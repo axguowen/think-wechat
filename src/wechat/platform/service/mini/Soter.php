@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\mini;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 小程序生物认证
  */
-class Soter extends Base
+class Soter extends Service
 {
     /**
      * SOTER 生物认证秘钥签名验证

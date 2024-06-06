@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 门店 WIFI 管理
  */
-class Wifi extends Base
+class Wifi extends Service
 {
 
     /**

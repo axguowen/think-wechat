@@ -11,6 +11,7 @@
 
 namespace think\wechat\platform\service\work\suite;
 
+use think\wechat\platform\service\Service;
 use think\wechat\cryptor\MsgCryptor;
 use think\wechat\cryptor\ErrorCode;
 use think\wechat\exception\InvalidArgumentException;
@@ -18,7 +19,7 @@ use think\wechat\exception\InvalidArgumentException;
 /**
  * 事件消息接收服务
  */
-class EventReceive extends Base
+class EventReceive extends Service
 {
     /**
      * 解密事件消息内容

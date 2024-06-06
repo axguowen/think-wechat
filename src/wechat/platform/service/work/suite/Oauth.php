@@ -11,13 +11,14 @@
 
 namespace think\wechat\platform\service\work\suite;
 
+use think\wechat\platform\service\Service;
 use think\wechat\utils\HttpClient;
 use think\wechat\exception\InvalidResponseException;
 
 /**
  * 企业微信身份验证服务
  */
-class Oauth extends Base
+class Oauth extends Service
 {
     // +=======================
     // | 网页授权登录

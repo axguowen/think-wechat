@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\work\provider;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 企业微信服务商接口调用许可服务
  */
-class License extends Base
+class License extends Service
 {
     // +=======================
     // | 订单管理

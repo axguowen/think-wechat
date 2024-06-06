@@ -11,13 +11,14 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
 use think\wechat\utils\Tools;
 use think\wechat\exception\InvalidResponseException;
 
 /**
  * 微信素材管理
  */
-class Media extends Base
+class Media extends Service
 {
     /**
      * 新增临时素材

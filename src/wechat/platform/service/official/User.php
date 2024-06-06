@@ -11,10 +11,12 @@
 
 namespace think\wechat\platform\service\official;
 
+use think\wechat\platform\service\Service;
+
 /**
  * 微信粉丝管理
  */
-class User extends Base
+class User extends Service
 {
 
     /**
