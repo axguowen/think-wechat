@@ -9,16 +9,14 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform\service\work\suite;
+namespace think\wechat\platform\service\work\contract\suite;
 
 use think\wechat\platform\service\Service;
-use think\wechat\utils\HttpClient;
-use think\wechat\exception\InvalidResponseException;
 
 /**
- * 第三方应用服务
+ * 应用授权服务基础类
  */
-class ThirdApp extends Service
+class AppApp extends Service
 {
     /**
      * 获取预授权码

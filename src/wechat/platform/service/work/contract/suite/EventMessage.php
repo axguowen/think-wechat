@@ -9,7 +9,7 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform\service\work\suite;
+namespace think\wechat\platform\service\work\contract\suite;
 
 use think\wechat\platform\service\Service;
 use think\wechat\cryptor\MsgCryptor;
@@ -17,9 +17,9 @@ use think\wechat\cryptor\ErrorCode;
 use think\wechat\exception\InvalidArgumentException;
 
 /**
- * 事件消息接收服务
+ * 事件消息服务基础类
  */
-class EventReceive extends Service
+abstract class EventMessage extends Service
 {
     /**
      * 解密事件消息内容

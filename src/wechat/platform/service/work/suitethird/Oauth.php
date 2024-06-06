@@ -9,14 +9,12 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform\service\work\suite;
+namespace think\wechat\platform\service\work\suitethird;
 
 use think\wechat\platform\service\Service;
-use think\wechat\utils\HttpClient;
-use think\wechat\exception\InvalidResponseException;
 
 /**
- * 企业微信身份验证服务
+ * 身份验证服务
  */
 class Oauth extends Service
 {
@@ -87,14 +85,13 @@ class Oauth extends Service
     }
 
     /**
-     * 获取访问用户身份
+     * 获取登录用户身份
      * @access public
      * @param string $code 授权Code值
      * @return array
      */
     public function getLoginUserInfo($code)
     {
-        $url = "https://qyapi.weixin.qq.com/cgi-bin/service/auth/getuserinfo3rd?suite_access_token=ACCESS_TOKEN&code={$code}";
-        return $this->platform->callGetApi($url);
+        return $this->getUserInfo($code);
     }
 }

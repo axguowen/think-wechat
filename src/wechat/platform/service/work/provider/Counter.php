@@ -16,7 +16,7 @@ use think\wechat\platform\service\Service;
 /**
  * 企业微信服务商收银台服务
  */
-class PayTool extends Service
+class Counter extends Service
 {
     // +=======================
     // | 收款工具

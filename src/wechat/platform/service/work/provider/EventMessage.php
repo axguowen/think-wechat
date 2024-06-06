@@ -19,7 +19,7 @@ use think\wechat\exception\InvalidArgumentException;
 /**
  * 事件消息接收服务
  */
-class EventReceive extends Service
+class EventMessage extends Service
 {
     /**
      * 解密事件消息内容
