@@ -11,7 +11,7 @@
 
 namespace think\wechat\service\work\suitethird;
 
-use think\wechat\Service;
+use think\wechat\service\work\contract\suite\AppAuth as Service;
 
 /**
  * 应用授权服务
@@ -94,31 +94,6 @@ class AppAuth extends Service
         }
         // 返回授权链接
         return "https://open.work.weixin.qq.com/3rdapp/install?suite_id={$suiteId}&pre_auth_code={$preAuthCode}&redirect_uri={$redirectUri}&state={$state}";
-    }
-
-    /**
-     * 获取企业永久授权码
-     * @access public
-     * @param string $authCode 临时授权码
-     * @return array
-     */
-    public function getPermanentCode($authCode)
-    {
-        $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_permanent_code?suite_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['auth_code' => $authCode,]);
-    }
-
-    /**
-     * 获取企业授权信息
-     * @access public
-     * @param string $authCorpid 授权方corpid
-     * @param string $permanentCode 企业永久授权码
-     * @return array
-     */
-    public function getAuthInfo($authCorpid, $permanentCode)
-    {
-        $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_auth_info?suite_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['auth_corpid' => $authCorpid, 'permanent_code' => $permanentCode]);
     }
 
     /**

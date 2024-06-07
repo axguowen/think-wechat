@@ -42,4 +42,17 @@ class General extends Service
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/finish_openid_migration?provider_access_token=ACCESS_TOKEN';
         return $this->platform->callPostApi($url, ['corpid' => $corpid, 'openid_type' => $openidType]);
     }
+
+    /**
+     * 获取代开发自建应用授权链接
+     * @access public
+     * @param string[] $templateidList 代开发自建应用模版ID列表, 数量不能超过9个
+     * @param string $state state值
+     * @return array
+     */
+    public function getCustomizedAuthUrl(array $templateidList, $state)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_customized_auth_url?provider_access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url, ['templateid_list' => $templateidList, 'state' => $state]);
+    }
 }
