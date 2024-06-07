@@ -52,6 +52,18 @@ class Oauth extends Service
     }
 
     /**
+     * 获取家校访问用户身份 
+     * @access public
+     * @param string $code 授权Code值
+     * @return array
+     */
+    public function getSchoolUserInfo($code)
+    {
+        $url = "https://qyapi.weixin.qq.com/cgi-bin/service/school/getuserinfo3rd?suite_access_token=ACCESS_TOKEN&code={$code}";
+        return $this->platform->callGetApi($url);
+    }
+
+    /**
      * 获取访问用户敏感信息
      * @access public
      * @param string $userTicket 成员票据

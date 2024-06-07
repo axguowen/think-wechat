@@ -9,12 +9,12 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\service\work\common;
+namespace think\wechat\service\work\contract\app;
 
 use think\wechat\Service;
 
 /**
- * 企业微信通用公共服务基础类
+ * 企业微信应用通用服务基础类
  */
 abstract class General extends Service
 {
