@@ -14,7 +14,7 @@ namespace think\wechat\service\work\suiteagent;
 use think\wechat\service\work\contract\suite\AppAuth as Service;
 
 /**
- * 应用授权服务基础类
+ * 应用授权服务
  */
 class AppAuth extends Service
 {

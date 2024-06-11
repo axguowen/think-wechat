@@ -78,7 +78,7 @@ return [
             'encoding_aes_key' => '',
         ],
         // 企业微信服务商代开发应用模板
-        'work_suite_third' => [
+        'work_suite_agent' => [
             // 驱动类型
             'type' => 'WorkSuiteAgent',
             // 代开发应用模板id
@@ -105,6 +105,8 @@ return [
         'work_app_third' => [
             // 驱动类型
             'type' => 'WorkAppThird',
+            // 所属第三方应用平台名称
+            'suite_platform' => 'work_suite_third',
             // 授权方corpid
             'auth_corpid' => '',
             // 授权方企业永久授权码

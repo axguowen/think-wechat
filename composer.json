@@ -25,7 +25,7 @@
     "extra": {
         "think": {
             "config": {
-                "wechat": "src/config.php"
+                "wechat": "src/wechat/config.php"
             }
         }
     }

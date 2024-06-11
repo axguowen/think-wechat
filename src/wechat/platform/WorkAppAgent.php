@@ -16,30 +16,26 @@ use think\wechat\utils\HttpClient;
 use think\wechat\utils\Tools;
 
 /**
- * 企业微信自建应用
+ * 企业微信服务商代开发应用
  */
-class WorkAppSelf extends Platform
+class WorkAppAgent extends Platform
 {
 	/**
      * 平台配置参数
      * @var array
      */
     protected $options = [
-        // 企业微信corpid
+        // 企业ID
         'corpid' => '',
-        // 企业微信自建应用secret
+        // 应用的凭证密钥, 即获取到的代开发授权应用的secret
         'corpsecret' => '',
-        // 接收消息时的校验Token
-        'token' => '',
-        // 消息加解密密钥
-        'encoding_aes_key' => '',
     ];
 
     /**
      * 服务的命名空间
      * @var string
      */
-    protected $serviceNamespace = '\\think\\wechat\\service\\work\\appself\\';
+    protected $serviceNamespace = '\\think\\wechat\\service\\work\\appagent\\';
 
     /**
      * 获取接口调用凭证缓存键名
