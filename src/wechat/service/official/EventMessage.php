@@ -9,7 +9,7 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\service\work\contract\suite;
+namespace think\wechat\service\official;
 
 use think\wechat\Service;
 use think\wechat\cryptor\MsgCryptor;
@@ -18,9 +18,9 @@ use think\wechat\utils\Tools;
 use think\wechat\exception\InvalidArgumentException;
 
 /**
- * 事件消息服务基础类
+ * 事件消息服务
  */
-abstract class EventMessage extends Service
+class EventMessage extends Service
 {
     /**
      * 解密事件消息内容
@@ -34,8 +34,8 @@ abstract class EventMessage extends Service
      */
     public function decrypt($encrypted, $msgSignature, $timestamp, $nonce, $verification = false)
     {
-		// 应用SuiteID
-		$suiteId = $this->platform->getConfig('suite_id');
+		// 开发者ID
+		$appid = $this->platform->getConfig('appid');
         // 获取token
         $token = $this->platform->getConfig('token');
         // 加密密钥
@@ -60,7 +60,7 @@ abstract class EventMessage extends Service
 		}
 
         // receiveId不正确
-        if ($result[2] != $suiteId) {
+        if ($result[2] != $appid) {
             return [null, new InvalidArgumentException(ErrorCode::getErrText(ErrorCode::$ValidateReceiveIdError))];
         }
         // 返回
@@ -75,8 +75,8 @@ abstract class EventMessage extends Service
      */
     public function encrypt(array $data)
     {
-        // 应用SuiteID
-		$suiteId = $this->platform->getConfig('suite_id');
+        // 开发者ID
+		$appid = $this->platform->getConfig('appid');
         // 获取token
         $token = $this->platform->getConfig('token');
         // 加密密钥
@@ -84,7 +84,7 @@ abstract class EventMessage extends Service
         // 数组转XML
         $xml = Tools::arr2xml($data);
         // 获取加密结果
-        $result = MsgCryptor::encrypt($xml, $suiteId, $encodingAesKey);
+        $result = MsgCryptor::encrypt($xml, $appid, $encodingAesKey);
         // 解密失败
         if ($result[0] != ErrorCode::$OK) {
 			return [null, new InvalidArgumentException(ErrorCode::getErrText($result[0]))];
