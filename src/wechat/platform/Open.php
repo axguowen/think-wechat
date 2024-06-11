@@ -108,7 +108,7 @@ class Open extends Platform
     }
 
     /**
-     * 在线获取接口调用凭证
+     * 强制获取接口调用凭证
      * @access protected
      * @return array
      */

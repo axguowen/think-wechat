@@ -52,7 +52,7 @@ class WorkProvider extends Platform
     }
 
     /**
-     * 在线获取接口调用凭证
+     * 强制获取接口调用凭证
      * @access protected
      * @return array
      */
@@ -69,7 +69,7 @@ class WorkProvider extends Platform
         $header = [
             'Content-Type' => 'application/json',
         ];
-        // 获取稳定接口调用凭证请求结果
+        // 获取接口调用凭证请求结果
         $response = HttpClient::post($requestUrl, $data, $header);
         // 获取解析结果
         $parseResponseResult = $this->parseResponseData($response);

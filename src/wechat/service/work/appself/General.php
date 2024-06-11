@@ -9,7 +9,7 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\service\work\appthird;
+namespace think\wechat\service\work\appself;
 
 use think\wechat\service\work\contract\app\General as Service;
 

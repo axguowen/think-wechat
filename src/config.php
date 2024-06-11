@@ -62,41 +62,58 @@ return [
             // 消息加解密密钥
             'encoding_aes_key' => '',
         ],
-        // 企业微信服务商第三方应用(或代开发应用模板)
-        'work_suite' => [
+        // 企业微信服务商第三方应用
+        'work_suite_third' => [
             // 驱动类型
-            'type' => 'WorkSuite',
-            // 第三方应用id或者代开发应用模板id
+            'type' => 'WorkSuiteThird',
+            // 第三方应用id
             'suite_id' => '',
-            // 第三方应用secret 或者代开发应用模板secret
+            // 第三方应用secret
             'suite_secret' => '',
             // 企业微信后台推送的ticket
             'suite_ticket' => '',
+            // 接收消息时的校验Token
+            'token' => '',
+            // 消息加解密密钥
+            'encoding_aes_key' => '',
         ],
-        // 企业微信企业内部开发
-        'work_internal' => [
+        // 企业微信服务商代开发应用模板
+        'work_suite_third' => [
             // 驱动类型
-            'type' => 'WorkInternal',
+            'type' => 'WorkSuiteAgent',
+            // 代开发应用模板id
+            'suite_id' => '',
+            // 代开发应用模板secret
+            'suite_secret' => '',
+            // 企业微信后台推送的ticket
+            'suite_ticket' => '',
+            // 接收消息时的校验Token
+            'token' => '',
+            // 消息加解密密钥
+            'encoding_aes_key' => '',
+        ],
+        // 企业微信自建应用
+        'work_app_self' => [
+            // 驱动类型
+            'type' => 'WorkAppSelf',
             // 企业ID
             'corpid' => '',
             // 自建应用的凭证密钥
             'corpsecret' => '',
         ],
-        // 企业微信第三方应用开发
-        'work_external' => [
+        // 企业微信第三方应用
+        'work_app_third' => [
             // 驱动类型
-            'type' => 'WorkExternal',
-            // 第三方应用凭证, 在获取永久授权码时需要传入
-            'suite_access_token' => '',
+            'type' => 'WorkAppThird',
             // 授权方corpid
             'auth_corpid' => '',
             // 授权方企业永久授权码
             'permanent_code' => '',
         ],
-        // 企业微信服务商代开发
-        'work_agent' => [
+        // 企业微信服务商代开发应用
+        'work_app_agent' => [
             // 驱动类型
-            'type' => 'WorkAgent',
+            'type' => 'WorkAppAgent',
             // 企业ID
             'corpid' => '',
             // 应用的凭证密钥, 即获取到的代开发授权应用的secret
