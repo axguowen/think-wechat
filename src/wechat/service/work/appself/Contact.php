@@ -29,8 +29,7 @@ class Contact extends Service
      */
     public function userAuthsucc($userid)
     {
-        $url = "https://qyapi.weixin.qq.com/cgi-bin/user/authsucc?access_token=ACCESS_TOKEN&userid={$userid}";
-        return $this->platform->callGetApi($url);
+        return $this->platform->service('oauth')->userAuthsucc($userid);
     }
 
     /**
