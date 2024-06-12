@@ -18,4 +18,43 @@ use think\wechat\service\work\contract\app\Oauth as Service;
  */
 class Oauth extends Service
 {
+    // +=======================
+    // | 二次验证
+    // +=======================
+    /**
+     * 获取用户二次验证信息
+     * @access public
+     * @param string $code 用户进入二次验证页面时，企业微信颁发的code
+     * @return string
+     */
+    public function getTfaInfo($code)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/auth/get_tfa_info?access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url, ['code' => $code]);
+    }
+
+    /**
+     * 登录二次验证
+     * @access public
+     * @param string $userid 成员UserID
+     * @return array
+     */
+    public function userAuthsucc($userid)
+    {
+        $url = "https://qyapi.weixin.qq.com/cgi-bin/user/authsucc?access_token=ACCESS_TOKEN&userid={$userid}";
+        return $this->platform->callGetApi($url);
+    }
+
+    /**
+     * 使用二次验证
+     * @access public
+     * @param string $userid 成员UserID
+     * @param string $tfaCode 成员UserID
+     * @return string
+     */
+    public function userTfaSucc($userid, $tfaCode)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/tfa_succ?access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url, ['userid' => $userid, 'tfa_code' => $tfaCode]);
+    }
 }
