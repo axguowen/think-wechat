@@ -56,6 +56,46 @@ class Contact extends Service
     }
 
     /**
+     * 通讯录批量搜索
+     * @access public
+     * @param string $authCorpid 授权方企业corpid
+     * @param string $queryWord 搜索关键词
+     * @param int $limit 查询返回的最大数量
+     * @param string $cursor 用于分页查询的游标
+     * @param int $queryType 查询类型: 1查询用户返回用户userid列表; 2查询部门返回部门id列表
+     * @param int $queryRange 查询范围, 仅查询类型包含用户时有效 0只查询在职用户 1同时查询在职和离职用户
+     * @param int $agentid 应用id, 若非0则只返回应用可见范围内的用户或者部门信息
+     * @param int $fullMatchField 精确匹配的字段: 1匹配用户名称或者部门名称 2匹配用户英文名, 不填则为模糊匹配
+     * @return array
+     */
+    public function batchSearch($authCorpid, $queryWord, $limit = 50, $cursor = '', $queryType = 1, $queryRange = 0, $agentid = 0, $fullMatchField = 0)
+    {
+        // 请求地址
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/contact/batchsearch?provider_access_token=ACCESS_TOKEN';
+        $requestList = [
+            'query_word' => $queryWord,
+            'limit' => $limit,
+            'query_type' => $queryType,
+            'query_range' => $queryRange,
+        ];
+        // 指定游标
+        if (!empty($cursor)) {
+            $requestList['cursor'] = $cursor;
+        }
+        // 指定应用id
+        if ($fullMatchField > 0) {
+            $requestList['full_match_field'] = $fullMatchField;
+        }
+        // 请求参数
+        $data = [
+            'auth_corpid' => $authCorpid,
+            'agentid' => $agentid,
+            'query_request_list' => [$requestList],
+        ];
+        return $this->platform->callPostApi($url, $data);
+    }
+
+    /**
      * 异步通讯录id转译
      * @access public
      * @param string $authCorpid 授权方企业corpid
