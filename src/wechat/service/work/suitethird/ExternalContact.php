@@ -14,10 +14,11 @@ namespace think\wechat\service\work\provider;
 use think\wechat\Service;
 use think\wechat\utils\Tools;
 use think\wechat\exception\InvalidResponseException;
+
 /**
  * 客户联系服务
  */
-class Media extends Service
+class ExternalContact extends Service
 {
     // +=======================
     // | 客户管理
