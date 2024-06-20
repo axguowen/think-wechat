@@ -16,7 +16,7 @@ use think\wechat\utils\Tools;
 use think\wechat\exception\InvalidResponseException;
 
 /**
- * 客户联系服务
+ * 客户联系服务基础类
  */
 class ExternalContact extends Service
 {
