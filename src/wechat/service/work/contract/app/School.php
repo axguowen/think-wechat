@@ -14,7 +14,7 @@ namespace think\wechat\service\work\contract\app;
 use think\wechat\Service;
 
 /**
- * 家校沟通服务基础类
+ * 家校 沟通/应用 服务基础类
  */
 abstract class School extends Service
 {
@@ -464,5 +464,172 @@ abstract class School extends Service
             'upgrade_switch' => $upgradeSwitch,
             'upgrade_time' => $upgradeTime,
         ]);
+    }
+
+    // +=======================
+    // | 上课直播
+    // +=======================
+    /**
+     * 获取老师直播ID列表
+     * @access public
+     * @param string $userid 企业成员的userid
+     * @param int $limit 返回的最大记录数
+     * @param string $cursor 上一次调用时返回的next_cursor
+     * @return array
+     */
+    public function livingGetUserAllLivingid($userid, $limit = 50, $cursor = '')
+    {
+        // 请求地址
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/living/get_user_all_livingid?access_token=ACCESS_TOKEN';
+        // 请求参数
+        $data = [
+            'userid' => $userid,
+            'limit' => $limit,
+        ];
+        // 指定了游标
+        if(!empty($cursor)){
+            $data['cursor'] = $cursor;
+        }
+        return $this->platform->callPostApi($url, $data);
+    }
+    
+    /**
+     * 获取直播详情
+     * @access public
+     * @param string $livingid 直播ID
+     * @return array
+     */
+    public function livingGetLivingInfo($livingid)
+    {
+        $url = "https://qyapi.weixin.qq.com/cgi-bin/school/living/get_living_info?access_token=ACCESS_TOKEN&livingid={$livingid}";
+        return $this->platform->callGetApi($url);
+    }
+    
+    /**
+     * 获取观看直播统计
+     * @access public
+     * @param string $livingid 直播ID
+     * @param string $nextKey 上一次调用时返回的next_key
+     * @return array
+     */
+    public function livingGetWatchStat($livingid, $nextKey = '')
+    {
+        // 请求地址
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/living/get_watch_stat?access_token=ACCESS_TOKEN';
+        // 请求参数
+        $data = [
+            'livingid' => $livingid,
+        ];
+        // 指定了偏移量
+        if(!empty($nextKey)){
+            $data['next_key'] = $nextKey;
+        }
+        return $this->platform->callPostApi($url, $data);
+    }
+    
+    /**
+     * 获取未观看直播统计
+     * @access public
+     * @param string $livingid 直播ID
+     * @param string $nextKey 上一次调用时返回的next_key
+     * @return array
+     */
+    public function livingGetUnwatchStat($livingid, $nextKey = '')
+    {
+        // 请求地址
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/living/get_unwatch_stat?access_token=ACCESS_TOKEN';
+        // 请求参数
+        $data = [
+            'livingid' => $livingid,
+        ];
+        // 指定了偏移量
+        if(!empty($nextKey)){
+            $data['next_key'] = $nextKey;
+        }
+        return $this->platform->callPostApi($url, $data);
+    }
+    
+    /**
+     * 删除直播回放
+     * @access public
+     * @param string $livingid 直播ID
+     * @return array
+     */
+    public function livingDeleteReplayData($livingid)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/living/delete_replay_data?access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url, ['livingid' => $livingid]);
+    }
+    
+    /**
+     * 获取观看直播统计V2
+     * @access public
+     * @param string $livingid 直播ID
+     * @param string $nextKey 上一次调用时返回的next_key
+     * @return array
+     */
+    public function livingGetWatchStatV2($livingid, $nextKey = '')
+    {
+        // 请求地址
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/living/get_watch_stat_v2?access_token=ACCESS_TOKEN';
+        // 请求参数
+        $data = [
+            'livingid' => $livingid,
+        ];
+        // 指定了偏移量
+        if(!empty($nextKey)){
+            $data['next_key'] = $nextKey;
+        }
+        return $this->platform->callPostApi($url, $data);
+    }
+    
+    /**
+     * 获取未观看直播统计V2
+     * @access public
+     * @param string $livingid 直播ID
+     * @param string $nextKey 上一次调用时返回的next_key
+     * @return array
+     */
+    public function livingGetUnwatchStatV2($livingid, $nextKey = '')
+    {
+        // 请求地址
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/living/get_unwatch_stat_v2?access_token=ACCESS_TOKEN';
+        // 请求参数
+        $data = [
+            'livingid' => $livingid,
+        ];
+        // 指定了偏移量
+        if(!empty($nextKey)){
+            $data['next_key'] = $nextKey;
+        }
+        return $this->platform->callPostApi($url, $data);
+    }
+
+    // +=======================
+    // | 班级收款
+    // +=======================
+    /**
+     * 获取学生付款结果
+     * @access public
+     * @param string $paymentId 收款项目id
+     * @return array
+     */
+    public function getPaymentResult($paymentId)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/get_payment_result?access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url, ['payment_id' => $paymentId]);
+    }
+
+    /**
+     * 获取订单详情
+     * @access public
+     * @param string $paymentId 收款项目id
+     * @param string $tradeNo 订单号
+     * @return array
+     */
+    public function getTrade($tradeNo)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/get_trade?access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url, ['payment_id' => $paymentId, 'trade_no' => $tradeNo]);
     }
 }

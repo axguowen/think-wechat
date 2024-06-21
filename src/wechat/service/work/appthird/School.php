@@ -14,7 +14,7 @@ namespace think\wechat\service\work\appthird;
 use think\wechat\service\work\contract\app\School as Service;
 
 /**
- * 家校沟通服务
+ * 家校 沟通/应用 服务
  */
 class School extends Service
 {
