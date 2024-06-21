@@ -14,7 +14,7 @@ namespace think\wechat\service\work\appthird;
 use think\wechat\service\work\contract\app\Kefu as Service;
 
 /**
- * 微信客服服务服务
+ * 微信客服服务
  */
 class Kefu extends Service
 {
