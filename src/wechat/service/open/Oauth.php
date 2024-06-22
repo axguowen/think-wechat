@@ -48,20 +48,15 @@ class Oauth extends Service
     {
         $appid = $this->platform->getConfig('appid');
         $secret = $this->platform->getConfig('appsecret');
-        $code = $code;
-        $url = 'https://api.weixin.qq.com/sns/oauth2/access_token';
         $query = [
             'grant_type' => 'authorization_code',
             'appid' => $appid,
             'secret' => $secret,
             'code' => $code,
         ];
-        // query参数不为空
-        if(!empty($query)){
-            $url .= (stripos($requestUrl, '?') !== false ? '&' : '?') . http_build_query($query);
-        }
+        $requestUrl = 'https://api.weixin.qq.com/sns/oauth2/access_token?' . http_build_query($query);
         // 获取请求结果
-        $response = HttpClient::get($url)->body;
+        $response = HttpClient::get($requestUrl)->body;
         // 获取解析结果
         $parseResponseDataResult = $this->parseResponseData($response);
         // 成功
@@ -82,18 +77,14 @@ class Oauth extends Service
     public function getOauthRefreshToken($refreshToken)
     {
         $appid = $this->platform->getConfig('appid');
-        $url = 'https://api.weixin.qq.com/sns/oauth2/refresh_token';
         $query = [
             'grant_type' => 'refresh_token',
             'appid' => $appid,
             'refresh_token' => $refreshToken,
         ];
-        // query参数不为空
-        if(!empty($query)){
-            $url .= (stripos($requestUrl, '?') !== false ? '&' : '?') . http_build_query($query);
-        }
+        $requestUrl = 'https://api.weixin.qq.com/sns/oauth2/refresh_token?' . http_build_query($query);
         // 获取请求结果
-        $response = HttpClient::get($url)->body;
+        $response = HttpClient::get($requestUrl)->body;
         // 获取解析结果
         $parseResponseDataResult = $this->parseResponseData($response);
         // 成功
@@ -119,16 +110,16 @@ class Oauth extends Service
             $accessToken = 'ACCESS_TOKEN';
         }
         // 请求地址
-        $url = "https://api.weixin.qq.com/sns/auth?access_token={$accessToken}&openid={$openid}";
+        $requestUrl = "https://api.weixin.qq.com/sns/auth?access_token={$accessToken}&openid={$openid}";
         // 如果传入了access_token，则直接使用
         if ($accessToken != 'ACCESS_TOKEN') {
             // 获取请求结果
-            $response = HttpClient::get($url)->body;
+            $response = HttpClient::get($requestUrl)->body;
             // 返回解析
             return $this->parseResponseData($response);
         }
         // 使用当前Token
-        return $this->platform->callGetApi($url);
+        return $this->platform->callGetApi($requestUrl);
     }
 
     /**
@@ -146,15 +137,15 @@ class Oauth extends Service
             $accessToken = 'ACCESS_TOKEN';
         }
         // 请求地址
-        $url = "https://api.weixin.qq.com/sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}";
+        $requestUrl = "https://api.weixin.qq.com/sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}";
         // 如果传入了access_token，则直接使用
         if ($accessToken != 'ACCESS_TOKEN') {
             // 获取请求结果
-            $response = HttpClient::get($url)->body;
+            $response = HttpClient::get($requestUrl)->body;
             // 返回解析
             return $this->parseResponseData($response);
         }
         // 使用当前Token
-        return $this->platform->callGetApi($url);
+        return $this->platform->callGetApi($requestUrl);
     }
 }

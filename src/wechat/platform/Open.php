@@ -114,8 +114,6 @@ class Open extends Platform
      */
     protected function getAccessTokenForce()
     {
-        // 接口请求地址
-        $requestUrl = 'https://api.weixin.qq.com/sns/oauth2/refresh_token';
         // 获取刷新token
         $getRefreshTokenResult = $this->getRefreshToken();
         // 获取失败
@@ -128,10 +126,8 @@ class Open extends Platform
             'appid' => $this->options['appid'],
             'refresh_token' => $getRefreshTokenResult[0],
         ];
-        // query参数不为空
-        if(!empty($query)){
-            $requestUrl .= (stripos($requestUrl, '?') !== false ? '&' : '?') . http_build_query($query);
-        }
+        // 接口请求地址
+        $requestUrl = 'https://api.weixin.qq.com/sns/oauth2/refresh_token?' . http_build_query($query);
         // 获取请求结果
         $response = HttpClient::get($requestUrl)->body;
         // 获取解析结果
