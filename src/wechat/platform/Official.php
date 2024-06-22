@@ -12,8 +12,8 @@
 namespace think\wechat\platform;
 
 use think\wechat\Platform;
-use think\wechat\utils\HttpClient;
 use think\wechat\utils\Tools;
+use axguowen\HttpClient;
 
 /**
  * 微信公众号平台
@@ -89,7 +89,7 @@ class Official extends Platform
             'secret' => $this->options['appsecret'],
         ];
         // 获取请求结果
-        return HttpClient::get($requestUrl, $query);
+        return HttpClient::get($requestUrl, $query)->body;
     }
 
     /**
@@ -109,9 +109,9 @@ class Official extends Platform
         ]);
         // 请求头
         $header = [
-            'Content-Type' => 'application/json',
+            'Content-Type' => 'application/json; charset=utf-8',
         ];
         // 获取请求结果
-        return HttpClient::post($requestUrl, $data, $header);
+        return HttpClient::post($requestUrl, $data, $header)->body;
     }
 }

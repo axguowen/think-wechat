@@ -102,7 +102,7 @@ class CustomService extends Service
     public function uploadHeadimg($kf_account, $image)
     {
         $url = 'https://api.weixin.qq.com/customservice/kfaccount/uploadheadimg?access_token=ACCESS_TOKEN&kf_account=' . $kf_account;
-        return $this->platform->callPostApi($url, ['media' => Tools::createCurlFile($image)], [], [], false);
+        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($image)]), [], false);
     }
 
     /**

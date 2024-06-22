@@ -33,7 +33,7 @@ class Media extends Service
             throw new InvalidResponseException('Invalid Media Type.', '0');
         }
         $url = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type={$type}";
-        return $this->platform->callPostApi($url, ['media' => Tools::createCurlFile($filename)], [], [], false);
+        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename)]), [], false);
     }
 
     /**
@@ -86,7 +86,7 @@ class Media extends Service
     public function uploadImg($filename)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['media' => Tools::createCurlFile($filename)], [], [], false);
+        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename)]), [], false);
     }
 
     /**
@@ -103,7 +103,7 @@ class Media extends Service
             throw new InvalidResponseException('Invalid Media Type.', '0');
         }
         $url = "https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=ACCESS_TOKEN&type={$type}";
-        return $this->platform->callPostApi($url, ['media' => Tools::createCurlFile($filename), 'description' => Tools::arr2json($description)], [], [], false);
+        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename), 'description' => Tools::arr2json($description)]), [], false);
     }
 
     /**

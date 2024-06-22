@@ -13,8 +13,8 @@ namespace think\wechat\platform;
 
 use think\facade\Cache;
 use think\wechat\Platform;
-use think\wechat\utils\HttpClient;
 use think\wechat\exception\LocalCacheException;
+use axguowen\HttpClient;
 
 /**
  * 微信开放平台
@@ -129,7 +129,7 @@ class Open extends Platform
             'refresh_token' => $getRefreshTokenResult[0],
         ];
         // 获取请求结果
-        $response = HttpClient::get($requestUrl, $query);
+        $response = HttpClient::get($requestUrl, $query)->body;
         // 获取解析结果
         return $this->parseResponseData($response);
     }

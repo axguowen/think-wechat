@@ -166,7 +166,7 @@ class Shake extends Service
     public function upload($filename, $type = 'icon')
     {
         $url = 'https://api.weixin.qq.com/shakearound/material/add?access_token=ACCESS_TOKEN&type=' . $type;
-        return $this->platform->callPostApi($url, ['media' => Tools::createCurlFile($filename)], false);
+        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename)]), [], false);
     }
 
     /**

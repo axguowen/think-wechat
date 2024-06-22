@@ -12,8 +12,8 @@
 namespace think\wechat\platform;
 
 use think\wechat\Platform;
-use think\wechat\utils\HttpClient;
 use think\wechat\utils\Tools;
+use axguowen\HttpClient;
 
 /**
  * 企业微信自建应用
@@ -66,7 +66,7 @@ class WorkAppSelf extends Platform
         $requestUrl = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={$appid}&corpsecret={$corpsecret}";
         
         // 获取接口调用凭证请求结果
-        $response = HttpClient::get($requestUrl);
+        $response = HttpClient::get($requestUrl)->body;
         // 获取解析结果
         $parseResponseResult = $this->parseResponseData($response);
         // 失败

@@ -89,7 +89,11 @@ class Newtmpl extends Service
     public function addTemplate($tid, array $kidList, $sceneDesc = '')
     {
         $url = 'https://api.weixin.qq.com/wxaapi/newtmpl/addtemplate?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['tid' => $tid, 'kidList' => $kidList, 'sceneDesc' => $sceneDesc], [], [], false);
+        return $this->platform->callPostApi($url, http_build_query([
+            'tid' => $tid,
+            'kidList' => $kidList,
+            'sceneDesc' => $sceneDesc,
+        ]), [], false);
     }
 
     /**

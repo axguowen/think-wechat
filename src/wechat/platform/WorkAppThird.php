@@ -13,7 +13,6 @@ namespace think\wechat\platform;
 
 use think\Wechat;
 use think\wechat\Platform;
-use think\wechat\utils\HttpClient;
 use think\wechat\utils\Tools;
 
 /**

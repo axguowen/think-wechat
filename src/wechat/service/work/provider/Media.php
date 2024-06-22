@@ -38,6 +38,6 @@ class Media extends Service
         if($attachmentType > 0){
             $url .= "&attachment_type={$attachmentType}";
         }
-        return $this->platform->callPostApi($url, ['media' => Tools::createCurlFile($filename)], [], [], false);
+        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename)]), [], false);
     }
 }

@@ -12,8 +12,7 @@
 namespace think\wechat\service\open;
 
 use think\wechat\Service;
-use think\wechat\utils\HttpClient;
-use think\wechat\exception\InvalidResponseException;
+use axguowen\HttpClient;
 
 /**
  * 微信网页授权
@@ -58,7 +57,7 @@ class Oauth extends Service
             'code' => $code,
         ];
         // 获取请求结果
-        $response = HttpClient::get($url, $query);
+        $response = HttpClient::get($url, $query)->body;
         // 获取解析结果
         $parseResponseDataResult = $this->parseResponseData($response);
         // 成功
@@ -86,7 +85,7 @@ class Oauth extends Service
             'refresh_token' => $refreshToken,
         ];
         // 获取请求结果
-        $response = HttpClient::get($url, $query);
+        $response = HttpClient::get($url, $query)->body;
         // 获取解析结果
         $parseResponseDataResult = $this->parseResponseData($response);
         // 成功
@@ -116,7 +115,7 @@ class Oauth extends Service
         // 如果传入了access_token，则直接使用
         if ($accessToken != 'ACCESS_TOKEN') {
             // 获取请求结果
-            $response = HttpClient::get($url);
+            $response = HttpClient::get($url)->body;
             // 返回解析
             return $this->parseResponseData($response);
         }
@@ -143,7 +142,7 @@ class Oauth extends Service
         // 如果传入了access_token，则直接使用
         if ($accessToken != 'ACCESS_TOKEN') {
             // 获取请求结果
-            $response = HttpClient::get($url);
+            $response = HttpClient::get($url)->body;
             // 返回解析
             return $this->parseResponseData($response);
         }

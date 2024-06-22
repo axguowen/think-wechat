@@ -12,8 +12,8 @@
 namespace think\wechat\platform\contract;
 
 use think\wechat\Platform;
-use think\wechat\utils\HttpClient;
 use think\wechat\utils\Tools;
+use axguowen\HttpClient;
 
 /**
  * 企业微信服务商应用套件基础类
@@ -64,10 +64,10 @@ class WorkSuite extends Platform
         ]);
         // 请求头
         $header = [
-            'Content-Type' => 'application/json',
+            'Content-Type' => 'application/json; charset=utf-8',
         ];
         // 获取接口调用凭证请求结果
-        $response = HttpClient::post($requestUrl, $data, $header);
+        $response = HttpClient::post($requestUrl, $data, $header)->body;
         // 获取解析结果
         $parseResponseResult = $this->parseResponseData($response);
         // 失败

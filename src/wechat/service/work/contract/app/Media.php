@@ -34,7 +34,7 @@ abstract class Media extends Service
         }
         // 请求地址
         $url = "https://qyapi.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type={$type}";
-        return $this->platform->callPostApi($url, ['media' => Tools::createCurlFile($filename)], [], [], false);
+        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename)]), [], false);
     }
 
     /**
@@ -47,7 +47,7 @@ abstract class Media extends Service
     public function uploadimg($filename)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['media' => Tools::createCurlFile($filename)], [], [], false);
+        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename)]), [], false);
     }
 
     /**

@@ -12,10 +12,10 @@
 namespace think\wechat\service\mini;
 
 use think\wechat\Service;
-use think\wechat\utils\HttpClient;
 use think\wechat\cryptor\MiniCryptor;
 use think\wechat\exception\InvalidResponseException;
 use think\wechat\exception\InvalidDecryptException;
+use axguowen\HttpClient;
 
 /**
  * 数据加密处理
@@ -51,7 +51,7 @@ class Crypt extends Service
         $appid = $this->platform->getConfig('appid');
         $secret = $this->platform->getConfig('appsecret');
         $url = "https://api.weixin.qq.com/sns/jscode2session?appid={$appid}&secret={$secret}&js_code={$code}&grant_type=authorization_code";
-        return json_decode(HttpClient::get($url), true);
+        return json_decode(HttpClient::get($url)->body, true);
     }
 
     /**

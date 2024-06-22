@@ -14,10 +14,10 @@ namespace think\wechat;
 use think\App;
 use think\facade\Cache;
 use think\helper\Str;
-use think\wechat\utils\HttpClient;
 use think\wechat\utils\Tools;
 use think\wechat\exception\InvalidResponseException;
 use think\wechat\exception\InvalidArgumentException;
+use axguowen\HttpClient;
 
 /**
  * 平台抽象类
@@ -284,7 +284,7 @@ abstract class Platform
      * @param array $options 其它参数
      * @return array
      */
-    public function callGetApi($url, array $query = [], array $headers = [], array $options = [])
+    public function callGetApi($url, array $query = [], array $headers = [])
     {
         // 获取接口调用凭证
         $getAccessTokenResult = $this->getAccessToken();
@@ -295,8 +295,13 @@ abstract class Platform
         $accessToken = $getAccessTokenResult[0];
         // 替换URL中的参数
         $requestUrl = str_replace('=ACCESS_TOKEN', '=' . urlencode($accessToken), $url);
+        // query参数不为空
+        if(!empty($query)){
+            $requestUrl .= (stripos($requestUrl, '?') !== false ? '&' : '?') . http_build_query($query);
+        }
         // 获取请求结果
-        $response = HttpClient::get($requestUrl, $query, $headers, $options);
+        $response = HttpClient::get($requestUrl, $query, $headers)->body;
+        
         // 获取解析结果
         $parseResponseDataResult = $this->parseResponseData($response);
         // 失败
@@ -306,7 +311,7 @@ abstract class Platform
                 // 标记调用凭证无效
                 $this->invalidAccessToken();
                 // 重试一次
-                return $this->callGetApi($url, $query, $headers, $options);
+                return $this->callGetApi($url, $query, $headers);
             }
         }
         // 请求成功且当前当前调用凭证标记的是无效
@@ -324,10 +329,10 @@ abstract class Platform
      * @param array $data POST提交接口参数
      * @param array $headers 请求头
      * @param array $options 请求扩展数据
-     * @param bool $toJson 是否转换为JSON参数
+     * @param bool $json 是否转换为JSON参数
      * @return array
      */
-    public function callPostApi($url, array $data = [], array $headers = [], array $options = [], $toJson = true)
+    public function callPostApi($url, array $data = [], array $headers = [], $json = true)
     {
         // 获取接口调用凭证
         $getAccessTokenResult = $this->getAccessToken();
@@ -339,16 +344,16 @@ abstract class Platform
         // 替换URL中的参数
         $requestUrl = str_replace('=ACCESS_TOKEN', '=' . urlencode($accessToken), $url);
         // 请求体
-        $body = $data;
+        $requestData = $data;
         // 请求头
-        $head = $headers;
-        // json请求
-        if ($toJson){
-            $head['Content-Type'] = 'application/json';
-            $body = Tools::arr2json($body);
+        $requestHeaders = $headers;
+        // 转换为JSON
+        if ($json){
+            $requestHeader['Content-Type'] = 'application/json; charset=utf-8';
+            $requestData = Tools::arr2json($requestData);
         }
         // 获取请求结果
-        $response = HttpClient::post($requestUrl, $body, $head, $options);
+        $response = HttpClient::post($requestUrl, $requestData, $requestHeaders)->body;
         // 获取解析结果
         $parseResponseDataResult = $this->parseResponseData($response);
         // 失败
@@ -358,7 +363,7 @@ abstract class Platform
                 // 标记调用凭证无效
                 $this->invalidAccessToken();
                 // 重试一次
-                return $this->callPostApi($url, $data, $headers, $options, $toJson);
+                return $this->callPostApi($url, $data, $headers, $json);
             }
         }
         // 请求成功且当前当前调用凭证标记的是无效

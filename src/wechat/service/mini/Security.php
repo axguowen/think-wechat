@@ -28,7 +28,7 @@ class Security extends Service
     public function imgSecCheck($media)
     {
         $url = 'https://api.weixin.qq.com/wxa/img_sec_check?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['media' => $media], ['Content-Type' => 'application/octet-stream'], [], false);
+        return $this->platform->callPostApi($url, http_build_query(['media' => $media]), ['Content-Type' => 'application/octet-stream'], false);
     }
 
     /**
