@@ -11,10 +11,7 @@
 
 namespace think\wechat\utils;
 
-use think\facade\App;
-use think\facade\Cache;
 use think\wechat\exception\InvalidArgumentException;
-use think\wechat\exception\LocalCacheException;
 
 /**
  * 工具类
@@ -49,64 +46,6 @@ class Tools
         } else {
             return $GLOBALS['HTTP_RAW_POST_DATA'];
         }
-    }
-    
-    /**
-     * 根据文件后缀获取文件类型
-     * @access public
-     * @param string|array $ext 文件后缀
-     * @param array $mine 文件后缀MINE信息
-     * @return string
-     */
-    public static function getExtMine($ext, $mine = [])
-    {
-        $mines = static::getMines();
-        foreach (is_string($ext) ? explode(',', $ext) : $ext as $e) {
-            $mine[] = isset($mines[strtolower($e)]) ? $mines[strtolower($e)] : 'application/octet-stream';
-        }
-        return join(',', array_unique($mine));
-    }
-
-    /**
-     * 获取所有文件扩展的类型
-     * @access protected
-     * @return array
-     */
-    protected static function getMines()
-    {
-        $mines = Cache::get('all_ext_mine');
-        if (empty($mines)) {
-            $content = file_get_contents('http://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types');
-            preg_match_all('#^([^\s]{2,}?)\s+(.+?)$#ism', $content, $matches, PREG_SET_ORDER);
-            foreach ($matches as $match) foreach (explode(' ', $match[2]) as $ext) $mines[$ext] = $match[1];
-            Cache::set('all_ext_mine', $mines, 86400);
-        }
-        return $mines;
-    }
-
-    /**
-     * 创建CURL文件对象
-     * @access public
-     * @param mixed $filename
-     * @param string $mimetype
-     * @param string $postname
-     * @return \CURLFile|string
-     */
-    public static function createCurlFile($filename, $mimetype = null, $postname = null)
-    {
-        if (is_string($filename) && file_exists($filename)) {
-            if (is_null($postname)){
-                $postname = basename($filename);
-            }
-            if (is_null($mimetype)){
-                $mimetype = static::getExtMine(pathinfo($filename, 4));
-            }
-            if (class_exists('CURLFile')) {
-                return new \CURLFile($filename, $mimetype, $postname);
-            }
-            return "@{$filename};filename={$postname};type={$mimetype}";
-        }
-        return $filename;
     }
 
     /**
@@ -269,42 +208,5 @@ class Tools
         return json_decode(preg_replace_callback('/\\\\\\\\/i', function () {
             return '\\';
         }, json_encode($content)));
-    }
-
-    /**
-     * 写入文件
-     * @access public
-     * @param string $name 文件名称
-     * @param string $content 文件内容
-     * @return string
-     * @throws LocalCacheException
-     */
-    public static function pushFile($name, $content)
-    {
-        // 构造文件名
-        $file = static::getCacheFileName($name);
-        // 写入失败
-        if (!file_put_contents($file, $content)) {
-            throw new LocalCacheException('local file write error.', '0');
-        }
-        // 返回文件名
-        return $file;
-    }
-
-    /**
-     * 应用缓存目录
-     * @access protected
-     * @param string $name
-     * @return string
-     */
-    protected static function getCacheFileName($name)
-    {
-        // 构造缓存目录
-        $cachePath = App::getRuntimePath() . 'cache' . DIRECTORY_SEPARATOR . 'think-wechat' . DIRECTORY_SEPARATOR;
-        // 目录不存在
-        if (!is_dir($cachePath)) {
-            mkdir($cachePath, 0755, true);
-        }
-        return $cachePath . $name;
     }
 }

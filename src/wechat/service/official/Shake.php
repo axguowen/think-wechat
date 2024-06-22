@@ -12,7 +12,6 @@
 namespace think\wechat\service\official;
 
 use think\wechat\Service;
-use think\wechat\utils\Tools;
 
 /**
  * 揺一揺周边
@@ -159,14 +158,16 @@ class Shake extends Service
     /**
      * 上传图片素材
      * @access public
-     * @param string $filename 图片名字
+     * @param string $fileName 文件名
+     * @param string $fileContent 文件内容
+     * @param string $mimeType 文件类型
      * @param string $type Icon：摇一摇页面展示的icon图；License：申请开通摇一摇周边功能时需上传的资质文件；若不传type，则默认type=icon
      * @return array
      */
-    public function upload($filename, $type = 'icon')
+    public function upload($fileName, $fileContent, $mimeType = null, $type = 'icon')
     {
         $url = 'https://api.weixin.qq.com/shakearound/material/add?access_token=ACCESS_TOKEN&type=' . $type;
-        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename)]), [], false);
+        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**

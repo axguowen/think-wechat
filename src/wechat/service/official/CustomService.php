@@ -12,7 +12,6 @@
 namespace think\wechat\service\official;
 
 use think\wechat\Service;
-use think\wechat\utils\Tools;
 
 /**
  * 客服消息处理
@@ -95,14 +94,16 @@ class CustomService extends Service
     /**
      * 设置客服帐号的头像
      * @access public
-     * @param string $kf_account 客户账号
-     * @param string $image 头像文件位置
+     * @param string $kfAccount 客户账号
+     * @param string $fileName 文件名
+     * @param string $fileContent 文件内容
+     * @param string $mimeType 文件类型
      * @return array
      */
-    public function uploadHeadimg($kf_account, $image)
+    public function uploadHeadimg($kfAccount, $fileName, $fileContent, $mimeType = null)
     {
-        $url = 'https://api.weixin.qq.com/customservice/kfaccount/uploadheadimg?access_token=ACCESS_TOKEN&kf_account=' . $kf_account;
-        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($image)]), [], false);
+        $url = "https://api.weixin.qq.com/customservice/kfaccount/uploadheadimg?access_token=ACCESS_TOKEN&kf_account={$kfAccount}";
+        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**

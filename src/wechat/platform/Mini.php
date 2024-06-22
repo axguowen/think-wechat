@@ -76,16 +76,12 @@ class Mini extends Platform
      */
     protected function forceGeneralAccessToken()
     {
+        $appid = $this->options['appid'];
+        $secret = $this->options['appsecret'];
         // 接口请求地址
-        $requestUrl = 'https://api.weixin.qq.com/cgi-bin/token';
-        // 参数
-        $query = [
-            'grant_type' => 'client_credential',
-            'appid' => $this->options['appid'],
-            'secret' => $this->options['appsecret'],
-        ];
+        $requestUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$secret}";
         // 获取请求结果
-        return HttpClient::get($requestUrl, $query)->body;
+        return HttpClient::get($requestUrl)->body;
     }
 
     /**

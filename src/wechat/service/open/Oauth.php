@@ -56,8 +56,12 @@ class Oauth extends Service
             'secret' => $secret,
             'code' => $code,
         ];
+        // query参数不为空
+        if(!empty($query)){
+            $url .= (stripos($requestUrl, '?') !== false ? '&' : '?') . http_build_query($query);
+        }
         // 获取请求结果
-        $response = HttpClient::get($url, $query)->body;
+        $response = HttpClient::get($url)->body;
         // 获取解析结果
         $parseResponseDataResult = $this->parseResponseData($response);
         // 成功
@@ -84,8 +88,12 @@ class Oauth extends Service
             'appid' => $appid,
             'refresh_token' => $refreshToken,
         ];
+        // query参数不为空
+        if(!empty($query)){
+            $url .= (stripos($requestUrl, '?') !== false ? '&' : '?') . http_build_query($query);
+        }
         // 获取请求结果
-        $response = HttpClient::get($url, $query)->body;
+        $response = HttpClient::get($url)->body;
         // 获取解析结果
         $parseResponseDataResult = $this->parseResponseData($response);
         // 成功

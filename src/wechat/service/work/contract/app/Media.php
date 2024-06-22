@@ -12,7 +12,6 @@
 namespace think\wechat\service\work\contract\app;
 
 use think\wechat\Service;
-use think\wechat\utils\Tools;
 use think\wechat\exception\InvalidResponseException;
 
 /**
@@ -23,31 +22,35 @@ abstract class Media extends Service
     /**
      * 上传临时素材
      * @access public
-     * @param string $filename 文件名称
+     * @param string $fileName 文件名
+     * @param string $fileContent 文件内容
+     * @param string $mimeType 文件类型
      * @param string $type 媒体文件类型, image图片、voice语音、video视频, file普通文件
      * @return array
      */
-    public function upload($filename, $type = 'file')
+    public function upload($fileName, $fileContent, $mimeType = null, $type = 'file')
     {
         if (!in_array($type, ['image', 'voice', 'video', 'file'])) {
             throw new InvalidResponseException('Invalid Media Type.', '0');
         }
         // 请求地址
         $url = "https://qyapi.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type={$type}";
-        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename)]), [], false);
+        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**
      * 上传图片
      * @access public
-     * @param string $filename 文件名称
+     * @param string $fileName 文件名
+     * @param string $fileContent 文件内容
+     * @param string $mimeType 文件类型
      * @param string $type 媒体文件类型, image图片、voice语音、video视频, file普通文件
      * @return array
      */
-    public function uploadimg($filename)
+    public function uploadimg($fileName, $fileContent, $mimeType = null)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename)]), [], false);
+        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**

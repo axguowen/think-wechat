@@ -281,7 +281,6 @@ abstract class Platform
      * @param string $url 接口URL
      * @param array $query GET参数
      * @param array $headers 请求头
-     * @param array $options 其它参数
      * @return array
      */
     public function callGetApi($url, array $query = [], array $headers = [])
@@ -300,7 +299,7 @@ abstract class Platform
             $requestUrl .= (stripos($requestUrl, '?') !== false ? '&' : '?') . http_build_query($query);
         }
         // 获取请求结果
-        $response = HttpClient::get($requestUrl, $query, $headers)->body;
+        $response = HttpClient::get($requestUrl, $headers)->body;
         
         // 获取解析结果
         $parseResponseDataResult = $this->parseResponseData($response);
@@ -311,7 +310,7 @@ abstract class Platform
                 // 标记调用凭证无效
                 $this->invalidAccessToken();
                 // 重试一次
-                return $this->callGetApi($url, $query, $headers);
+                return $this->callGetApi($url, $headers);
             }
         }
         // 请求成功且当前当前调用凭证标记的是无效
@@ -328,7 +327,6 @@ abstract class Platform
      * @param string $url 接口URL
      * @param array $data POST提交接口参数
      * @param array $headers 请求头
-     * @param array $options 请求扩展数据
      * @param bool $json 是否转换为JSON参数
      * @return array
      */
@@ -364,6 +362,51 @@ abstract class Platform
                 $this->invalidAccessToken();
                 // 重试一次
                 return $this->callPostApi($url, $data, $headers, $json);
+            }
+        }
+        // 请求成功且当前当前调用凭证标记的是无效
+        if(false !== $this->accessTokenInvalid){
+            $this->accessTokenInvalid = false;
+        }
+        // 返回
+        return $parseResponseDataResult;
+    }
+
+    /**
+     * 接口通用表单类型POST请求方法
+     * @access public
+     * @param string $url 接口URL
+     * @param array $fields 字段
+     * @param string $name 名称
+     * @param string $fileName 上传文件名
+     * @param string $fileBody 上传文件内容
+     * @param string $mimeType MIME类型
+     * @param array $headers 请求头
+     * @return array
+     */
+    public function callMultipartPostApi($url, array $fields, $name, $fileName, $fileBody, $mimeType = null, array $headers = [])
+    {
+        // 获取接口调用凭证
+        $getAccessTokenResult = $this->getAccessToken();
+        // 获取接口调用凭证失败
+        if(is_null($getAccessTokenResult[0])){
+            return $getAccessTokenResult;
+        }
+        $accessToken = $getAccessTokenResult[0];
+        // 替换URL中的参数
+        $requestUrl = str_replace('=ACCESS_TOKEN', '=' . urlencode($accessToken), $url);
+        // 获取请求结果
+        $response = HttpClient::multipartPost($requestUrl, $fields, $name, $fileName, $fileBody, $mimeType, $headers)->body;
+        // 获取解析结果
+        $parseResponseDataResult = $this->parseResponseData($response);
+        // 失败
+        if(is_null($parseResponseDataResult[0])){
+            // 如果接口调用凭证未标记为无效，且返回码为凭证无效则重试一次
+            if(false === $this->accessTokenInvalid && in_array($parseResponseDataResult[1]->getCode(), $this->accessTokenInvalidCode)){
+                // 标记调用凭证无效
+                $this->invalidAccessToken();
+                // 重试一次
+                return $this->callMultipartPostApi($url, $fields, $name, $fileName, $fileBody, $mimeType, $headers);
             }
         }
         // 请求成功且当前当前调用凭证标记的是无效

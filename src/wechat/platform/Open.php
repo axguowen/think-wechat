@@ -128,8 +128,12 @@ class Open extends Platform
             'appid' => $this->options['appid'],
             'refresh_token' => $getRefreshTokenResult[0],
         ];
+        // query参数不为空
+        if(!empty($query)){
+            $requestUrl .= (stripos($requestUrl, '?') !== false ? '&' : '?') . http_build_query($query);
+        }
         // 获取请求结果
-        $response = HttpClient::get($requestUrl, $query)->body;
+        $response = HttpClient::get($requestUrl)->body;
         // 获取解析结果
         return $this->parseResponseData($response);
     }

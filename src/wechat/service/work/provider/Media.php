@@ -12,7 +12,6 @@
 namespace think\wechat\service\work\provider;
 
 use think\wechat\Service;
-use think\wechat\utils\Tools;
 use think\wechat\exception\InvalidResponseException;
 /**
  * 企业微信服务商素材管理服务
@@ -22,12 +21,14 @@ class Media extends Service
     /**
      * 服务商上传临时素材
      * @access public
-     * @param string $filename 文件名称
+     * @param string $fileName 文件名
+     * @param string $fileContent 文件内容
+     * @param string $mimeType 文件类型
      * @param string $type 媒体文件类型, image图片、voice语音、video视频, file普通文件
      * @param int $attachmentType 附件类型, 不同的附件类型用于不同的场景, 3收银台
      * @return array
      */
-    public function upload($filename, $type = 'file', $attachmentType = 0)
+    public function upload($fileName, $fileContent, $mimeType = null, $type = 'file', $attachmentType = 0)
     {
         if (!in_array($type, ['image', 'voice', 'video', 'file'])) {
             throw new InvalidResponseException('Invalid Media Type.', '0');
@@ -38,6 +39,6 @@ class Media extends Service
         if($attachmentType > 0){
             $url .= "&attachment_type={$attachmentType}";
         }
-        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename)]), [], false);
+        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 }

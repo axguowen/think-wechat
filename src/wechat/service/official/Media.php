@@ -23,17 +23,19 @@ class Media extends Service
     /**
      * 新增临时素材
      * @access public
-     * @param string $filename 文件名称
+     * @param string $fileName 文件名
+     * @param string $fileContent 文件内容
+     * @param string $mimeType 文件类型
      * @param string $type 媒体文件类型(image|voice|video|thumb)
      * @return array
      */
-    public function add($filename, $type = 'image')
+    public function add($fileName, $fileContent, $mimeType = null, $type = 'image')
     {
         if (!in_array($type, ['image', 'voice', 'video', 'thumb'])) {
             throw new InvalidResponseException('Invalid Media Type.', '0');
         }
         $url = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type={$type}";
-        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename)]), [], false);
+        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**
@@ -80,30 +82,34 @@ class Media extends Service
     /**
      * 上传图文消息内的图片获取URL
      * @access public
-     * @param mixed $filename
+     * @param string $fileName 文件名
+     * @param string $fileContent 文件内容
+     * @param string $mimeType 文件类型
      * @return array
      */
-    public function uploadImg($filename)
+    public function uploadImg($fileName, $fileContent, $mimeType = null)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename)]), [], false);
+        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**
      * 新增其他类型永久素材
      * @access public
-     * @param mixed $filename 文件名称
+     * @param string $fileName 文件名
+     * @param string $fileContent 文件内容
+     * @param string $mimeType 文件类型
      * @param string $type 媒体文件类型(image|voice|video|thumb)
      * @param array $description 包含素材的描述信息
      * @return array
      */
-    public function addMaterial($filename, $type = 'image', $description = [])
+    public function addMaterial($fileName, $fileContent, $mimeType = null, $type = 'image', $description = [])
     {
         if (!in_array($type, ['image', 'voice', 'video', 'thumb'])) {
             throw new InvalidResponseException('Invalid Media Type.', '0');
         }
         $url = "https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=ACCESS_TOKEN&type={$type}";
-        return $this->platform->callPostApi($url, http_build_query(['media' => Tools::createCurlFile($filename), 'description' => Tools::arr2json($description)]), [], false);
+        return $this->platform->callMultipartPostApi($url, ['description' => Tools::arr2json($description)], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**
