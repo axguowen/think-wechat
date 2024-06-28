@@ -12,7 +12,7 @@
 namespace think\wechat;
 
 use think\App;
-use think\facade\Cache;
+use think\Cache;
 use think\helper\Str;
 use think\wechat\utils\Tools;
 use think\wechat\exception\InvalidResponseException;
@@ -58,13 +58,13 @@ abstract class Platform
      * 接口调用凭证缓存获取器
      * @var string|array
      */
-    protected $accessTokenGetter = Cache::class . '::get';
+    protected $accessTokenGetter = [Cache::class, 'get'];
 
     /**
      * 接口调用凭证缓存修改器
      * @var string|array
      */
-    protected $accessTokenSetter = Cache::class . '::set';
+    protected $accessTokenSetter = [Cache::class, 'set'];
 
     /**
      * 接口调用凭证是否无效
@@ -170,9 +170,9 @@ abstract class Platform
     protected function initCacheHandler()
     {
         // 设置默认接口调用凭证缓存获取器
-        $this->accessTokenGetter = Cache::class . '::get';
+        $this->accessTokenGetter = [Cache::class, 'get'];
         // 设置默认接口调用凭证缓存修改器
-        $this->accessTokenSetter = Cache::class . '::set';
+        $this->accessTokenSetter = [Cache::class, 'set'];
         
         // 如果配置了接口调用凭证缓存获取器
         if (isset($this->options['access_token_getter']) && !empty($this->options['access_token_getter'])) {
@@ -229,7 +229,7 @@ abstract class Platform
         // 获取缓存键名
         $cacheKey = $this->getAccessCacheKey();
         // 返回
-        return call_user_func_array($this->accessTokenGetter, [$cacheKey]);
+        return $this->app->invokeMethod($this->accessTokenGetter, [$cacheKey]);
     }
 
     /**
@@ -257,7 +257,7 @@ abstract class Platform
         // 设置调用凭证
         $this->accessToken = $accessToken;
         // 调用缓存修改器方法
-        call_user_func_array($this->accessTokenSetter, [$cacheKey, $accessToken, $expiresIn]);
+        $this->app->invokeMethod($this->accessTokenSetter, [$cacheKey, $accessToken, $expiresIn]);
         // 返回
         return $this;
     }

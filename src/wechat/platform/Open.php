@@ -11,7 +11,7 @@
 
 namespace think\wechat\platform;
 
-use think\facade\Cache;
+use think\Cache;
 use think\wechat\Platform;
 use think\wechat\exception\LocalCacheException;
 use axguowen\HttpClient;
@@ -48,13 +48,13 @@ class Open extends Platform
      * 刷新Token缓存获取器
      * @var string|array
      */
-    protected $accessTokenGetter = Cache::class . '::get';
+    protected $accessTokenGetter = [Cache::class, 'get'];
 
     /**
      * 刷新Token缓存修改器
      * @var string|array
      */
-    protected $accessTokenSetter = Cache::class . '::set';
+    protected $accessTokenSetter = [Cache::class, 'set'];
 
 	/**
      * 初始化缓存器
@@ -66,9 +66,9 @@ class Open extends Platform
         // 调用父类方法
         parent::initCacheHandler();
         // 设置刷新Token缓存获取器
-        $this->refreshTokenGetter = Cache::class . '::get';
+        $this->refreshTokenGetter = [Cache::class, 'get'];
         // 设置刷新Token缓存修改器
-        $this->refreshTokenSetter = Cache::class . '::set';
+        $this->refreshTokenSetter = [Cache::class, 'set'];
         
         // 如果配置了刷新Token
         if (isset($this->options['refresh_token']) && !empty($this->options['refresh_token'])) {
@@ -165,7 +165,7 @@ class Open extends Platform
         // 获取缓存键名
         $cacheKey = $this->getRefreshCacheKey();
         // 返回
-        return call_user_func_array($this->refreshTokenGetter, [$cacheKey]);
+        return $this->app->invokeMethod($this->refreshTokenGetter, [$cacheKey]);
     }
 
     /**
@@ -204,9 +204,9 @@ class Open extends Platform
         // 设置刷新Token
         $this->refreshToken = $refreshToken;
         // 调用缓存修改器方法
-        call_user_func_array($this->accessTokenSetter, [$cacheKey, $accessToken, $expiresIn]);
+        $this->app->invokeMethod($this->accessTokenSetter, [$cacheKey, $accessToken, $expiresIn]);
         // 刷新token缓存修改器方法
-        call_user_func_array($this->refreshTokenSetter, [$refreshKey, $refreshToken, 86400 * 30]);
+        $this->app->invokeMethod($this->refreshTokenSetter, [$refreshKey, $refreshToken, 86400 * 30]);
         // 返回
         return $this;
     }
