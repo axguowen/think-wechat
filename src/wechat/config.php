@@ -23,7 +23,7 @@ return [
             // 开发者密码
             'appsecret' => '',
             // 是否使用稳定版接口调用凭证
-            'stable_access_token' => false,
+            'use_stable_access_token' => false,
             // 接收消息时的校验Token
             'token' => '',
             // 消息加解密密钥
@@ -47,7 +47,7 @@ return [
             // 小程序密钥
             'appsecret' => '',
             // 是否使用稳定版接口调用凭证
-            'stable_access_token' => false,
+            'use_stable_access_token' => false,
         ],
         // 企业微信服务商
         'work_provider' => [

@@ -30,7 +30,7 @@ class Mini extends Platform
         // 小程序密钥
         'appsecret' => '',
         // 是否使用稳定版接口调用凭证
-        'stable_access_token' => false,
+        'use_stable_access_token' => false,
     ];
 
     /**
@@ -57,7 +57,7 @@ class Mini extends Platform
     protected function getAccessTokenForce()
     {
         // 如果使用稳定版接口调用凭证
-        if($this->options['stable_access_token']){
+        if($this->options['use_stable_access_token']){
             // 获取请求结果
             $response = $this->forceStableAccessToken();
             // 返回解析结果

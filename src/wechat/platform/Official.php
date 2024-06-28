@@ -30,7 +30,7 @@ class Official extends Platform
         // 开发者密码
         'appsecret' => '',
         // 是否使用稳定版接口调用凭证
-        'stable_access_token' => false,
+        'use_stable_access_token' => false,
         // 接收消息时的校验Token
         'token' => '',
         // 消息加解密密钥
@@ -61,7 +61,7 @@ class Official extends Platform
     protected function getAccessTokenForce()
     {
         // 如果使用稳定版接口调用凭证
-        if($this->options['stable_access_token']){
+        if($this->options['use_stable_access_token']){
             // 获取请求结果
             $response = $this->forceStableAccessToken();
             // 返回解析结果
