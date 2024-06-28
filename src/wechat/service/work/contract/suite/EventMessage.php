@@ -29,10 +29,10 @@ abstract class EventMessage extends Service
      * @param string $msgSignature 消息签名
      * @param string $timestamp 时间戳
      * @param string $nonce 随机字符串
-     * @param string $verification 是否是验证模式
+     * @param string $returnRaw 是否返回原始数据
      * @return array
      */
-    public function decrypt($encrypted, $msgSignature, $timestamp, $nonce, $verification = false)
+    public function decrypt($encrypted, $msgSignature, $timestamp, $nonce, $returnRaw = false)
     {
 		// 应用SuiteID
 		$suiteId = $this->platform->getConfig('suite_id');
@@ -63,8 +63,25 @@ abstract class EventMessage extends Service
         if ($result[2] != $suiteId) {
             return [null, new InvalidArgumentException(ErrorCode::getErrText(ErrorCode::$ValidateReceiveIdError))];
         }
+
+        // 如果是返回原始数据
+        if($returnRaw){
+            return [$result[1], null];
+        }
+
+        try{
+            // 解密数据转数组
+            $decryptData = Tools::xml2arr($result[1]);
+        } catch (\Exception $e) {
+            return [null, $e];
+        }
+
+        // 转换失败
+        if(!is_array($decryptData)){
+            return [null, new InvalidArgumentException(ErrorCode::getErrText(ErrorCode::$ParseXmlError))];
+        }
         // 返回
-        return [$result[1], null];
+        return [$decryptData, null];
     }
 
     /**
