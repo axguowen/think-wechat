@@ -71,7 +71,7 @@ class EventMessage extends Service
 
         try{
             // 解密数据转数组
-            $decryptData = '{' !== substr($result[1], 0, 1) ? Tools::xml2arr($result[1]) : json_decode($result[1], true);
+            $decryptData = Tools::xml2arr($result[1]);
         } catch (\Exception $e) {
             return [null, $e];
         }
