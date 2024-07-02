@@ -48,4 +48,18 @@ class ExternalContact extends Service
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/to_service_external_userid?access_token=ACCESS_TOKEN';
         return $this->platform->callPostApi($url, ['external_userid' => $externalUserid]);
     }
+
+    // +=======================
+    // | 获客助手组件
+    // +=======================
+    /**
+     * 获取组件授权信息
+     * @access public
+     * @return array
+     */
+    public function customerAcquisitionGetCompAuthInfo()
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/customer_acquisition/get_comp_auth_info?access_token=ACCESS_TOKEN';
+        return $this->platform->callPostApi($url);
+    }
 }
