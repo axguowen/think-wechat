@@ -25,6 +25,8 @@ class WorkAppAgent extends Platform
      * @var array
      */
     protected $options = [
+        // 所属第三方应用平台名称
+        'suite_platform' => '',
         // 企业ID
         'corpid' => '',
         // 应用的凭证密钥, 即获取到的代开发授权应用的secret
@@ -36,6 +38,12 @@ class WorkAppAgent extends Platform
      * @var string
      */
     protected $serviceNamespace = '\\think\\wechat\\service\\work\\appagent\\';
+
+    /**
+     * 所属第三方应用套件平台实例
+     * @var string
+     */
+    protected $suitePlatform;
 
     /**
      * 获取接口调用凭证缓存键名
@@ -75,5 +83,43 @@ class WorkAppAgent extends Platform
             'access_token' => $accessTokenData['access_token'],
             'expires_in' => $accessTokenData['expires_in'],
         ], null];
+    }
+
+    /**
+     * 获取应用授权信息
+     * @access public
+     * @return array
+     */
+    public function getAuthInfo()
+    {
+        // 获取第三方应用平台实例
+        $suitePlatform = $this->getSuitePlatform();
+        // 获取第三方应用平台实例失败
+        if(is_null($suitePlatform)){
+            return [null, new \Exception('所属第三方应用套件平台实例获取失败')];
+        }
+        // 授权方corpid
+        $authCorpid = $this->options['corpid'];
+        // 授权方企业永久授权码
+        $permanentCode = $this->options['corpsecret'];
+        // 返回
+        return $suitePlatform->service('app_auth')->getAuthInfo($authCorpid, $permanentCode);
+    }
+
+    /**
+     * 获取第三方应用平台实例
+     * @access protected
+     * @return array
+     */
+    protected function getSuitePlatform()
+    {
+        // 如果当前第三方应用套件平台实例为空且配置了第三方应用套件平台参数
+        if(is_null($this->suitePlatform) && !empty($this->options['suite_platform'])){
+            // 获取平台配置
+            $platform = $this->options['suite_platform'];
+            $this->suitePlatform = $platform instanceof WorkSuiteThird ? $platform : Wechat::platform($platform);
+        }
+        // 返回
+        return $this->suitePlatform;
     }
 }
