@@ -39,55 +39,6 @@ class Open extends Platform
     protected $serviceNamespace = '\\think\\wechat\\service\\open\\';
 
     /**
-     * 刷新Token
-     * @var string
-     */
-    protected $refreshToken = '';
-
-    /**
-     * 刷新Token缓存获取器
-     * @var string|array
-     */
-    protected $accessTokenGetter = [Cache::class, 'get'];
-
-    /**
-     * 刷新Token缓存修改器
-     * @var string|array
-     */
-    protected $accessTokenSetter = [Cache::class, 'set'];
-
-	/**
-     * 初始化缓存器
-     * @access protected
-     * @return void
-     */
-    protected function initCacheHandler()
-    {
-        // 调用父类方法
-        parent::initCacheHandler();
-        // 设置刷新Token缓存获取器
-        $this->refreshTokenGetter = [Cache::class, 'get'];
-        // 设置刷新Token缓存修改器
-        $this->refreshTokenSetter = [Cache::class, 'set'];
-        
-        // 如果配置了刷新Token
-        if (isset($this->options['refresh_token']) && !empty($this->options['refresh_token'])) {
-            // 设置刷新Token
-            $this->refreshToken = $this->options['refresh_token'];
-        }
-        // 如果配置了刷新Token缓存获取器
-        if (isset($this->options['refresh_token_getter']) && !empty($this->options['refresh_token_getter'])) {
-            // 设置刷新Token缓存获取器
-            $this->refreshTokenGetter = $this->options['refresh_token_getter'];
-        }
-        // 如果配置了刷新Token缓存修改器
-        if (isset($this->options['refresh_token_setter']) && !empty($this->options['refresh_token_setter'])) {
-            // 设置刷新Token缓存修改器
-            $this->refreshTokenSetter = $this->options['refresh_token_setter'];
-        }
-    }
-
-    /**
      * 获取接口调用凭证缓存键名
      * @access protected
      * @return string
@@ -98,116 +49,13 @@ class Open extends Platform
     }
 
     /**
-     * 获取刷新接口调用凭证缓存键名
-     * @access protected
-     * @return string
-     */
-    protected function getRefreshCacheKey()
-    {
-        return 'open_refresh_token_' . $this->options['appid'];
-    }
-
-    /**
      * 强制获取接口调用凭证
      * @access protected
      * @return array
      */
     protected function getAccessTokenForce()
     {
-        // 获取刷新token
-        $getRefreshTokenResult = $this->getRefreshToken();
-        // 获取失败
-        if(empty($getRefreshTokenResult[0])){
-            return $getRefreshTokenResult;
-        }
-        // 参数
-        $query = [
-            'grant_type' => 'refresh_token',
-            'appid' => $this->options['appid'],
-            'refresh_token' => $getRefreshTokenResult[0],
-        ];
-        // 接口请求地址
-        $requestUrl = 'https://api.weixin.qq.com/sns/oauth2/refresh_token?' . http_build_query($query);
-        // 获取请求结果
-        $response = HttpClient::get($requestUrl)->body;
-        // 获取解析结果
-        return $this->parseResponseData($response);
-    }
-
-    /**
-     * 获取刷新Token
-     * @access protected
-     * @return array
-     */
-    protected function getRefreshToken()
-    {
-        // 当前已存在
-        if (!empty($this->refreshToken)) {
-            return [$this->refreshToken, null];
-        }
-        // 从缓存获取
-        $this->refreshToken = $this->getRefreshTokenCache();
-        // 缓存存在
-        if (!empty($this->refreshToken)) {
-            return [$this->refreshToken, null];
-        }
-        // 返回
-        return [null, new LocalCacheException('refresh_token is empty')];
-    }
-
-    /**
-     * 获取刷新token缓存
-     * @access protected
-     * @return string
-     */
-    protected function getRefreshTokenCache()
-    {
-        // 获取缓存键名
-        $cacheKey = $this->getRefreshCacheKey();
-        // 返回
-        return $this->app->invokeMethod($this->refreshTokenGetter, [$cacheKey]);
-    }
-
-    /**
-     * 更新当前接口调用凭证
-     * @access public
-     * @param array $data
-     * @return $this
-     */
-    public function updateAccessToken(array $data = [])
-    {
-        // 调用凭证
-        $accessToken = '';
-        if(!empty($data['access_token'])){
-            $accessToken = $data['access_token'];
-        }
-        
-        // 到期时间
-        $expiresIn = 0;
-        if(!empty($data['expires_in'])){
-            // 设置调用凭证
-            $expiresIn = $data['expires_in'];
-        }
-        
-        // 刷新Token
-        $refreshToken = '';
-        if(!empty($data['refresh_token'])){
-            // 设置调用凭证
-            $refreshToken = $data['refresh_token'];
-        }
-        // 获取缓存键名
-        $cacheKey = $this->getAccessCacheKey();
-        // 获取缓存键名
-        $refreshKey = $this->getRefreshCacheKey();
-        // 设置调用凭证
-        $this->accessToken = $accessToken;
-        // 设置刷新Token
-        $this->refreshToken = $refreshToken;
-        // 调用缓存修改器方法
-        $this->app->invokeMethod($this->accessTokenSetter, [$cacheKey, $accessToken, $expiresIn]);
-        // 刷新token缓存修改器方法
-        $this->app->invokeMethod($this->refreshTokenSetter, [$refreshKey, $refreshToken, 86400 * 30]);
-        // 返回
-        return $this;
+        // 返回结果
+        return [null, new \Exception('开放平台不支持该方法')];
     }
 }
