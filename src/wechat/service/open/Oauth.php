@@ -102,11 +102,11 @@ class Oauth extends Service
     /**
      * 检验授权凭证（access_token）是否有效
      * @access public
-     * @param string $openid 用户的唯一标识
      * @param string $accessToken 网页授权接口调用凭证,注意：此access_token与基础支持的access_token不同
+     * @param string $openid 用户的唯一标识
      * @return array
      */
-    public function checkAccessToken($openid, $accessToken)
+    public function checkAccessToken($accessToken, $openid)
     {
         // 请求地址
         $requestUrl = "https://api.weixin.qq.com/sns/auth?access_token={$accessToken}&openid={$openid}";
@@ -119,12 +119,12 @@ class Oauth extends Service
     /**
      * 拉取用户信息(需scope为 snsapi_userinfo)
      * @access public
-     * @param string $openid 用户的唯一标识
      * @param string $accessToken 网页授权接口调用凭证,注意：此access_token与基础支持的access_token不同
+     * @param string $openid 用户的唯一标识
      * @param string $lang 返回国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语
      * @return array
      */
-    public function getUserInfo($openid, $accessToken, $lang = 'zh_CN')
+    public function getUserInfo($accessToken, $openid, $lang = 'zh_CN')
     {
         // 请求地址
         $requestUrl = "https://api.weixin.qq.com/sns/userinfo?access_token={$accessToken}&openid={$openid}&lang={$lang}";
