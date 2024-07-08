@@ -11,11 +11,11 @@
 
 namespace think\wechat\service\work\suiteagent;
 
-use think\wechat\service\work\contract\suite\EventMessage as Service;
+use think\wechat\service\work\contract\suite\MessageCryptor as Service;
 
 /**
- * 事件消息服务
+ * 消息加解密服务
  */
-class EventMessage extends Service
+class MessageCryptor extends Service
 {
 }

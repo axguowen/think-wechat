@@ -18,9 +18,9 @@ use think\wechat\utils\Tools;
 use think\wechat\exception\InvalidArgumentException;
 
 /**
- * 事件消息服务基础类
+ * 消息加解密服务基础类
  */
-abstract class EventMessage extends Service
+abstract class MessageCryptor extends Service
 {
     /**
      * 解密事件消息内容
