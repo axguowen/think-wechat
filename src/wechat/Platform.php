@@ -452,9 +452,10 @@ abstract class Platform
      * 获取服务实例
      * @access public
      * @param string $name
+     * @param bool $newInstance 是否每次创建新的实例
      * @return mixed
      */
-    public function service(string $name)
+    public function service(string $name, bool $newInstance = false)
     {
         // 为空
         if (empty($name)) {
@@ -464,13 +465,19 @@ abstract class Platform
             ));
         }
 
-        // 如果服务已经存在
-        if(isset($this->services[$name])){
+        // 如果服务已经存在且不需要创建新的实例
+        if(isset($this->services[$name]) && !$newInstance){
             // 直接返回
             return $this->services[$name];
         }
-        // 创建了再返回
-        return $this->services[$name] = $this->createService($name);
+        // 创建服务实例
+        $object = $this->createService($name);
+        // 记录实例
+        if (!$newInstance) {
+            $this->services[$name] = $object;
+        }
+        // 返回
+        return $object;
     }
 
     /**
