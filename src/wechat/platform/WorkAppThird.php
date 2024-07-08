@@ -73,7 +73,7 @@ class WorkAppThird extends Platform
         // 授权方企业永久授权码
         $permanentCode = $this->options['permanent_code'];
         // 获取企业凭证
-        $getCorpTokenResult = $suitePlatform->service('app_auth')->getCorpToken($authCorpid, $permanentCode);
+        $getCorpTokenResult = $suitePlatform->service('app_auth', true)->getCorpToken($authCorpid, $permanentCode);
         // 失败
         if(is_null($getCorpTokenResult[0])){
             return $getCorpTokenResult;
@@ -105,7 +105,7 @@ class WorkAppThird extends Platform
         // 授权方企业永久授权码
         $permanentCode = $this->options['permanent_code'];
         // 返回
-        return $suitePlatform->service('app_auth')->getAuthInfo($authCorpid, $permanentCode);
+        return $suitePlatform->service('app_auth', true)->getAuthInfo($authCorpid, $permanentCode);
     }
 
     /**

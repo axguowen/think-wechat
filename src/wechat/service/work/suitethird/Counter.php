@@ -56,7 +56,7 @@ class Counter extends Service
      */
     public function getPermanentCode($authCode)
     {
-        return $this->platform->service('app_auth')->getPermanentCode($authCode);
+        return $this->platform->service('app_auth', true)->getPermanentCode($authCode);
     }
 
     /**
@@ -68,7 +68,7 @@ class Counter extends Service
      */
     public function getAuthInfo($authCorpid, $permanentCode)
     {
-        return $this->platform->service('app_auth')->getAuthInfo($authCorpid, $permanentCode);
+        return $this->platform->service('app_auth', true)->getAuthInfo($authCorpid, $permanentCode);
     }
 
     /**

@@ -103,7 +103,7 @@ class WorkAppAgent extends Platform
         // 授权方企业永久授权码
         $permanentCode = $this->options['corpsecret'];
         // 返回
-        return $suitePlatform->service('app_auth')->getAuthInfo($authCorpid, $permanentCode);
+        return $suitePlatform->service('app_auth', true)->getAuthInfo($authCorpid, $permanentCode);
     }
 
     /**

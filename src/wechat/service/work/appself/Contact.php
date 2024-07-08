@@ -29,7 +29,7 @@ class Contact extends Service
      */
     public function userAuthsucc($userid)
     {
-        return $this->platform->service('oauth')->userAuthsucc($userid);
+        return $this->platform->service('oauth', true)->userAuthsucc($userid);
     }
 
     /**
