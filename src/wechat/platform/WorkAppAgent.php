@@ -67,7 +67,7 @@ class WorkAppAgent extends Platform
         // 企业微信自建应用secret
         $corpsecret = $this->options['corpsecret'];
         // 接口请求地址
-        $requestUrl = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={$appid}&corpsecret={$corpsecret}";
+        $requestUrl = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={$corpid}&corpsecret={$corpsecret}";
         
         // 获取接口调用凭证请求结果
         $response = HttpClient::get($requestUrl)->body;
