@@ -59,11 +59,6 @@ abstract class MessageCryptor extends Service
 			return [null, new InvalidArgumentException(ErrorCode::getErrText($result[0]))];
 		}
 
-        // receiveId不正确
-        if ($result[2] != $suiteId) {
-            return [null, new InvalidArgumentException(ErrorCode::getErrText(ErrorCode::$ValidateReceiveIdError))];
-        }
-
         // 如果是返回原始数据
         if($returnRaw){
             return [$result[1], null];
