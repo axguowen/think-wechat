@@ -41,6 +41,10 @@ class MessageCryptor extends Service
 
         // 构造安全签名数组
         $signatureArray = array($encrypted, $token, $timestamp, $nonce);
+        // 如果是返回原始数据
+        if($returnRaw){
+            $signatureArray = array($token, $timestamp, $nonce);
+        }
         // 按字典排序
 		sort($signatureArray, SORT_STRING);
         // 生成本地签名
@@ -50,17 +54,17 @@ class MessageCryptor extends Service
 			return [null, new InvalidArgumentException(ErrorCode::getErrText(ErrorCode::$ValidateSignatureError))];
 		}
 
+        // 如果是返回原始数据
+        if($returnRaw){
+            return [$encrypted, null];
+        }
+
         // 解密
         $result = MsgCryptor::decrypt($encrypted, $encodingAesKey);
         // 解密失败
         if ($result[0] != ErrorCode::$OK) {
 			return [null, new InvalidArgumentException(ErrorCode::getErrText($result[0]))];
 		}
-
-        // 如果是返回原始数据
-        if($returnRaw){
-            return [$result[1], null];
-        }
 
         try{
             // 解密数据转数组
