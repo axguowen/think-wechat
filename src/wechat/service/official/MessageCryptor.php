@@ -34,8 +34,6 @@ class MessageCryptor extends Service
      */
     public function decrypt($encrypted, $msgSignature, $timestamp, $nonce, $returnRaw = false)
     {
-		// 开发者ID
-		$appid = $this->platform->getConfig('appid');
         // 获取token
         $token = $this->platform->getConfig('token');
         // 加密密钥
@@ -58,11 +56,6 @@ class MessageCryptor extends Service
         if ($result[0] != ErrorCode::$OK) {
 			return [null, new InvalidArgumentException(ErrorCode::getErrText($result[0]))];
 		}
-
-        // receiveId不正确
-        if ($result[2] != $appid) {
-            return [null, new InvalidArgumentException(ErrorCode::getErrText(ErrorCode::$ValidateReceiveIdError))];
-        }
 
         // 如果是返回原始数据
         if($returnRaw){

@@ -34,8 +34,6 @@ abstract class MessageCryptor extends Service
      */
     public function decrypt($encrypted, $msgSignature, $timestamp, $nonce, $returnRaw = false)
     {
-		// 应用SuiteID
-		$suiteId = $this->platform->getConfig('suite_id');
         // 获取token
         $token = $this->platform->getConfig('token');
         // 加密密钥
