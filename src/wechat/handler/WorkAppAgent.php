@@ -11,6 +11,8 @@
 
 namespace think\wechat\handler;
 
+use think\facade\Wechat;
+use think\wechat\Platform;
 use think\wechat\utils\Tools;
 use axguowen\HttpClient;
 
@@ -116,7 +118,7 @@ class WorkAppAgent extends Base
         if(is_null($this->suitePlatform) && !empty($this->options['suite_platform'])){
             // 获取平台配置
             $platform = $this->options['suite_platform'];
-            $this->suitePlatform = $platform instanceof WorkSuiteThird ? $platform : Wechat::platform($platform);
+            $this->suitePlatform = $platform instanceof Platform ? $platform : Wechat::platform($platform);
         }
         // 返回
         return $this->suitePlatform;
