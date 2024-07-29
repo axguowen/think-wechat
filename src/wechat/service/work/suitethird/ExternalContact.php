@@ -13,7 +13,6 @@ namespace think\wechat\service\work\provider;
 
 use think\wechat\Service;
 use think\wechat\utils\Tools;
-use think\wechat\exception\InvalidResponseException;
 
 /**
  * 客户联系服务
@@ -44,7 +43,7 @@ class ExternalContact extends Service
         if(!empty($corpid)){
             $data['corpid'] = $corpid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -75,6 +74,6 @@ class ExternalContact extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

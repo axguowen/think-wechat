@@ -29,7 +29,7 @@ class Wifi extends Service
     public function getShopList($pageindex = 1, $pagesize = 2)
     {
         $url = 'https://api.weixin.qq.com/bizwifi/shop/list?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['pageindex' => $pageindex, 'pagesize' => $pagesize]);
+        return $this->handler->callPostApi($url, ['pageindex' => $pageindex, 'pagesize' => $pagesize]);
     }
 
     /**
@@ -41,7 +41,7 @@ class Wifi extends Service
     public function getShopWifi($shop_id)
     {
         $url = 'https://api.weixin.qq.com/bizwifi/shop/list?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['shop_id' => $shop_id]);
+        return $this->handler->callPostApi($url, ['shop_id' => $shop_id]);
     }
 
     /**
@@ -58,7 +58,7 @@ class Wifi extends Service
         $data = ['shop_id' => $shop_id, 'old_ssid' => $old_ssid, 'ssid' => $ssid];
         is_null($password) || $data['password'] = $password;
         $url = 'https://api.weixin.qq.com/bizwifi/shop/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -70,7 +70,7 @@ class Wifi extends Service
     public function clearShopWifi($shop_id)
     {
         $url = 'https://api.weixin.qq.com/bizwifi/shop/clean?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['shop_id' => $shop_id]);
+        return $this->handler->callPostApi($url, ['shop_id' => $shop_id]);
     }
 
     /**
@@ -85,7 +85,7 @@ class Wifi extends Service
     {
         $data = ['shop_id' => $shop_id, 'ssid' => $ssid, 'password' => $password];
         $url = 'https://api.weixin.qq.com/bizwifi/device/add?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -100,7 +100,7 @@ class Wifi extends Service
     {
         $data = ['shop_id' => $shop_id, 'ssid' => $ssid, 'reset' => $reset];
         $url = 'https://api.weixin.qq.com/bizwifi/apportal/register?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -118,7 +118,7 @@ class Wifi extends Service
         is_null($pageindex) || $data['pageindex'] = $pageindex;
         is_null($shop_id) || $data['shop_id'] = $shop_id;
         $url = 'https://api.weixin.qq.com/bizwifi/device/list?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -130,7 +130,7 @@ class Wifi extends Service
     public function delShopWifi($bssid)
     {
         $url = 'https://api.weixin.qq.com/bizwifi/device/delete?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['bssid' => $bssid]);
+        return $this->handler->callPostApi($url, ['bssid' => $bssid]);
     }
 
     /**
@@ -144,7 +144,7 @@ class Wifi extends Service
     public function getQrc($shop_id, $ssid, $img_id = 1)
     {
         $url = 'https://api.weixin.qq.com/bizwifi/qrcode/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['shop_id' => $shop_id, 'ssid' => $ssid, 'img_id' => $img_id]);
+        return $this->handler->callPostApi($url, ['shop_id' => $shop_id, 'ssid' => $ssid, 'img_id' => $img_id]);
     }
 
     /**
@@ -160,7 +160,7 @@ class Wifi extends Service
         $data = ['shop_id' => $shop_id, 'template_id' => $template_id];
         is_null($url) && $data['struct'] = ['url' => $url];
         $url = 'https://api.weixin.qq.com/bizwifi/homepage/set?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -172,7 +172,7 @@ class Wifi extends Service
     public function getHomePage($shop_id)
     {
         $url = 'https://api.weixin.qq.com/bizwifi/homepage/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['shop_id' => $shop_id]);
+        return $this->handler->callPostApi($url, ['shop_id' => $shop_id]);
     }
 
     /**
@@ -185,7 +185,7 @@ class Wifi extends Service
     public function setBar($shop_id, $bar_type = 1)
     {
         $url = 'https://api.weixin.qq.com/bizwifi/bar/set?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['shop_id' => $shop_id, 'bar_type' => $bar_type]);
+        return $this->handler->callPostApi($url, ['shop_id' => $shop_id, 'bar_type' => $bar_type]);
     }
 
     /**
@@ -198,7 +198,7 @@ class Wifi extends Service
     public function setFinishPage($shop_id, $finishpage_url)
     {
         $url = 'https://api.weixin.qq.com/bizwifi/finishpage/set?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['shop_id' => $shop_id, 'finishpage_url' => $finishpage_url]);
+        return $this->handler->callPostApi($url, ['shop_id' => $shop_id, 'finishpage_url' => $finishpage_url]);
     }
 
     /**
@@ -212,7 +212,7 @@ class Wifi extends Service
     public function staticList($begin_date, $end_date, $shop_id = -1)
     {
         $url = 'https://api.weixin.qq.com/bizwifi/statistics/list?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['shop_id' => $shop_id, 'begin_date' => $begin_date, 'end_date' => $end_date]);
+        return $this->handler->callPostApi($url, ['shop_id' => $shop_id, 'begin_date' => $begin_date, 'end_date' => $end_date]);
     }
 
     /**
@@ -229,7 +229,7 @@ class Wifi extends Service
     {
         $data = ['shop_id' => $shop_id, 'card_id' => $card_id, 'card_describe' => $card_describe, 'start_time' => $start_time, 'end_time' => $end_time];
         $url = 'https://api.weixin.qq.com/bizwifi/couponput/set?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -241,7 +241,7 @@ class Wifi extends Service
     public function getCouponput($shop_id)
     {
         $url = 'https://api.weixin.qq.com/bizwifi/couponput/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['shop_id' => $shop_id]);
+        return $this->handler->callPostApi($url, ['shop_id' => $shop_id]);
     }
 
 }

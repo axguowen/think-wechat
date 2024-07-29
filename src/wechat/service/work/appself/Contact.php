@@ -29,7 +29,7 @@ class Contact extends Service
      */
     public function userAuthsucc($userid)
     {
-        return $this->platform->service('oauth', true)->userAuthsucc($userid);
+        return $this->handler->service('oauth', true)->userAuthsucc($userid);
     }
 
     /**
@@ -41,6 +41,6 @@ class Contact extends Service
     public function corpGetJoinQrcode($sizeType = 1)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/corp/get_join_qrcode?access_token=ACCESS_TOKEN&size_type={$sizeType}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 }

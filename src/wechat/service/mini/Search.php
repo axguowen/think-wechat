@@ -27,6 +27,6 @@ class Search extends Service
     public function submitPages($pages)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguideacct?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['pages' => $pages]);
+        return $this->handler->callPostApi($url, ['pages' => $pages]);
     }
 }

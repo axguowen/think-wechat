@@ -47,7 +47,7 @@ abstract class ExternalPay extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -59,6 +59,6 @@ abstract class ExternalPay extends Service
     public function getPaymentInfo($paymentId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalpay/get_payment_info?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['payment_id' => $paymentId]);
+        return $this->handler->callPostApi($url, ['payment_id' => $paymentId]);
     }
 }

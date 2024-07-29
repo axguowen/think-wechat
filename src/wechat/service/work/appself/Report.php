@@ -44,7 +44,7 @@ class Report extends Service
         if(!empty($gridMember)){
             $data['grid_member'] = $gridMember;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -58,7 +58,7 @@ class Report extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/grid/update?access_token=ACCESS_TOK';
         $data['grid_id'] = $gridId;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -70,7 +70,7 @@ class Report extends Service
     public function gridDelete($gridId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/grid/delete?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['grid_id' => $gridId]);
+        return $this->handler->callPostApi($url, ['grid_id' => $gridId]);
     }
 
     /**
@@ -82,7 +82,7 @@ class Report extends Service
     public function gridList($gridId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/grid/list?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['grid_id' => $gridId]);
+        return $this->handler->callPostApi($url, ['grid_id' => $gridId]);
     }
 
     /**
@@ -94,7 +94,7 @@ class Report extends Service
     public function gridGetUserGridInfo($userid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/grid/get_user_grid_info?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['userid' => $userid]);
+        return $this->handler->callPostApi($url, ['userid' => $userid]);
     }
 
     // +=======================
@@ -120,7 +120,7 @@ class Report extends Service
         if(!empty($parentCategoryId)){
             $data['parent_category_id'] = $parentCategoryId;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -134,7 +134,7 @@ class Report extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/grid/update_cata?access_token=ACCESS_TOKEN';
         $data['category_id'] = $categoryId;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -146,7 +146,7 @@ class Report extends Service
     public function gridDeleteCata($categoryId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/grid/delete_cata?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['category_id' => $categoryId]);
+        return $this->handler->callPostApi($url, ['category_id' => $categoryId]);
     }
 
     /**
@@ -157,7 +157,7 @@ class Report extends Service
     public function gridListCata()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/grid/list_cata?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url);
+        return $this->handler->callPostApi($url);
     }
 
     // +=======================
@@ -171,7 +171,7 @@ class Report extends Service
     public function patrolGetGridInfo()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/patrol/get_grid_info?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -189,7 +189,7 @@ class Report extends Service
         if(!empty($gridId)){
             $data['grid_id'] = $gridId;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -201,7 +201,7 @@ class Report extends Service
     public function patrolGetUserStatus($userid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/patrol/get_user_status?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['userid' => $userid]);
+        return $this->handler->callPostApi($url, ['userid' => $userid]);
     }
 
     /**
@@ -213,7 +213,7 @@ class Report extends Service
     public function patrolCategoryStatistic($categoryId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/patrol/category_statistic?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['category_id' => $categoryId]);
+        return $this->handler->callPostApi($url, ['category_id' => $categoryId]);
     }
 
     /**
@@ -242,7 +242,7 @@ class Report extends Service
         if ($beginModifyTime > 0) {
             $data['begin_modify_time'] = $beginModifyTime;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -254,7 +254,7 @@ class Report extends Service
     public function patrolGetOrderInfo($orderId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/patrol/get_order_info?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['order_id' => $orderId]);
+        return $this->handler->callPostApi($url, ['order_id' => $orderId]);
     }
 
     // +=======================
@@ -268,7 +268,7 @@ class Report extends Service
     public function residentGetGridInfo()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/resident/get_grid_info?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -286,7 +286,7 @@ class Report extends Service
         if(!empty($gridId)){
             $data['grid_id'] = $gridId;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -298,7 +298,7 @@ class Report extends Service
     public function residentGetUserStatus($userid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/resident/get_user_status?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['userid' => $userid]);
+        return $this->handler->callPostApi($url, ['userid' => $userid]);
     }
 
     /**
@@ -310,7 +310,7 @@ class Report extends Service
     public function residentCategoryStatistic($categoryId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/resident/category_statistic?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['category_id' => $categoryId]);
+        return $this->handler->callPostApi($url, ['category_id' => $categoryId]);
     }
 
     /**
@@ -339,7 +339,7 @@ class Report extends Service
         if ($beginModifyTime > 0) {
             $data['begin_modify_time'] = $beginModifyTime;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -351,6 +351,6 @@ class Report extends Service
     public function residentGetOrderInfo($orderId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/report/resident/get_order_info?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['order_id' => $orderId]);
+        return $this->handler->callPostApi($url, ['order_id' => $orderId]);
     }
 }

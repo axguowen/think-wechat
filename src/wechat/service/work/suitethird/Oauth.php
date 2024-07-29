@@ -31,7 +31,7 @@ class Oauth extends Service
      */
     public function getOauthRedirect($redirectUri, $state = '', $scope = 'snsapi_base')
     {
-        $suiteId = $this->platform->getConfig('suite_id');
+        $suiteId = $this->handler->getConfig('suite_id');
         // 如果未编码
         if(!preg_match('/^http(s)?%3A%2F%2F/', $redirectUri)){
             $redirectUri = urlencode($redirectUri);
@@ -48,7 +48,7 @@ class Oauth extends Service
     public function getUserInfo($code)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/service/auth/getuserinfo3rd?suite_access_token=ACCESS_TOKEN&code={$code}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -60,7 +60,7 @@ class Oauth extends Service
     public function getSchoolUserInfo($code)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/service/school/getuserinfo3rd?suite_access_token=ACCESS_TOKEN&code={$code}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -72,7 +72,7 @@ class Oauth extends Service
     public function getUserDetail($userTicket)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/auth/getuserdetail3rd?suite_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['user_ticket' => $userTicket]);
+        return $this->handler->callPostApi($url, ['user_ticket' => $userTicket]);
     }
 
     // +=======================
@@ -88,7 +88,7 @@ class Oauth extends Service
      */
     public function getWebLoginUrl($redirectUri, $state = '', $lang = 'zh')
     {
-        $suiteId = $this->platform->getConfig('suite_id');
+        $suiteId = $this->handler->getConfig('suite_id');
         // 如果未编码
         if(!preg_match('/^http(s)?%3A%2F%2F/', $redirectUri)){
             $redirectUri = urlencode($redirectUri);

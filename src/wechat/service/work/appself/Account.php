@@ -29,7 +29,7 @@ class Account extends Service
     public function openuseridToUserid(array $openUseridList, $sourceAgentid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/batch/openuserid_to_userid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['open_userid_list' => $openUseridList, 'source_agentid' => $sourceAgentid]);
+        return $this->handler->callPostApi($url, ['open_userid_list' => $openUseridList, 'source_agentid' => $sourceAgentid]);
     }
 
     /**
@@ -43,7 +43,7 @@ class Account extends Service
     public function fromServiceExternalUserid($externalUserid, $sourceAgentid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/from_service_external_userid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['external_userid' => $externalUserid, 'source_agentid' => $sourceAgentid]);
+        return $this->handler->callPostApi($url, ['external_userid' => $externalUserid, 'source_agentid' => $sourceAgentid]);
     }
 
     /**
@@ -65,6 +65,6 @@ class Account extends Service
             'business_type' => $businessType,
             'user_type' => $userType,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

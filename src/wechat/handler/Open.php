@@ -9,17 +9,15 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat\handler;
 
 use think\Cache;
-use think\wechat\Platform;
-use think\wechat\exception\LocalCacheException;
 use axguowen\HttpClient;
 
 /**
  * 微信开放平台
  */
-class Open extends Platform
+class Open extends Base
 {
 	/**
      * 平台配置参数

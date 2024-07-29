@@ -28,7 +28,7 @@ class FreePublish extends Service
     public function submit($mediaId)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/freepublish/submit?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['media_id' => $mediaId]);
+        return $this->handler->callPostApi($url, ['media_id' => $mediaId]);
     }
 
     /**
@@ -40,7 +40,7 @@ class FreePublish extends Service
     public function get($publishId)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/freepublish/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['publish_id' => $publishId]);
+        return $this->handler->callPostApi($url, ['publish_id' => $publishId]);
     }
 
     /**
@@ -54,7 +54,7 @@ class FreePublish extends Service
     public function delete($articleId, $index = 0)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/freepublish/delete?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['article_id' => $articleId, 'index' => $index]);
+        return $this->handler->callPostApi($url, ['article_id' => $articleId, 'index' => $index]);
     }
 
     /**
@@ -66,7 +66,7 @@ class FreePublish extends Service
     public function getArticle($articleId)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/freepublish/getarticle?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['article_id' => $articleId]);
+        return $this->handler->callPostApi($url, ['article_id' => $articleId]);
     }
 
     /**
@@ -80,6 +80,6 @@ class FreePublish extends Service
     public function batchGet($offset = 0, $count = 20, $noContent = 0)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/freepublish/batchget?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['no_content' => $noContent, 'offset' => $offset, 'count' => $count]);
+        return $this->handler->callPostApi($url, ['no_content' => $noContent, 'offset' => $offset, 'count' => $count]);
     }
 }

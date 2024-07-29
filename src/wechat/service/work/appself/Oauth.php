@@ -30,7 +30,7 @@ class Oauth extends Service
     public function getTfaInfo($code)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/auth/get_tfa_info?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['code' => $code]);
+        return $this->handler->callPostApi($url, ['code' => $code]);
     }
 
     /**
@@ -42,7 +42,7 @@ class Oauth extends Service
     public function userAuthsucc($userid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/user/authsucc?access_token=ACCESS_TOKEN&userid={$userid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -55,6 +55,6 @@ class Oauth extends Service
     public function userTfaSucc($userid, $tfaCode)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/tfa_succ?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['userid' => $userid, 'tfa_code' => $tfaCode]);
+        return $this->handler->callPostApi($url, ['userid' => $userid, 'tfa_code' => $tfaCode]);
     }
 }

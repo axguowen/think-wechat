@@ -26,6 +26,6 @@ class Account extends Service
     public function upgradeChatidForNewCorp()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/idconvert/upgrade_chatid_for_new_corp?suite_access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 }

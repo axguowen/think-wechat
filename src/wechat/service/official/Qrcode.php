@@ -40,7 +40,7 @@ class Qrcode extends Service
             $data['action_name'] = is_integer($scene) ? 'QR_LIMIT_SCENE' : 'QR_LIMIT_STR_SCENE';
         }
         $url = 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -63,6 +63,6 @@ class Qrcode extends Service
     public function shortUrl($longUrl)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['action' => 'long2short', 'long_url' => $longUrl]);
+        return $this->handler->callPostApi($url, ['action' => 'long2short', 'long_url' => $longUrl]);
     }
 }

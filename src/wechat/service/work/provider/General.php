@@ -27,7 +27,7 @@ class General extends Service
     public function corpidToOpencorpid($corpid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/corpid_to_opencorpid?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['corpid' => $corpid]);
+        return $this->handler->callPostApi($url, ['corpid' => $corpid]);
     }
 
     /**
@@ -40,7 +40,7 @@ class General extends Service
     public function finishOpenidMigration($corpid, array $openidType)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/finish_openid_migration?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['corpid' => $corpid, 'openid_type' => $openidType]);
+        return $this->handler->callPostApi($url, ['corpid' => $corpid, 'openid_type' => $openidType]);
     }
 
     /**
@@ -53,6 +53,6 @@ class General extends Service
     public function getCustomizedAuthUrl(array $templateidList, $state)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_customized_auth_url?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['templateid_list' => $templateidList, 'state' => $state]);
+        return $this->handler->callPostApi($url, ['templateid_list' => $templateidList, 'state' => $state]);
     }
 }

@@ -27,7 +27,7 @@ class Logistics extends Service
     public function addOrder($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/business/order/add?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -39,7 +39,7 @@ class Logistics extends Service
     public function cancelOrder($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/business/order/cancel?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -50,7 +50,7 @@ class Logistics extends Service
     public function getAllDelivery()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/business/delivery/getall?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -62,7 +62,7 @@ class Logistics extends Service
     public function getOrder($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/business/order/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -74,7 +74,7 @@ class Logistics extends Service
     public function getPath($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/business/path/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -85,7 +85,7 @@ class Logistics extends Service
     public function getPrinter()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/business/printer/getall?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -97,7 +97,7 @@ class Logistics extends Service
     public function getQuota($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/business/path/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -109,7 +109,7 @@ class Logistics extends Service
     public function testUpdateOrder($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/business/test_update_order?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -121,7 +121,7 @@ class Logistics extends Service
     public function updatePrinter($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/business/printer/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -133,7 +133,7 @@ class Logistics extends Service
     public function getContact($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/delivery/contact/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -145,7 +145,7 @@ class Logistics extends Service
     public function previewTemplate($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/delivery/template/preview?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -157,7 +157,7 @@ class Logistics extends Service
     public function updateBusiness($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/delivery/service/business/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -169,6 +169,6 @@ class Logistics extends Service
     public function updatePath($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/express/delivery/path/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

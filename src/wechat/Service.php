@@ -11,26 +11,39 @@
 
 namespace think\wechat;
 
+use think\wechat\contract\HandlerInterface;
+
 /**
  * 服务基础类
  */
 abstract class Service
 {
 	/**
-     * 当前所属平台
-     * @var Platform
+     * 当前所属平台驱动句柄
+     * @var HandlerInterface
      */
-	protected $platform;
+	protected $handler;
 
     /**
      * 架构函数
      * @access public
-     * @param Platform $platform 当前所属平台
+     * @param HandlerInterface $handler 当前所属平台驱动句柄
      * @return void
      */
-    public function __construct(Platform $platform)
+    public function __construct(HandlerInterface $handler)
     {
-        // 当前所属平台
-        $this->platform = $platform;
+        // 当前所属平台驱动句柄
+        $this->handler = $handler;
+        // 初始化
+        $this->init();
+    }
+
+	/**
+     * 初始化
+     * @access protected
+     * @return void
+     */
+    protected function init()
+    {
     }
 }

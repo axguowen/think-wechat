@@ -52,7 +52,7 @@ abstract class Corpgroup extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url);
+        return $this->handler->callPostApi($url);
     }
 
     /**
@@ -76,7 +76,7 @@ abstract class Corpgroup extends Service
         if(!is_null($businessType)){
             $data['business_type'] = $businessType;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -89,7 +89,7 @@ abstract class Corpgroup extends Service
     public function transferSession($userid, $sessionKey)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/miniprogram/transfer_session?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['userid' => $userid, 'session_key' => $sessionKey]);
+        return $this->handler->callPostApi($url, ['userid' => $userid, 'session_key' => $sessionKey]);
     }
 
     /**
@@ -116,7 +116,7 @@ abstract class Corpgroup extends Service
         if(!empty($massCallTicket)){
             $data['mass_call_ticket'] = $massCallTicket;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -135,7 +135,7 @@ abstract class Corpgroup extends Service
             'unionid' => $unionid,
             'openid' => $openid,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -154,7 +154,7 @@ abstract class Corpgroup extends Service
             'external_userid' => $externalUserid,
             'chat_id' => $chatId,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -168,7 +168,7 @@ abstract class Corpgroup extends Service
     public function getChainList()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/corpgroup/corp/get_chain_list?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -189,7 +189,7 @@ abstract class Corpgroup extends Service
         if($groupid > 0){
             $data['groupid'] = $groupid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -218,7 +218,7 @@ abstract class Corpgroup extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -243,6 +243,6 @@ abstract class Corpgroup extends Service
         if(!empty($pendingCorpid)){
             $data['pending_corpid'] = $pendingCorpid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

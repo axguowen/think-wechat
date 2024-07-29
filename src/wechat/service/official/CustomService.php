@@ -28,7 +28,7 @@ class CustomService extends Service
     public function addAccount($kf_account, $nickname)
     {
         $url = 'https://api.weixin.qq.com/customservice/kfaccount/add?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['kf_account' => $kf_account, 'nickname' => $nickname]);
+        return $this->handler->callPostApi($url, ['kf_account' => $kf_account, 'nickname' => $nickname]);
     }
 
     /**
@@ -41,7 +41,7 @@ class CustomService extends Service
     public function updateAccount($kfAccount, $nickname)
     {
         $url = 'https://api.weixin.qq.com/customservice/kfaccount/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['kf_account' => $kfAccount, 'nickname' => $nickname]);
+        return $this->handler->callPostApi($url, ['kf_account' => $kfAccount, 'nickname' => $nickname]);
     }
 
     /**
@@ -53,7 +53,7 @@ class CustomService extends Service
     public function deleteAccount($kfAccount)
     {
         $url = 'https://api.weixin.qq.com/customservice/kfaccount/del?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['kf_account' => $kfAccount]);
+        return $this->handler->callPostApi($url, ['kf_account' => $kfAccount]);
     }
 
     /**
@@ -66,7 +66,7 @@ class CustomService extends Service
     public function inviteWorker($kfAccount, $inviteWx)
     {
         $url = 'https://api.weixin.qq.com/customservice/kfaccount/inviteworker?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['kf_account' => $kfAccount, 'invite_wx' => $inviteWx]);
+        return $this->handler->callPostApi($url, ['kf_account' => $kfAccount, 'invite_wx' => $inviteWx]);
     }
 
     /**
@@ -77,7 +77,7 @@ class CustomService extends Service
     public function getAccountList()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -88,7 +88,7 @@ class CustomService extends Service
     public function getOnlineAccountList()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/customservice/getonlinekflist?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -103,7 +103,7 @@ class CustomService extends Service
     public function uploadHeadimg($kfAccount, $fileName, $fileContent, $mimeType = null)
     {
         $url = "https://api.weixin.qq.com/customservice/kfaccount/uploadheadimg?access_token=ACCESS_TOKEN&kf_account={$kfAccount}";
-        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
+        return $this->handler->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**
@@ -115,7 +115,7 @@ class CustomService extends Service
     public function send(array $data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -128,7 +128,7 @@ class CustomService extends Service
     public function typing($openid, $command = 'Typing')
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/message/custom/typing?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['touser' => $openid, 'command' => $command]);
+        return $this->handler->callPostApi($url, ['touser' => $openid, 'command' => $command]);
     }
 
     /**
@@ -140,7 +140,7 @@ class CustomService extends Service
     public function massSendAll(array $data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -152,7 +152,7 @@ class CustomService extends Service
     public function massSend(array $data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -167,7 +167,7 @@ class CustomService extends Service
         $url = 'https://api.weixin.qq.com/cgi-bin/message/mass/delete?access_token=ACCESS_TOKEN';
         $data = ['msg_id' => $msg_id];
         is_null($article_idx) || $data['article_idx'] = $article_idx;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -179,7 +179,7 @@ class CustomService extends Service
     public function massPreview(array $data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -191,7 +191,7 @@ class CustomService extends Service
     public function massGet($msgId)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/message/mass/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['msg_id' => $msgId]);
+        return $this->handler->callPostApi($url, ['msg_id' => $msgId]);
     }
 
     /**
@@ -202,7 +202,7 @@ class CustomService extends Service
     public function massGetSeed()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/message/mass/speed/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, []);
+        return $this->handler->callPostApi($url, []);
     }
 
     /**
@@ -214,6 +214,6 @@ class CustomService extends Service
     public function massSetSeed($speed)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/message/mass/speed/set?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['speed' => $speed]);
+        return $this->handler->callPostApi($url, ['speed' => $speed]);
     }
 }

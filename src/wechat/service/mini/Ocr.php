@@ -27,7 +27,7 @@ class Ocr extends Service
     public function bankcard($data)
     {
         $url = 'https://api.weixin.qq.com/cv/ocr/bankcard?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data,[] ,[] , false);
+        return $this->handler->callPostApi($url, $data,[] ,[] , false);
     }
 
     /**
@@ -39,7 +39,7 @@ class Ocr extends Service
     public function businessLicense($data)
     {
         $url = 'https://api.weixin.qq.com/cv/ocr/bizlicense?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data,[] ,[] , false);
+        return $this->handler->callPostApi($url, $data,[] ,[] , false);
     }
 
     /**
@@ -51,7 +51,7 @@ class Ocr extends Service
     public function driverLicense($data)
     {
         $url = 'https://api.weixin.qq.com/cv/ocr/drivinglicense?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data,[] ,[] , false);
+        return $this->handler->callPostApi($url, $data,[] ,[] , false);
     }
 
     /**
@@ -63,7 +63,7 @@ class Ocr extends Service
     public function idcard($data)
     {
         $url = 'https://api.weixin.qq.com/cv/ocr/idcard?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data,[] ,[] , false);
+        return $this->handler->callPostApi($url, $data,[] ,[] , false);
     }
 
     /**
@@ -75,7 +75,7 @@ class Ocr extends Service
     public function printedText($data)
     {
         $url = 'https://api.weixin.qq.com/cv/ocr/comm?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data,[] ,[] , false);
+        return $this->handler->callPostApi($url, $data,[] ,[] , false);
     }
 
     /**
@@ -87,6 +87,6 @@ class Ocr extends Service
     public function vehicleLicense($data)
     {
         $url = 'https://api.weixin.qq.com/cv/ocr/driving?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data,[] ,[] , false);
+        return $this->handler->callPostApi($url, $data,[] ,[] , false);
     }
 }

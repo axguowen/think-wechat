@@ -11,8 +11,6 @@
 
 namespace think\wechat\utils;
 
-use think\wechat\exception\InvalidArgumentException;
-
 /**
  * 工具类
  */
@@ -130,7 +128,7 @@ class Tools
      * @access public
      * @param string $json
      * @return array
-     * @throws InvalidArgumentException
+     * @throws \Exception
      */
     public static function json2arr($json)
     {
@@ -138,7 +136,7 @@ class Tools
         $result = json_decode($json, true);
         // 转换失败
         if (!is_array($result)) {
-            throw new InvalidArgumentException('invalid json string.', '0', ['json' => $json]);
+            throw new \Exception('invalid json string.', '0');
         }
         // 返回
         return $result;

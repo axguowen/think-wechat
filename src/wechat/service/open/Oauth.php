@@ -29,7 +29,7 @@ class Oauth extends Service
      */
     public function getOauthRedirect($redirectUri, $state = '', $scope = 'snsapi_base')
     {
-        $appid = $this->platform->getConfig('appid');
+        $appid = $this->handler->getConfig('appid');
         // 如果未编码
         if(!preg_match('/^http(s)?%3A%2F%2F/', $redirectUri)){
             $redirectUri = urlencode($redirectUri);
@@ -47,7 +47,7 @@ class Oauth extends Service
      */
     public function getOauthQrcode($redirectUri, $state = '', $scope = 'snsapi_login')
     {
-        $appid = $this->platform->getConfig('appid');
+        $appid = $this->handler->getConfig('appid');
         // 如果未编码
         if(!preg_match('/^http(s)?%3A%2F%2F/', $redirectUri)){
             $redirectUri = urlencode($redirectUri);
@@ -63,8 +63,8 @@ class Oauth extends Service
      */
     public function getAccessToken($code)
     {
-        $appid = $this->platform->getConfig('appid');
-        $secret = $this->platform->getConfig('appsecret');
+        $appid = $this->handler->getConfig('appid');
+        $secret = $this->handler->getConfig('appsecret');
         $query = [
             'grant_type' => 'authorization_code',
             'appid' => $appid,
@@ -75,7 +75,7 @@ class Oauth extends Service
         // 获取请求结果
         $response = HttpClient::get($requestUrl)->body;
         // 返回结果
-        return $this->platform->parseResponseData($response);
+        return $this->handler->parseResponseData($response);
     }
 
     /**
@@ -86,7 +86,7 @@ class Oauth extends Service
      */
     public function refreshAccessToken($refreshToken)
     {
-        $appid = $this->platform->getConfig('appid');
+        $appid = $this->handler->getConfig('appid');
         $query = [
             'grant_type' => 'refresh_token',
             'appid' => $appid,
@@ -96,7 +96,7 @@ class Oauth extends Service
         // 获取请求结果
         $response = HttpClient::get($requestUrl)->body;
         // 返回结果
-        return $this->platform->parseResponseData($response);
+        return $this->handler->parseResponseData($response);
     }
 
     /**
@@ -113,7 +113,7 @@ class Oauth extends Service
         // 获取请求结果
         $response = HttpClient::get($requestUrl)->body;
         // 返回解析
-        return $this->platform->parseResponseData($response);
+        return $this->handler->parseResponseData($response);
     }
 
     /**
@@ -131,7 +131,7 @@ class Oauth extends Service
         // 获取请求结果
         $response = HttpClient::get($requestUrl)->body;
         // 返回解析
-        return $this->platform->parseResponseData($response);
+        return $this->handler->parseResponseData($response);
     }
 
     /**

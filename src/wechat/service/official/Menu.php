@@ -26,7 +26,7 @@ class Menu extends Service
     public function get()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -37,7 +37,7 @@ class Menu extends Service
     public function delete()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -49,7 +49,7 @@ class Menu extends Service
     public function create(array $data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -61,7 +61,7 @@ class Menu extends Service
     public function addConditional(array $data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -73,7 +73,7 @@ class Menu extends Service
     public function delConditional($menuid)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/delconditional?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['menuid' => $menuid]);
+        return $this->handler->callPostApi($url, ['menuid' => $menuid]);
     }
 
     /**
@@ -85,6 +85,6 @@ class Menu extends Service
     public function tryConditional($openid)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/trymatch?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['user_id' => $openid]);
+        return $this->handler->callPostApi($url, ['user_id' => $openid]);
     }
 }

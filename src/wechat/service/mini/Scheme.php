@@ -28,7 +28,7 @@ class Scheme extends Service
     public function create($data)
     {
         $url = 'https://api.weixin.qq.com/wxa/generatescheme?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -40,7 +40,7 @@ class Scheme extends Service
     public function query($scheme)
     {
         $url = 'https://api.weixin.qq.com/wxa/queryscheme?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['scheme' => $scheme]);
+        return $this->handler->callPostApi($url, ['scheme' => $scheme]);
     }
 
     /**
@@ -52,7 +52,7 @@ class Scheme extends Service
     public function urlLink($data)
     {
         $url = 'https://api.weixin.qq.com/wxa/generate_urllink?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -64,6 +64,6 @@ class Scheme extends Service
     public function urlQuery($urllink)
     {
         $url = 'https://api.weixin.qq.com/wxa/query_urllink?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['url_link' => $urllink]);
+        return $this->handler->callPostApi($url, ['url_link' => $urllink]);
     }
 }

@@ -26,7 +26,7 @@ class Tags extends Service
     public function getTags()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -38,7 +38,7 @@ class Tags extends Service
     public function createTags($name)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/create?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['tag' => ['name' => $name]]);
+        return $this->handler->callPostApi($url, ['tag' => ['name' => $name]]);
     }
 
     /**
@@ -51,7 +51,7 @@ class Tags extends Service
     public function updateTags($id, $name)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['tag' => ['name' => $name, 'id' => $id]]);
+        return $this->handler->callPostApi($url, ['tag' => ['name' => $name, 'id' => $id]]);
     }
 
     /**
@@ -63,7 +63,7 @@ class Tags extends Service
     public function deleteTags($tagId)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/delete?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['tag' => ['id' => $tagId]]);
+        return $this->handler->callPostApi($url, ['tag' => ['id' => $tagId]]);
     }
 
     /**
@@ -76,7 +76,7 @@ class Tags extends Service
     public function batchTagging(array $openids, $tagId)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['openid_list' => $openids, 'tagid' => $tagId]);
+        return $this->handler->callPostApi($url, ['openid_list' => $openids, 'tagid' => $tagId]);
     }
 
     /**
@@ -89,7 +89,7 @@ class Tags extends Service
     public function batchUntagging(array $openids, $tagId)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/members/batchuntagging?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['openid_list' => $openids, 'tagid' => $tagId]);
+        return $this->handler->callPostApi($url, ['openid_list' => $openids, 'tagid' => $tagId]);
     }
 
     /**
@@ -101,6 +101,6 @@ class Tags extends Service
     public function getUserTagId($openid)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/getidlist?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['openid' => $openid]);
+        return $this->handler->callPostApi($url, ['openid' => $openid]);
     }
 }

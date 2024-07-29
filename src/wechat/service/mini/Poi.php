@@ -34,7 +34,7 @@ class Poi extends Service
             'related_name'    => $related_name, 'related_credential' => $related_credential,
             'related_address' => $related_address, 'related_proof_material' => $related_proof_material,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -47,7 +47,7 @@ class Poi extends Service
     public function getNearByPoiList($page = 1, $page_rows = 1000)
     {
         $url = "https://api.weixin.qq.com/wxa/getnearbypoilist?page={$page}&page_rows={$page_rows}&access_token=ACCESS_TOKEN";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -59,7 +59,7 @@ class Poi extends Service
     public function delNearByPoiList($poi_id)
     {
         $url = 'https://api.weixin.qq.com/wxa/delnearbypoi?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['poi_id' => $poi_id]);
+        return $this->handler->callPostApi($url, ['poi_id' => $poi_id]);
     }
 
     /**
@@ -72,6 +72,6 @@ class Poi extends Service
     public function setNearByPoiShowStatus($poi_id, $status)
     {
         $url = 'https://api.weixin.qq.com/wxa/setnearbypoishowstatus?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['poi_id' => $poi_id, 'status' => $status]);
+        return $this->handler->callPostApi($url, ['poi_id' => $poi_id, 'status' => $status]);
     }
 }

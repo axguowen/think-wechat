@@ -28,7 +28,7 @@ class Total extends Service
     public function getWeanalysisAppidDailySummarytrend($beginDate, $endDate)
     {
         $url = 'https://api.weixin.qq.com/datacube/getweanalysisappiddailysummarytrend?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
+        return $this->handler->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
     }
 
     /**
@@ -41,7 +41,7 @@ class Total extends Service
     public function getWeanalysisAppidDailyVisittrend($beginDate, $endDate)
     {
         $url = 'https://api.weixin.qq.com/datacube/getweanalysisappiddailyvisittrend?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
+        return $this->handler->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
     }
 
     /**
@@ -54,7 +54,7 @@ class Total extends Service
     public function getWeanalysisAppidWeeklyVisittrend($beginDate, $endDate)
     {
         $url = 'https://api.weixin.qq.com/datacube/getweanalysisappidweeklyvisittrend?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
+        return $this->handler->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
     }
 
     /**
@@ -67,7 +67,7 @@ class Total extends Service
     public function getWeanalysisAppidMonthlyVisittrend($beginDate, $endDate)
     {
         $url = 'https://api.weixin.qq.com/datacube/getweanalysisappidmonthlyvisittrend?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
+        return $this->handler->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
     }
 
     /**
@@ -80,7 +80,7 @@ class Total extends Service
     public function getWeanalysisAppidVisitdistribution($beginDate, $endDate)
     {
         $url = 'https://api.weixin.qq.com/datacube/getweanalysisappidvisitdistribution?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
+        return $this->handler->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
     }
 
     /**
@@ -93,7 +93,7 @@ class Total extends Service
     public function getWeanalysisAppidDailyRetaininfo($beginDate, $endDate)
     {
         $url = 'https://api.weixin.qq.com/datacube/getweanalysisappiddailyretaininfo?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
+        return $this->handler->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
     }
 
     /**
@@ -106,7 +106,7 @@ class Total extends Service
     public function getWeanalysisAppidWeeklyRetaininfo($beginDate, $endDate)
     {
         $url = 'https://api.weixin.qq.com/datacube/getweanalysisappidweeklyretaininfo?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
+        return $this->handler->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
     }
 
     /**
@@ -119,7 +119,7 @@ class Total extends Service
     public function getWeanalysisAppidMonthlyRetaininfo($beginDate, $endDate)
     {
         $url = 'https://api.weixin.qq.com/datacube/getweanalysisappidmonthlyretaininfo?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
+        return $this->handler->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
     }
 
     /**
@@ -132,7 +132,7 @@ class Total extends Service
     public function getWeanalysisAppidVisitPage($beginDate, $endDate)
     {
         $url = 'https://api.weixin.qq.com/datacube/getweanalysisappidvisitpage?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
+        return $this->handler->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
     }
 
     /**
@@ -145,6 +145,6 @@ class Total extends Service
     public function getWeanalysisAppidUserportrait($beginDate, $endDate)
     {
         $url = 'https://api.weixin.qq.com/datacube/getweanalysisappiduserportrait?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
+        return $this->handler->callPostApi($url, ['begin_date' => $beginDate, 'end_date' => $endDate]);
     }
 }

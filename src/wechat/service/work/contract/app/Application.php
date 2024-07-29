@@ -30,7 +30,7 @@ abstract class Application extends Service
     public function get($agentid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/agent/get?access_token=ACCESS_TOKEN&agentid={$agentid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -41,7 +41,7 @@ abstract class Application extends Service
     public function list()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/agent/list?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     // +=======================
@@ -69,7 +69,7 @@ abstract class Application extends Service
         if (!empty($defaultData)) {
             $data[$type] = $defaultData;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -81,7 +81,7 @@ abstract class Application extends Service
     public function getWorkbenchTemplate($agentid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/agent/get_workbench_template?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['agentid' => $agentid]);
+        return $this->handler->callPostApi($url, ['agentid' => $agentid]);
     }
 
     /**
@@ -106,6 +106,6 @@ abstract class Application extends Service
         if (!empty($typeData)) {
             $data[$type] = $typeData;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

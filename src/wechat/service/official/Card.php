@@ -27,7 +27,7 @@ class Card extends Service
     public function create(array $data)
     {
         $url = 'https://api.weixin.qq.com/card/create?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -40,7 +40,7 @@ class Card extends Service
     public function setPaycell($cardId, $isOpen = true)
     {
         $url = 'https://api.weixin.qq.com/card/paycell/set?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['card_id' => $cardId, 'is_open' => $isOpen]);
+        return $this->handler->callPostApi($url, ['card_id' => $cardId, 'is_open' => $isOpen]);
     }
 
     /**
@@ -53,7 +53,7 @@ class Card extends Service
     public function setConsumeCell($cardId, $isOpen = true)
     {
         $url = 'https://api.weixin.qq.com/card/selfconsumecell/set?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['card_id' => $cardId, 'is_open' => $isOpen]);
+        return $this->handler->callPostApi($url, ['card_id' => $cardId, 'is_open' => $isOpen]);
     }
 
     /**
@@ -65,7 +65,7 @@ class Card extends Service
     public function createQrc(array $data)
     {
         $url = 'https://api.weixin.qq.com/card/qrcode/create?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -77,7 +77,7 @@ class Card extends Service
     public function createLandingPage(array $data)
     {
         $url = 'https://api.weixin.qq.com/card/landingpage/create?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -90,7 +90,7 @@ class Card extends Service
     public function deposit($cardId, array $code)
     {
         $url = 'https://api.weixin.qq.com/card/code/deposit?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['card_id' => $cardId, 'code' => $code]);
+        return $this->handler->callPostApi($url, ['card_id' => $cardId, 'code' => $code]);
     }
 
     /**
@@ -102,7 +102,7 @@ class Card extends Service
     public function getDepositCount($cardId)
     {
         $url = 'https://api.weixin.qq.com/card/code/getdepositcount?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['card_id' => $cardId]);
+        return $this->handler->callPostApi($url, ['card_id' => $cardId]);
     }
 
     /**
@@ -115,7 +115,7 @@ class Card extends Service
     public function checkCode($cardId, array $code)
     {
         $url = 'https://api.weixin.qq.com/card/code/checkcode?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['card_id' => $cardId, 'code' => $code]);
+        return $this->handler->callPostApi($url, ['card_id' => $cardId, 'code' => $code]);
     }
 
     /**
@@ -127,7 +127,7 @@ class Card extends Service
     public function getNewsHtml($cardId)
     {
         $url = 'https://api.weixin.qq.com/card/mpnews/gethtml?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['card_id' => $cardId]);
+        return $this->handler->callPostApi($url, ['card_id' => $cardId]);
     }
 
     /**
@@ -140,7 +140,7 @@ class Card extends Service
     public function setTestWhiteList($openids = [], $usernames = [])
     {
         $url = 'https://api.weixin.qq.com/card/testwhitelist/set?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['openid' => $openids, 'username' => $usernames]);
+        return $this->handler->callPostApi($url, ['openid' => $openids, 'username' => $usernames]);
     }
 
     /**
@@ -157,7 +157,7 @@ class Card extends Service
         is_null($cardId) || $data['card_id'] = $cardId;
         is_null($checkConsume) || $data['check_consume'] = $checkConsume;
         $url = 'https://api.weixin.qq.com/card/code/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -172,7 +172,7 @@ class Card extends Service
         $data = ['code' => $code];
         is_null($card_id) || $data['card_id'] = $card_id;
         $url = 'https://api.weixin.qq.com/card/code/consume?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -184,7 +184,7 @@ class Card extends Service
     public function decrypt($encryptCode)
     {
         $url = 'https://api.weixin.qq.com/card/code/decrypt?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['encrypt_code' => $encryptCode]);
+        return $this->handler->callPostApi($url, ['encrypt_code' => $encryptCode]);
     }
 
     /**
@@ -199,7 +199,7 @@ class Card extends Service
         $data = ['openid' => $openid];
         is_null($cardId) || $data['card_id'] = $cardId;
         $url = 'https://api.weixin.qq.com/card/user/getcardlist?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -211,7 +211,7 @@ class Card extends Service
     public function getCard($cardId)
     {
         $url = 'https://api.weixin.qq.com/card/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['card_id' => $cardId]);
+        return $this->handler->callPostApi($url, ['card_id' => $cardId]);
     }
 
     /**
@@ -227,7 +227,7 @@ class Card extends Service
         $data = ['offset' => $offset, 'count' => $count];
         empty($statusList) || $data['status_list'] = $statusList;
         $url = 'https://api.weixin.qq.com/card/batchget?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -240,7 +240,7 @@ class Card extends Service
     public function updateCard($cardId, array $memberCard)
     {
         $url = 'https://api.weixin.qq.com/card/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['card_id' => $cardId, 'member_card' => $memberCard]);
+        return $this->handler->callPostApi($url, ['card_id' => $cardId, 'member_card' => $memberCard]);
     }
 
     /**
@@ -257,7 +257,7 @@ class Card extends Service
         is_null($increaseStockValue) || $data['increase_stock_value'] = $increaseStockValue;
         is_null($reduceStockValue) || $data['reduce_stock_value'] = $reduceStockValue;
         $url = 'https://api.weixin.qq.com/card/modifystock?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -273,7 +273,7 @@ class Card extends Service
         $data = ['code' => $code, 'new_code' => $new_code];
         is_null($card_id) || $data['card_id'] = $card_id;
         $url = 'https://api.weixin.qq.com/card/code/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -285,7 +285,7 @@ class Card extends Service
     public function deleteCard($cardId)
     {
         $url = 'https://api.weixin.qq.com/card/delete?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['card_id' => $cardId]);
+        return $this->handler->callPostApi($url, ['card_id' => $cardId]);
     }
 
     /**
@@ -301,7 +301,7 @@ class Card extends Service
         $data = ['code' => $code, 'card_id' => $cardId];
         is_null($reason) || $data['reason'] = $reason;
         $url = 'https://api.weixin.qq.com/card/code/unavailable?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -316,7 +316,7 @@ class Card extends Service
     {
         $url = 'https://api.weixin.qq.com/datacube/getcardbizuininfo?access_token=ACCESS_TOKEN';
         $data = ['begin_date' => $beginDate, 'end_date' => $endDate, 'cond_source' => $condSource];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -333,7 +333,7 @@ class Card extends Service
         $url = 'https://api.weixin.qq.com/datacube/getcardcardinfo?access_token=ACCESS_TOKEN';
         $data = ['begin_date' => $beginDate, 'end_date' => $endDate, 'cond_source' => $condSource];
         is_null($cardId) || $data['card_id'] = $cardId;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
 
@@ -346,7 +346,7 @@ class Card extends Service
     public function activateMemberCard(array $data)
     {
         $url = 'https://api.weixin.qq.com/card/membercard/activate?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -359,7 +359,7 @@ class Card extends Service
     public function setActivateMemberCardUser(array $data)
     {
         $url = 'https://api.weixin.qq.com/card/membercard/activateuserform/set?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -372,7 +372,7 @@ class Card extends Service
     public function getActivateMemberCardTempinfo($activateTicket)
     {
         $url = 'https://api.weixin.qq.com/card/membercard/activatetempinfo/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['activate_ticket' => $activateTicket]);
+        return $this->handler->callPostApi($url, ['activate_ticket' => $activateTicket]);
     }
 
     /**
@@ -384,7 +384,7 @@ class Card extends Service
     public function updateMemberCardUser(array $data)
     {
         $url = 'https://api.weixin.qq.com/card/membercard/updateuser?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -399,7 +399,7 @@ class Card extends Service
     {
         $url = 'https://api.weixin.qq.com/datacube/getcardmembercardinfo?access_token=ACCESS_TOKEN';
         $data = ['begin_date' => $beginDate, 'end_date' => $endDate, 'cond_source' => $condSource];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -414,7 +414,7 @@ class Card extends Service
     {
         $url = 'https://api.weixin.qq.com/datacube/getcardmembercarddetail?access_token=ACCESS_TOKEN';
         $data = ['begin_date' => $beginDate, 'end_date' => $endDate, 'card_id' => $cardId];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -428,7 +428,7 @@ class Card extends Service
     {
         $url = 'https://api.weixin.qq.com/card/membercard/userinfo/get?access_token=ACCESS_TOKEN';
         $data = ['card_id' => $cardId, 'code' => $code];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -440,7 +440,7 @@ class Card extends Service
     public function payGiftCard(array $data)
     {
         $url = 'https://api.weixin.qq.com/card/paygiftcard/add?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -452,7 +452,7 @@ class Card extends Service
     public function delPayGiftCard($ruleId)
     {
         $url = 'https://api.weixin.qq.com/card/paygiftcard/add?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['rule_id' => $ruleId]);
+        return $this->handler->callPostApi($url, ['rule_id' => $ruleId]);
     }
 
     /**
@@ -464,7 +464,7 @@ class Card extends Service
     public function getPayGiftCard($ruleId)
     {
         $url = 'https://api.weixin.qq.com/card/paygiftcard/getbyid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['rule_id' => $ruleId]);
+        return $this->handler->callPostApi($url, ['rule_id' => $ruleId]);
     }
 
     /**
@@ -479,7 +479,7 @@ class Card extends Service
     {
         $url = 'https://api.weixin.qq.com/card/paygiftcard/batchget?access_token=ACCESS_TOKEN';
         $data = ['type' => 'RULE_TYPE_PAY_MEMBER_CARD', 'offset' => $offset, 'count' => $count, 'effective' => $effective];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -491,7 +491,7 @@ class Card extends Service
     public function addActivity(array $data)
     {
         $url = 'https://api.weixin.qq.com/card/mkt/activity/create?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -502,7 +502,7 @@ class Card extends Service
     public function payActivate()
     {
         $url = 'https://api.weixin.qq.com/card/pay/activate?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -515,7 +515,7 @@ class Card extends Service
     public function getPayprice($cardId, $quantity)
     {
         $url = 'POST https://api.weixin.qq.com/card/pay/getpayprice?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['card_id' => $cardId, 'quantity' => $quantity]);
+        return $this->handler->callPostApi($url, ['card_id' => $cardId, 'quantity' => $quantity]);
     }
 
     /**
@@ -526,7 +526,7 @@ class Card extends Service
     public function getCoinsInfo()
     {
         $url = 'https://api.weixin.qq.com/card/pay/getcoinsinfo?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -541,7 +541,7 @@ class Card extends Service
     {
         $url = 'https://api.weixin.qq.com/card/pay/confirm?access_token=ACCESS_TOKEN';
         $data = ['card_id' => $cardId, 'quantity' => $quantity, 'order_id' => $orderId];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -553,7 +553,7 @@ class Card extends Service
     public function payRecharge($coinCount)
     {
         $url = 'https://api.weixin.qq.com/card/pay/recharge?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['coin_count' => $coinCount]);
+        return $this->handler->callPostApi($url, ['coin_count' => $coinCount]);
     }
 
     /**
@@ -565,7 +565,7 @@ class Card extends Service
     public function payGetOrder($orderId)
     {
         $url = 'https://api.weixin.qq.com/card/pay/getorder?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['order_id' => $orderId]);
+        return $this->handler->callPostApi($url, ['order_id' => $orderId]);
     }
 
     /**
@@ -577,7 +577,7 @@ class Card extends Service
     public function payGetList(array $data)
     {
         $url = 'https://api.weixin.qq.com/card/pay/getorderlist?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
 }

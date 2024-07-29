@@ -52,7 +52,7 @@ class Contact extends Service
         if ($fullMatchField > 0) {
             $data['full_match_field'] = $fullMatchField;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -92,7 +92,7 @@ class Contact extends Service
             'agentid' => $agentid,
             'query_request_list' => [$requestList],
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -121,7 +121,7 @@ class Contact extends Service
         if (!empty($outputFileFormat)) {
             $data['output_file_format'] = $outputFileFormat;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -133,7 +133,7 @@ class Contact extends Service
     public function getResult($jobid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/service/batch/getresult?provider_access_token=ACCESS_TOKEN&jobid={$jobid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -157,6 +157,6 @@ class Contact extends Service
         if (!empty($sortOptions)) {
             $data['sort_options'] = $sortOptions;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

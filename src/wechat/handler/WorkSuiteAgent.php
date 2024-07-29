@@ -9,26 +9,27 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat\handler;
 
-use think\wechat\Platform;
 use think\wechat\utils\Tools;
 use axguowen\HttpClient;
 
 /**
- * 企业微信服务商平台
+ * 企业微信服务商代开发应用模板
  */
-class WorkProvider extends Platform
+class WorkSuiteAgent extends Base
 {
-	/**
+    /**
      * 平台配置参数
      * @var array
      */
     protected $options = [
-        // 服务商的corpid
-        'corpid' => '',
-        // 服务商的secret
-        'provider_secret' => '',
+        // 第三方应用id或者代开发应用模板id
+        'suite_id' => '',
+        // 第三方应用secret 或者代开发应用模板secret
+        'suite_secret' => '',
+        // 企业微信后台推送的ticket
+        'suite_ticket' => '',
         // 接收消息时的校验Token
         'token' => '',
         // 消息加解密密钥
@@ -39,7 +40,7 @@ class WorkProvider extends Platform
      * 服务的命名空间
      * @var string
      */
-    protected $serviceNamespace = '\\think\\wechat\\service\\work\\provider\\';
+    protected $serviceNamespace = '\\think\\wechat\\service\\work\\suiteagent\\';
 
     /**
      * 获取接口调用凭证缓存键名
@@ -48,7 +49,7 @@ class WorkProvider extends Platform
      */
     protected function getAccessCacheKey()
     {
-        return 'work_provider_access_token_' . $this->options['corpid'];
+        return 'work_suite_access_token_' . $this->options['suite_id'];
     }
 
     /**
@@ -59,11 +60,12 @@ class WorkProvider extends Platform
     protected function getAccessTokenForce()
     {
         // 接口请求地址
-        $requestUrl = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_provider_token';
+        $requestUrl = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_suite_token';
         // 参数
         $data = Tools::arr2json([
-            'corpid' => $this->options['corpid'],
-            'provider_secret' => $this->options['provider_secret'],
+            'suite_id' => $this->options['suite_id'],
+            'suite_secret' => $this->options['suite_secret'],
+            'suite_ticket' => $this->options['suite_ticket'],
         ]);
         // 请求头
         $header = [
@@ -80,7 +82,7 @@ class WorkProvider extends Platform
         $accessTokenData = $parseResponseResult[0];
         // 返回
         return [[
-            'access_token' => $accessTokenData['provider_access_token'],
+            'access_token' => $accessTokenData['suite_access_token'],
             'expires_in' => $accessTokenData['expires_in'],
         ], null];
     }

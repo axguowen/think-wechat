@@ -30,7 +30,7 @@ class Application extends Service
     public function menuCreate(array $button)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN&agentid=AGENTID';
-        return $this->platform->callPostApi($url, ['button' => $button]);
+        return $this->handler->callPostApi($url, ['button' => $button]);
     }
     
     /**
@@ -42,7 +42,7 @@ class Application extends Service
     public function menuGet($agentid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/menu/get?access_token=ACCESS_TOKEN&agentid={$agentid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
     
     /**
@@ -54,6 +54,6 @@ class Application extends Service
     public function menuDelete($agentid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN&agentid={$agentid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 }

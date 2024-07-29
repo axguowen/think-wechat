@@ -23,7 +23,20 @@ class Wechat extends Manager
      * 驱动的命名空间
      * @var string
      */
-	protected $namespace = '\\think\\wechat\\platform\\';
+	protected $namespace = '\\think\\wechat\\handler\\';
+
+    /**
+     * 创建驱动
+     * @access public
+     * @return Platform
+     */
+    protected function createDriver(string $name)
+    {
+        // 获取父类创建的驱动
+        $handler = parent::createDriver($name);
+        // 返回
+        return new Platform($handler);
+    }
 
 	/**
      * 默认驱动
@@ -66,7 +79,7 @@ class Wechat extends Manager
             return Arr::get($config, $name, $default);
         }
 		// 驱动不存在
-        throw new \InvalidArgumentException('Platform [' . $platform . '] not found.');
+        throw new \Exception('Platform [' . $platform . '] not found.');
     }
 
     /**

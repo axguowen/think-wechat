@@ -27,7 +27,7 @@ class Shake extends Service
     public function register(array $data)
     {
         $url = 'https://api.weixin.qq.com/shakearound/account/register?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -38,7 +38,7 @@ class Shake extends Service
     public function auditStatus()
     {
         $url = 'https://api.weixin.qq.com/shakearound/account/auditstatus?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -56,7 +56,7 @@ class Shake extends Service
         $data = ['quantity' => $quantity, 'apply_reason' => $apply_reason];
         is_null($poi_id) || $data['poi_id'] = $poi_id;
         is_null($comment) || $data['comment'] = $comment;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -68,7 +68,7 @@ class Shake extends Service
     public function getApplyStatus($applyId)
     {
         $url = 'https://api.weixin.qq.com/shakearound/device/applyid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['apply_id' => $applyId]);
+        return $this->handler->callPostApi($url, ['apply_id' => $applyId]);
     }
 
     /**
@@ -80,7 +80,7 @@ class Shake extends Service
     public function updateApply(array $data)
     {
         $url = 'https://api.weixin.qq.com/shakearound/device/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -92,7 +92,7 @@ class Shake extends Service
     public function bindLocation(array $data)
     {
         $url = 'https://api.weixin.qq.com/shakearound/device/bindlocation?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -104,7 +104,7 @@ class Shake extends Service
     public function search(array $data)
     {
         $url = 'https://api.weixin.qq.com/shakearound/device/search?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -116,7 +116,7 @@ class Shake extends Service
     public function createPage(array $data)
     {
         $url = 'https://api.weixin.qq.com/shakearound/page/add?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -128,7 +128,7 @@ class Shake extends Service
     public function updatePage(array $data)
     {
         $url = 'https://api.weixin.qq.com/shakearound/page/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -140,7 +140,7 @@ class Shake extends Service
     public function searchPage(array $data)
     {
         $url = 'https://api.weixin.qq.com/shakearound/page/search?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -152,7 +152,7 @@ class Shake extends Service
     public function deletePage($pageId)
     {
         $url = 'https://api.weixin.qq.com/shakearound/page/delete?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['page_id' => $pageId]);
+        return $this->handler->callPostApi($url, ['page_id' => $pageId]);
     }
 
     /**
@@ -167,7 +167,7 @@ class Shake extends Service
     public function upload($fileName, $fileContent, $mimeType = null, $type = 'icon')
     {
         $url = 'https://api.weixin.qq.com/shakearound/material/add?access_token=ACCESS_TOKEN&type=' . $type;
-        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
+        return $this->handler->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**
@@ -179,7 +179,7 @@ class Shake extends Service
     public function bindPage(array $data)
     {
         $url = 'https://api.weixin.qq.com/shakearound/device/bindpage?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -191,7 +191,7 @@ class Shake extends Service
     public function queryPage(array $data)
     {
         $url = 'https://api.weixin.qq.com/shakearound/relation/search?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -203,7 +203,7 @@ class Shake extends Service
     public function totalDevice(array $data)
     {
         $url = 'https://api.weixin.qq.com/shakearound/statistics/device?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -216,7 +216,7 @@ class Shake extends Service
     public function totalDeviceList($date, $pageIndex = 1)
     {
         $url = 'https://api.weixin.qq.com/shakearound/statistics/devicelist?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['date' => $date, 'page_index' => $pageIndex]);
+        return $this->handler->callPostApi($url, ['date' => $date, 'page_index' => $pageIndex]);
     }
 
     /**
@@ -230,7 +230,7 @@ class Shake extends Service
     public function totalPage($pageId, $beginDate, $endDate)
     {
         $url = 'https://api.weixin.qq.com/shakearound/statistics/page?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['page_id' => $pageId, 'begin_date' => $beginDate, 'end_date' => $endDate]);
+        return $this->handler->callPostApi($url, ['page_id' => $pageId, 'begin_date' => $beginDate, 'end_date' => $endDate]);
     }
 
     /**
@@ -243,7 +243,7 @@ class Shake extends Service
     public function updateGroup($groupId, $groupName)
     {
         $url = 'https://api.weixin.qq.com/shakearound/device/group/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['group_id' => $groupId, 'group_name' => $groupName]);
+        return $this->handler->callPostApi($url, ['group_id' => $groupId, 'group_name' => $groupName]);
     }
 
     /**
@@ -255,7 +255,7 @@ class Shake extends Service
     public function deleteGroup($groupId)
     {
         $url = 'https://api.weixin.qq.com/shakearound/device/group/delete?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['group_id' => $groupId]);
+        return $this->handler->callPostApi($url, ['group_id' => $groupId]);
     }
 
     /**
@@ -268,7 +268,7 @@ class Shake extends Service
     public function getGroupList($begin = 0, $count = 10)
     {
         $url = 'https://api.weixin.qq.com/shakearound/device/group/getlist?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['begin' => $begin, 'count' => $count]);
+        return $this->handler->callPostApi($url, ['begin' => $begin, 'count' => $count]);
     }
 
 
@@ -283,7 +283,7 @@ class Shake extends Service
     public function getGroupDetail($groupId, $begin = 0, $count = 100)
     {
         $url = 'https://api.weixin.qq.com/shakearound/device/group/getdetail?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['group_id' => $groupId, 'begin' => $begin, 'count' => $count]);
+        return $this->handler->callPostApi($url, ['group_id' => $groupId, 'begin' => $begin, 'count' => $count]);
     }
 
     /**
@@ -295,7 +295,7 @@ class Shake extends Service
     public function addDeviceGroup(array $data)
     {
         $url = 'https://api.weixin.qq.com/shakearound/device/group/adddevice?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -307,6 +307,6 @@ class Shake extends Service
     public function deleteDeviceGroup(array $data)
     {
         $url = 'https://api.weixin.qq.com/shakearound/device/group/deletedevice?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

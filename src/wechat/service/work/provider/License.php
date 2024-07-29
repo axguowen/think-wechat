@@ -49,7 +49,7 @@ class License extends Service
                 'days' => $days,
             ],
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -73,7 +73,7 @@ class License extends Service
         if(!empty($jobid)){
             $data['jobid'] = $jobid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -101,7 +101,7 @@ class License extends Service
         else{
             $data['account_duration']['months'] = $months;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -135,7 +135,7 @@ class License extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -147,7 +147,7 @@ class License extends Service
     public function getOrder($orderId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/get_order?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['order_id' => $orderId]);
+        return $this->handler->callPostApi($url, ['order_id' => $orderId]);
     }
 
     /**
@@ -171,7 +171,7 @@ class License extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -193,7 +193,7 @@ class License extends Service
         if(!empty($corpid)){
             $data['corpid'] = $corpid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -215,7 +215,7 @@ class License extends Service
         if(!empty($jobid)){
             $data['jobid'] = $jobid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -228,7 +228,7 @@ class License extends Service
     public function submitNewOrderJob($jobid, $buyerUserid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/submit_new_order_job?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['jobid' => $jobid, 'buyer_userid' => $buyerUserid]);
+        return $this->handler->callPostApi($url, ['jobid' => $jobid, 'buyer_userid' => $buyerUserid]);
     }
 
     /**
@@ -252,7 +252,7 @@ class License extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -265,7 +265,7 @@ class License extends Service
     public function submitPayJob($orderId, $payerUserid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/submit_pay_job?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['orderid' => $orderId, 'payer_userid' => $payerUserid]);
+        return $this->handler->callPostApi($url, ['orderid' => $orderId, 'payer_userid' => $payerUserid]);
     }
 
     /**
@@ -277,7 +277,7 @@ class License extends Service
     public function payJobResult($jobid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/pay_job_result?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['jobid' => $jobid]);
+        return $this->handler->callPostApi($url, ['jobid' => $jobid]);
     }
 
     // +=======================
@@ -294,7 +294,7 @@ class License extends Service
     public function activeAccount($corpid, $userid, $activeCode)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/active_account?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['active_code' => $activeCode, 'corpid' => $corpid, 'userid' => $userid]);
+        return $this->handler->callPostApi($url, ['active_code' => $activeCode, 'corpid' => $corpid, 'userid' => $userid]);
     }
 
     /**
@@ -307,7 +307,7 @@ class License extends Service
     public function batchActiveAccount($corpid, array $activeList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/batch_active_account?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['corpid' => $corpid, 'active_list' => $activeList]);
+        return $this->handler->callPostApi($url, ['corpid' => $corpid, 'active_list' => $activeList]);
     }
 
     /**
@@ -320,7 +320,7 @@ class License extends Service
     public function getActiveInfoByCode($corpid, $activeCode)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/get_active_info_by_code?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['corpid' => $corpid, 'active_code' => $activeCode]);
+        return $this->handler->callPostApi($url, ['corpid' => $corpid, 'active_code' => $activeCode]);
     }
 
     /**
@@ -333,7 +333,7 @@ class License extends Service
     public function batchGetActiveInfoByCode($corpid, array $activeCodeList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/batch_get_active_info_by_code?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['corpid' => $corpid, 'active_code_list' => $activeCodeList]);
+        return $this->handler->callPostApi($url, ['corpid' => $corpid, 'active_code_list' => $activeCodeList]);
     }
 
     /**
@@ -357,7 +357,7 @@ class License extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -370,7 +370,7 @@ class License extends Service
     public function getActiveInfoByUser($corpid, $userid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/get_active_info_by_user?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['corpid' => $corpid, 'userid' => $userid]);
+        return $this->handler->callPostApi($url, ['corpid' => $corpid, 'userid' => $userid]);
     }
 
     /**
@@ -383,7 +383,7 @@ class License extends Service
     public function batchTransferLicense($corpid, array $transferList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/batch_transfer_license?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['corpid' => $corpid, 'transfer_list' => $transferList]);
+        return $this->handler->callPostApi($url, ['corpid' => $corpid, 'transfer_list' => $transferList]);
     }
 
     /**
@@ -406,7 +406,7 @@ class License extends Service
             'share_list' => $shareList,
             'corp_link_type' => $corpLinkType,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -429,7 +429,7 @@ class License extends Service
             'suite_id' => $suiteId,
             'appid' => 1,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -445,7 +445,7 @@ class License extends Service
     public function setAutoActiveStatus($corpid, $autoActiveStatus)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/set_auto_active_status?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['corpid' => $corpid, 'auto_active_status' => $autoActiveStatus]);
+        return $this->handler->callPostApi($url, ['corpid' => $corpid, 'auto_active_status' => $autoActiveStatus]);
     }
 
     /**
@@ -457,6 +457,6 @@ class License extends Service
     public function getAutoActiveStatus($corpid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/get_auto_active_status?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['corpid' => $corpid]);
+        return $this->handler->callPostApi($url, ['corpid' => $corpid]);
     }
 }

@@ -9,29 +9,35 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\exception;
+namespace think\wechat\contract;
 
 /**
- * 接口异常基础类
+ * 平台句柄接口
  */
-class BaseException extends \InvalidArgumentException
+interface HandlerInterface
 {
-    /**
-     * @var array
+	/**
+     * 动态设置平台配置参数
+     * @access public
+     * @param array $options 平台配置
+     * @return $this
      */
-    public $raw = [];
+    public function setConfig(array $options);
 
     /**
-     * 构造方法
+     * 获取平台配置
      * @access public
-     * @param string $message
-     * @param integer $code
-     * @param array $raw
-     * @return void
+     * @param null|string $name 名称
+     * @param mixed $default 默认值
+     * @return mixed
      */
-    public function __construct($message, $code = 0, $raw = [])
-    {
-        parent::__construct($message, intval($code));
-        $this->raw = $raw;
-    }
+    public function getConfig(string $name = null, $default = null);
+
+    /**
+     * 创建服务
+     * @access public
+     * @param string $name
+     * @return mixed
+     */
+    public function createService(string $name);
 }

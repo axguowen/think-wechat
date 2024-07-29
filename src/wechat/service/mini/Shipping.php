@@ -26,7 +26,7 @@ class Shipping extends Service
     public function upload($data)
     {
         $url = 'https://api.weixin.qq.com/wxa/sec/order/upload_shipping_info?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -37,7 +37,7 @@ class Shipping extends Service
     public function combined($data)
     {
         $url = 'https://api.weixin.qq.com/wxa/sec/order/upload_combined_shipping_info?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -48,7 +48,7 @@ class Shipping extends Service
     public function query($data)
     {
         $url = 'https://api.weixin.qq.com/wxa/sec/order/get_order?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -59,7 +59,7 @@ class Shipping extends Service
     public function qlist($data)
     {
         $url = 'https://api.weixin.qq.com/wxa/sec/order/get_order_list?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -70,7 +70,7 @@ class Shipping extends Service
     public function confirm($data)
     {
         $url = 'https://api.weixin.qq.com/wxa/sec/order/notify_confirm_receive?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -81,7 +81,7 @@ class Shipping extends Service
     public function setJump($data)
     {
         $url = 'https://api.weixin.qq.com/wxa/sec/order/set_msg_jump_path?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -92,7 +92,7 @@ class Shipping extends Service
     public function isTrade($data)
     {
         $url = 'https://api.weixin.qq.com/wxa/sec/order/is_trade_managed?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -103,6 +103,6 @@ class Shipping extends Service
     public function isCompleted($data)
     {
         $url = 'https://api.weixin.qq.com/wxa/sec/order/is_trade_management_confirmation_completed?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

@@ -43,7 +43,7 @@ abstract class Chatdata extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -55,7 +55,7 @@ abstract class Chatdata extends Service
     public function groupchatGet($chatid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/groupchat/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['chatid' => $chatid]);
+        return $this->handler->callPostApi($url, ['chatid' => $chatid]);
     }
 
     /**
@@ -67,7 +67,7 @@ abstract class Chatdata extends Service
     public function getAgreeStatusSingle(array $chatList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/getagreestatus/single?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['item' => $chatList]);
+        return $this->handler->callPostApi($url, ['item' => $chatList]);
     }
 
     /**
@@ -79,7 +79,7 @@ abstract class Chatdata extends Service
     public function getAgreeStatusRoom($chatid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/getagreestatus/room?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['chatid' => $chatid]);
+        return $this->handler->callPostApi($url, ['chatid' => $chatid]);
     }
 
     // +=======================
@@ -105,7 +105,7 @@ abstract class Chatdata extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -140,7 +140,7 @@ abstract class Chatdata extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -176,7 +176,7 @@ abstract class Chatdata extends Service
         if (!empty($applicableRange)) {
             $data['applicable_range'] = $applicableRange;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -197,7 +197,7 @@ abstract class Chatdata extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -209,7 +209,7 @@ abstract class Chatdata extends Service
     public function keywordGetRuleDetail($ruleId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/keyword/get_rule_detail?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['rule_id' => $ruleId]);
+        return $this->handler->callPostApi($url, ['rule_id' => $ruleId]);
     }
 
     /**
@@ -246,7 +246,7 @@ abstract class Chatdata extends Service
         if (!empty($applicableRange)) {
             $data['applicable_range'] = $applicableRange;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -258,7 +258,7 @@ abstract class Chatdata extends Service
     public function keywordDeleteRule($ruleId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/keyword/delete_rule?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['rule_id' => $ruleId]);
+        return $this->handler->callPostApi($url, ['rule_id' => $ruleId]);
     }
 
     /**
@@ -285,7 +285,7 @@ abstract class Chatdata extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -314,7 +314,7 @@ abstract class Chatdata extends Service
         if (!empty($jobid)) {
             $data['jobid'] = $jobid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -326,7 +326,7 @@ abstract class Chatdata extends Service
     public function analyzeTaskSubmit($jobid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/analyze_task_submit?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['jobid' => $jobid]);
+        return $this->handler->callPostApi($url, ['jobid' => $jobid]);
     }
 
     /**
@@ -338,7 +338,7 @@ abstract class Chatdata extends Service
     public function analyzeTaskResult($jobid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/analyze_task_result?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['jobid' => $jobid]);
+        return $this->handler->callPostApi($url, ['jobid' => $jobid]);
     }
 
     /**
@@ -351,7 +351,7 @@ abstract class Chatdata extends Service
     public function exportCreateJob($code, $mediaId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/export/create_job?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['code' => $code, 'media_id' => $mediaId]);
+        return $this->handler->callPostApi($url, ['code' => $code, 'media_id' => $mediaId]);
     }
 
     /**
@@ -363,6 +363,6 @@ abstract class Chatdata extends Service
     public function exportGetJobStatus($jobid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/export/get_job_status?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['jobid' => $jobid]);
+        return $this->handler->callPostApi($url, ['jobid' => $jobid]);
     }
 }

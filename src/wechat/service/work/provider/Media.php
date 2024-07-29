@@ -12,7 +12,6 @@
 namespace think\wechat\service\work\provider;
 
 use think\wechat\Service;
-use think\wechat\exception\InvalidResponseException;
 /**
  * 企业微信服务商素材管理服务
  */
@@ -31,7 +30,7 @@ class Media extends Service
     public function upload($fileName, $fileContent, $mimeType = null, $type = 'file', $attachmentType = 0)
     {
         if (!in_array($type, ['image', 'voice', 'video', 'file'])) {
-            throw new InvalidResponseException('Invalid Media Type.', '0');
+            throw new \Exception('Invalid Media Type.', '0');
         }
         // 请求地址
         $url = "https://qyapi.weixin.qq.com/cgi-bin/service/media/upload?provider_access_token=ACCESS_TOKEN&type={$type}";
@@ -39,6 +38,6 @@ class Media extends Service
         if($attachmentType > 0){
             $url .= "&attachment_type={$attachmentType}";
         }
-        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
+        return $this->handler->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 }

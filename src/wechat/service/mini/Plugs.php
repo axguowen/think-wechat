@@ -27,7 +27,7 @@ class Plugs extends Service
     public function apply($plugin_appid)
     {
         $url = 'https://api.weixin.qq.com/wxa/plugin?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['action' => 'apply', 'plugin_appid' => $plugin_appid]);
+        return $this->handler->callPostApi($url, ['action' => 'apply', 'plugin_appid' => $plugin_appid]);
     }
 
     /**
@@ -38,7 +38,7 @@ class Plugs extends Service
     public function getList()
     {
         $url = 'https://api.weixin.qq.com/wxa/plugin?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['action' => 'list']);
+        return $this->handler->callPostApi($url, ['action' => 'list']);
     }
 
     /**
@@ -50,7 +50,7 @@ class Plugs extends Service
     public function unbind($plugin_appid)
     {
         $url = 'https://api.weixin.qq.com/wxa/plugin?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['action' => 'unbind', 'plugin_appid' => $plugin_appid]);
+        return $this->handler->callPostApi($url, ['action' => 'unbind', 'plugin_appid' => $plugin_appid]);
     }
 
     /**
@@ -63,7 +63,7 @@ class Plugs extends Service
     public function devplugin($data)
     {
         $url = 'https://api.weixin.qq.com/wxa/devplugin?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -77,7 +77,7 @@ class Plugs extends Service
     {
         $url = 'https://api.weixin.qq.com/wxa/plugin?access_token=ACCESS_TOKEN';
         $data = ['action' => 'dev_apply_list', 'page' => $page, 'num' => $num];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -89,6 +89,6 @@ class Plugs extends Service
     public function devAgree($action = 'dev_agree')
     {
         $url = 'https://api.weixin.qq.com/wxa/plugin?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['action' => $action]);
+        return $this->handler->callPostApi($url, ['action' => $action]);
     }
 }

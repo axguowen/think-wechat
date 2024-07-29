@@ -30,7 +30,7 @@ class MiniappPay extends Service
     public function applyMch(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/miniapppay/apply_mch?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -42,7 +42,7 @@ class MiniappPay extends Service
     public function getApplymentStatus($outRequestNo)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/miniapppay/get_applyment_status?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['out_request_no' => $outRequestNo]);
+        return $this->handler->callPostApi($url, ['out_request_no' => $outRequestNo]);
     }
 
     // +=======================
@@ -57,7 +57,7 @@ class MiniappPay extends Service
     public function createOrder(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/miniapppay/create_order?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -70,7 +70,7 @@ class MiniappPay extends Service
     public function getOrder($mchid, $outTradeNo)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/miniapppay/get_order?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['mchid' => $mchid, 'out_trade_no' => $outTradeNo]);
+        return $this->handler->callPostApi($url, ['mchid' => $mchid, 'out_trade_no' => $outTradeNo]);
     }
 
     /**
@@ -83,7 +83,7 @@ class MiniappPay extends Service
     public function closeOrder($mchid, $outTradeNo)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/miniapppay/close_order?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['mchid' => $mchid, 'out_trade_no' => $outTradeNo]);
+        return $this->handler->callPostApi($url, ['mchid' => $mchid, 'out_trade_no' => $outTradeNo]);
     }
 
     /**
@@ -108,7 +108,7 @@ class MiniappPay extends Service
             'timestamp' => $timestamp,
             'signtype' => $signType,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -123,7 +123,7 @@ class MiniappPay extends Service
     public function refund(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/miniapppay/refund?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -136,7 +136,7 @@ class MiniappPay extends Service
     public function getRefundDetail($mchid, $outRefundNo)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/miniapppay/get_refund_detail?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['mchid' => $mchid, 'out_refund_no' => $outRefundNo]);
+        return $this->handler->callPostApi($url, ['mchid' => $mchid, 'out_refund_no' => $outRefundNo]);
     }
 
     /**
@@ -159,6 +159,6 @@ class MiniappPay extends Service
             'bill_type' => $billType,
             'tar_type' => $tarType,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

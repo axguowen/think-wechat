@@ -12,7 +12,6 @@
 namespace think\wechat\service\work\contract\app;
 
 use think\wechat\Service;
-use think\wechat\exception\InvalidResponseException;
 
 /**
  * 素材管理服务基础类
@@ -31,11 +30,11 @@ abstract class Media extends Service
     public function upload($fileName, $fileContent, $mimeType = null, $type = 'file')
     {
         if (!in_array($type, ['image', 'voice', 'video', 'file'])) {
-            throw new InvalidResponseException('Invalid Media Type.', '0');
+            throw new \Exception('Invalid Media Type.', '0');
         }
         // 请求地址
         $url = "https://qyapi.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type={$type}";
-        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
+        return $this->handler->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**
@@ -50,7 +49,7 @@ abstract class Media extends Service
     public function uploadimg($fileName, $fileContent, $mimeType = null)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN';
-        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
+        return $this->handler->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**
@@ -62,7 +61,7 @@ abstract class Media extends Service
     public function get($mediaId)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id={$mediaId}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -74,7 +73,7 @@ abstract class Media extends Service
     public function getJssdk($mediaId)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/media/get/jssdk?access_token=ACCESS_TOKEN&media_id={$mediaId}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -90,11 +89,11 @@ abstract class Media extends Service
     public function uploadByUrl($filename, $url, $md5, $type = 'file', $scene = 1)
     {
         if (!in_array($type, ['video', 'file'])) {
-            throw new InvalidResponseException('Invalid Media Type.', '0');
+            throw new \Exception('Invalid Media Type.', '0');
         }
         // 请求地址
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/media/upload_by_url?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, [
+        return $this->handler->callPostApi($url, [
             'filename' => $filename,
             'url' => $url,
             'md5' => $md5,

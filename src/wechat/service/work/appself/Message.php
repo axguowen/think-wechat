@@ -47,7 +47,7 @@ class Message extends Service
         if(!empty($chatid)){
             $data['chatid'] = $chatid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -80,7 +80,7 @@ class Message extends Service
         if(!empty($delUserList)){
             $data['del_user_list'] = $delUserList;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -92,7 +92,7 @@ class Message extends Service
     public function appchatGet($chatid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/appchat/get?access_token=ACCESS_TOKEN&chatid={$chatid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -113,7 +113,7 @@ class Message extends Service
             'msgtype' => $msgtype,
             $msgtype => $msgdata,
         ]);
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -139,7 +139,7 @@ class Message extends Service
             'msgtype' => $msgtype,
             $msgtype => $msgdata,
         ]);
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -165,6 +165,6 @@ class Message extends Service
             'msgtype' => $msgtype,
             $msgtype => $msgdata,
         ]);
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

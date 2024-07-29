@@ -36,6 +36,6 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

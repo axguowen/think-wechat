@@ -28,6 +28,6 @@ class Operation extends Service
     public function realtimelogSearch($data)
     {
         $url = 'https://api.weixin.qq.com/wxaapi/userlog/userlog_search?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

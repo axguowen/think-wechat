@@ -31,7 +31,7 @@ class ExternalContact extends Service
     public function unionidToExternalUserid($unionid, $openid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/unionid_to_external_userid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, [
+        return $this->handler->callPostApi($url, [
             'unionid' => $unionid,
             'openid' => $openid,
         ]);
@@ -46,7 +46,7 @@ class ExternalContact extends Service
     public function toServiceExternalUserid($unionid, $openid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/to_service_external_userid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['external_userid' => $externalUserid]);
+        return $this->handler->callPostApi($url, ['external_userid' => $externalUserid]);
     }
 
     // +=======================
@@ -60,6 +60,6 @@ class ExternalContact extends Service
     public function customerAcquisitionGetCompAuthInfo()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/customer_acquisition/get_comp_auth_info?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url);
+        return $this->handler->callPostApi($url);
     }
 }

@@ -28,7 +28,7 @@ abstract class Account extends Service
     public function useridToOpenuserid(array $useridList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/batch/userid_to_openuserid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['userid_list' => $useridList]);
+        return $this->handler->callPostApi($url, ['userid_list' => $useridList]);
     }
 
     /**
@@ -41,7 +41,7 @@ abstract class Account extends Service
     public function getNewExternalUserid(array $externalUseridList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_new_external_userid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['external_userid_list' => $externalUseridList]);
+        return $this->handler->callPostApi($url, ['external_userid_list' => $externalUseridList]);
     }
 
     /**
@@ -55,7 +55,7 @@ abstract class Account extends Service
     public function getNewGroupExternalUserid($chatId, array $externalUseridList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/groupchat/get_new_external_userid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['chat_id' => $chatId, 'external_userid_list' => $externalUseridList]);
+        return $this->handler->callPostApi($url, ['chat_id' => $chatId, 'external_userid_list' => $externalUseridList]);
     }
 
     /**
@@ -76,7 +76,7 @@ abstract class Account extends Service
             'business_type' => $businessType,
             'user_type' => $userType,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -98,7 +98,7 @@ abstract class Account extends Service
         if(!empty($chatId)){
             $data['chat_id'] = $chatId;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -111,7 +111,7 @@ abstract class Account extends Service
     public function externalTagid(array $externalTagidList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/idconvert/external_tagid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['external_tagid_list' => $externalTagidList]);
+        return $this->handler->callPostApi($url, ['external_tagid_list' => $externalTagidList]);
     }
 
     /**
@@ -124,7 +124,7 @@ abstract class Account extends Service
     public function openKfid(array $openKfidList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/idconvert/open_kfid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['open_kfid_list' => $openKfidList]);
+        return $this->handler->callPostApi($url, ['open_kfid_list' => $openKfidList]);
     }
 
     /**
@@ -146,6 +146,6 @@ abstract class Account extends Service
             'business_type' => $businessType,
             'user_type' => $userType,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

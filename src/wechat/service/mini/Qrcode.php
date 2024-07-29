@@ -48,7 +48,7 @@ class Qrcode extends Service
             'line_color' => $lineColor,
             'is_hyaline' => $isHyaline,
         ];
-        return $this->platform->callPostApi($url, array_merge($data, $extra));
+        return $this->handler->callPostApi($url, array_merge($data, $extra));
     }
 
     /**
@@ -80,7 +80,7 @@ class Qrcode extends Service
         if (empty($page)){
             unset($data['page']);
         }
-        return $this->platform->callPostApi($url, array_merge($data, $extra));
+        return $this->handler->callPostApi($url, array_merge($data, $extra));
     }
 
     /**
@@ -94,6 +94,6 @@ class Qrcode extends Service
     public function createDefault($path, $width = 430)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['path' => $path, 'width' => $width]);
+        return $this->handler->callPostApi($url, ['path' => $path, 'width' => $width]);
     }
 }

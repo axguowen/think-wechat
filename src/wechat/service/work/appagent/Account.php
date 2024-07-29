@@ -27,7 +27,7 @@ class Account extends Service
     public function applyToUpgradeChatid($upgradeTime)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/idconvert/apply_to_upgrade_chatid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['upgrade_time' => $upgradeTime]);
+        return $this->handler->callPostApi($url, ['upgrade_time' => $upgradeTime]);
     }
     
     /**
@@ -39,6 +39,6 @@ class Account extends Service
     public function chatid(array $chatIdList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/idconvert/chatid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['chat_id_list' => $chatIdList]);
+        return $this->handler->callPostApi($url, ['chat_id_list' => $chatIdList]);
     }
 }

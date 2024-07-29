@@ -31,7 +31,7 @@ class AppAuth extends Service
         // 请求地址
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_pre_auth_code?suite_access_token=ACCESS_TOKEN';
         // 返回结果
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -53,7 +53,7 @@ class AppAuth extends Service
             ],
         ];
         // 返回结果
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -67,7 +67,7 @@ class AppAuth extends Service
      */
     public function getAuthUrl($redirectUri, $state = '', $preAuthCode = '', $options = [])
     {
-        $suiteId = $this->platform->getConfig('suite_id');
+        $suiteId = $this->handler->getConfig('suite_id');
         // 如果未编码
         if(!preg_match('/^http(s)?%3A%2F%2F/', $redirectUri)){
             $redirectUri = urlencode($redirectUri);
@@ -106,7 +106,7 @@ class AppAuth extends Service
     public function getCorpToken($authCorpid, $permanentCode)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token?suite_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['auth_corpid' => $authCorpid, 'permanent_code' => $permanentCode]);
+        return $this->handler->callPostApi($url, ['auth_corpid' => $authCorpid, 'permanent_code' => $permanentCode]);
     }
 
     /**
@@ -119,7 +119,7 @@ class AppAuth extends Service
     public function getAdminList($authCorpid, $agentid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_admin_list?suite_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['auth_corpid' => $authCorpid, 'agentid' => $agentid]);
+        return $this->handler->callPostApi($url, ['auth_corpid' => $authCorpid, 'agentid' => $agentid]);
     }
 
     /**
@@ -137,7 +137,7 @@ class AppAuth extends Service
      */
     public function getAppQrcode($state = '', $style = 2, $resultType = 1)
     {
-        $suiteId = $this->platform->getConfig('suite_id');
+        $suiteId = $this->handler->getConfig('suite_id');
         // 请求地址
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_app_qrcode?suite_access_token=ACCESS_TOKEN';
         // 请求参数
@@ -147,6 +147,6 @@ class AppAuth extends Service
             'style' => $style,
             'result_type' => $resultType
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

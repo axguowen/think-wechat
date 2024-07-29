@@ -30,7 +30,7 @@ class School extends Service
     public function healthGetHealthReportStat($date)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/health/get_health_report_stat?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['date' => $date]);
+        return $this->handler->callPostApi($url, ['date' => $date]);
     }
 
     /**
@@ -52,7 +52,7 @@ class School extends Service
         if(!empty($offset)){
             $data['offset'] = $offset;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
     
     /**
@@ -65,7 +65,7 @@ class School extends Service
     public function healthGetReportJobInfo($jobid, $date)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/health/get_report_job_info?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['jobid' => $jobid, 'date' => $date]);
+        return $this->handler->callPostApi($url, ['jobid' => $jobid, 'date' => $date]);
     }
     
     /**
@@ -91,7 +91,7 @@ class School extends Service
         if(!empty($offset)){
             $data['offset'] = $offset;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -118,7 +118,7 @@ class School extends Service
         if(!empty($nextKey)){
             $data['next_key'] = $nextKey;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -142,7 +142,7 @@ class School extends Service
         if(!empty($nextKey)){
             $data['next_key'] = $nextKey;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -155,6 +155,6 @@ class School extends Service
     public function userGetHealthQrcode($userids, $type = 1)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/user/get_health_qrcode?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['userids' => $userids, 'type' => $type]);
+        return $this->handler->callPostApi($url, ['userids' => $userids, 'type' => $type]);
     }
 }

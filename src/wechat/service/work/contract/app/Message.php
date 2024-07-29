@@ -41,7 +41,7 @@ abstract class Message extends Service
             'msgtype' => $msgtype,
             $msgtype => $msgdata,
         ]);
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -53,7 +53,7 @@ abstract class Message extends Service
     public function updateTemplateCard(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/message/update_template_card?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -65,6 +65,6 @@ abstract class Message extends Service
     public function recall(string $msgid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/message/recall?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['msgid' => $msgid]);
+        return $this->handler->callPostApi($url, ['msgid' => $msgid]);
     }
 }

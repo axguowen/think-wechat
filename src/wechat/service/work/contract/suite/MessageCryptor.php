@@ -15,7 +15,6 @@ use think\wechat\Service;
 use think\wechat\cryptor\MsgCryptor;
 use think\wechat\cryptor\ErrorCode;
 use think\wechat\utils\Tools;
-use think\wechat\exception\InvalidArgumentException;
 
 /**
  * 消息加解密服务基础类
@@ -35,9 +34,9 @@ abstract class MessageCryptor extends Service
     public function decrypt($encrypted, $msgSignature, $timestamp, $nonce, $returnRaw = false)
     {
         // 获取token
-        $token = $this->platform->getConfig('token');
+        $token = $this->handler->getConfig('token');
         // 加密密钥
-        $encodingAesKey = $this->platform->getConfig('encoding_aes_key');
+        $encodingAesKey = $this->handler->getConfig('encoding_aes_key');
 
         // 构造安全签名数组
         $signatureArray = array($encrypted, $token, $timestamp, $nonce);
@@ -47,14 +46,14 @@ abstract class MessageCryptor extends Service
         $localSignature = sha1(implode($signatureArray));
         // 签名错误
 		if ($localSignature != $msgSignature) {
-			return [null, new InvalidArgumentException(ErrorCode::getErrText(ErrorCode::$ValidateSignatureError))];
+			return [null, new \Exception(ErrorCode::getErrText(ErrorCode::$ValidateSignatureError))];
 		}
 
         // 解密
         $result = MsgCryptor::decrypt($encrypted, $encodingAesKey);
         // 解密失败
         if ($result[0] != ErrorCode::$OK) {
-			return [null, new InvalidArgumentException(ErrorCode::getErrText($result[0]))];
+			return [null, new \Exception(ErrorCode::getErrText($result[0]))];
 		}
 
         // 如果是返回原始数据
@@ -71,7 +70,7 @@ abstract class MessageCryptor extends Service
 
         // 转换失败
         if(!is_array($decryptData)){
-            return [null, new InvalidArgumentException(ErrorCode::getErrText(ErrorCode::$ParseXmlError))];
+            return [null, new \Exception(ErrorCode::getErrText(ErrorCode::$ParseXmlError))];
         }
         // 返回
         return [$decryptData, null];
@@ -86,18 +85,18 @@ abstract class MessageCryptor extends Service
     public function encrypt(array $data)
     {
         // 应用SuiteID
-		$suiteId = $this->platform->getConfig('suite_id');
+		$suiteId = $this->handler->getConfig('suite_id');
         // 获取token
-        $token = $this->platform->getConfig('token');
+        $token = $this->handler->getConfig('token');
         // 加密密钥
-        $encodingAesKey = $this->platform->getConfig('encoding_aes_key');
+        $encodingAesKey = $this->handler->getConfig('encoding_aes_key');
         // 数组转XML
         $xml = Tools::arr2xml($data);
         // 获取加密结果
         $result = MsgCryptor::encrypt($xml, $suiteId, $encodingAesKey);
         // 解密失败
         if ($result[0] != ErrorCode::$OK) {
-			return [null, new InvalidArgumentException(ErrorCode::getErrText($result[0]))];
+			return [null, new \Exception(ErrorCode::getErrText($result[0]))];
 		}
         // 获取加密内容
         $encrypted = $result[1];

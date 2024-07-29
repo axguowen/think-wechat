@@ -31,7 +31,7 @@ abstract class Kefu extends Service
     public function accountAdd($name, $mediaId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/kf/account/add?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['name' => $name, 'media_id' => $mediaId]);
+        return $this->handler->callPostApi($url, ['name' => $name, 'media_id' => $mediaId]);
     }
 
     /**
@@ -43,7 +43,7 @@ abstract class Kefu extends Service
     public function accountDel($openKfid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/kf/account/del?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['open_kfid' => $openKfid]);
+        return $this->handler->callPostApi($url, ['open_kfid' => $openKfid]);
     }
 
     /**
@@ -57,7 +57,7 @@ abstract class Kefu extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/kf/account/update?access_token=ACCESS_TOKEN';
         $data['open_kfid'] = $openKfid;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -79,7 +79,7 @@ abstract class Kefu extends Service
         if(!empty($offset)){
             $data['offset'] = $offset;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -101,7 +101,7 @@ abstract class Kefu extends Service
         if(!empty($scene)){
             $data['scene'] = $scene;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -129,7 +129,7 @@ abstract class Kefu extends Service
         if(!empty($departmentIdList)){
             $data['department_id_list'] = $departmentIdList;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -154,7 +154,7 @@ abstract class Kefu extends Service
         if(!empty($departmentIdList)){
             $data['department_id_list'] = $departmentIdList;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -166,7 +166,7 @@ abstract class Kefu extends Service
     public function servicerList($openKfid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/kf/servicer/list?access_token=ACCESS_TOKEN&open_kfid={$openKfid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     // +=======================
@@ -182,7 +182,7 @@ abstract class Kefu extends Service
     public function serviceStateGet($openKfid, $externalUserid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/kf/service_state/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, [
+        return $this->handler->callPostApi($url, [
             'open_kfid' => $openKfid,
             'external_userid' => $externalUserid,
         ]);
@@ -210,7 +210,7 @@ abstract class Kefu extends Service
         if(!empty($servicerUserid)){
             $data['servicer_userid'] = $servicerUserid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -239,7 +239,7 @@ abstract class Kefu extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -266,7 +266,7 @@ abstract class Kefu extends Service
         if(!empty($msgid)){
             $data['msgid'] = $msgid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -291,7 +291,7 @@ abstract class Kefu extends Service
         if(!empty($msgid)){
             $data['msgid'] = $msgid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -305,7 +305,7 @@ abstract class Kefu extends Service
     public function customerGetUpgradeServiceConfig()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/kf/customer/get_upgrade_service_config?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url,);
+        return $this->handler->callGetApi($url,);
     }
 
     /**
@@ -332,7 +332,7 @@ abstract class Kefu extends Service
         }else{
             $data['groupchat'] = $options;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -345,7 +345,7 @@ abstract class Kefu extends Service
     public function customerCancelUpgradeService($openKfid, $externalUserid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/kf/customer/cancel_upgrade_service?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, [
+        return $this->handler->callPostApi($url, [
             'open_kfid' => $openKfid,
             'external_userid' => $externalUserid,
         ]);
@@ -364,7 +364,7 @@ abstract class Kefu extends Service
     public function customerBatchget($externalUseridList, $needEnterSessionContext = 0)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/kf/customer/batchget?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, [
+        return $this->handler->callPostApi($url, [
             'external_userid_list' => $externalUseridList,
             'need_enter_session_context' => $needEnterSessionContext,
         ]);
@@ -391,7 +391,7 @@ abstract class Kefu extends Service
             'start_time' => $startTime,
             'end_time' => $endTime,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -416,7 +416,7 @@ abstract class Kefu extends Service
         if (!empty($servicerUserid)) {
             $data['servicer_userid'] = $servicerUserid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -431,7 +431,7 @@ abstract class Kefu extends Service
     public function knowledgeAddGroup($name)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/kf/knowledge/add_group?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['name' => $name]);
+        return $this->handler->callPostApi($url, ['name' => $name]);
     }
 
     /**
@@ -443,7 +443,7 @@ abstract class Kefu extends Service
     public function knowledgeDelGroup($groupId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/kf/knowledge/del_group?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['group_id' => $groupId]);
+        return $this->handler->callPostApi($url, ['group_id' => $groupId]);
     }
 
     /**
@@ -456,7 +456,7 @@ abstract class Kefu extends Service
     public function knowledgeModGroup($groupId, $name)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/kf/knowledge/mod_group?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['group_id' => $groupId, 'name' => $name]);
+        return $this->handler->callPostApi($url, ['group_id' => $groupId, 'name' => $name]);
     }
 
     /**
@@ -481,7 +481,7 @@ abstract class Kefu extends Service
         if (!empty($groupId)) {
             $data['group_id'] = $groupId;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -506,7 +506,7 @@ abstract class Kefu extends Service
         if (!empty($cursor)) {
             $data['similar_questions'] = $similarQuestions;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -518,7 +518,7 @@ abstract class Kefu extends Service
     public function knowledgeDelIntent($intentId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/kf/knowledge/del_intent?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['intent_id' => $intentId]);
+        return $this->handler->callPostApi($url, ['intent_id' => $intentId]);
     }
 
     /**
@@ -532,7 +532,7 @@ abstract class Kefu extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/kf/knowledge/mod_intent?access_token=ACCESS_TOKEN';
         $data['intent_id'] = $intentId;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -561,6 +561,6 @@ abstract class Kefu extends Service
         if (!empty($intentId)) {
             $data['intent_id'] = $intentId;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

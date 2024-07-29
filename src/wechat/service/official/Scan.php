@@ -26,7 +26,7 @@ class Scan extends Service
     public function getMerchantInfo()
     {
         $url = 'https://api.weixin.qq.com/scan/merchantinfo/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -38,7 +38,7 @@ class Scan extends Service
     public function addProduct(array $data)
     {
         $url = 'https://api.weixin.qq.com/scan/product/create?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -53,7 +53,7 @@ class Scan extends Service
     {
         $url = 'https://api.weixin.qq.com/scan/product/modstatus?access_token=ACCESS_TOKEN';
         $data = ['keystandard' => $keystandard, 'keystr' => $keystr, 'status' => $status];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -66,7 +66,7 @@ class Scan extends Service
     public function setTestWhiteList($openids = [], $usernames = [])
     {
         $url = 'https://api.weixin.qq.com/scan/product/modstatus?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['openid' => $openids, 'username' => $usernames]);
+        return $this->handler->callPostApi($url, ['openid' => $openids, 'username' => $usernames]);
     }
 
     /**
@@ -83,7 +83,7 @@ class Scan extends Service
         $url = 'https://api.weixin.qq.com/scan/product/getqrcode?access_token=ACCESS_TOKEN';
         $data = ['keystandard' => $keystandard, 'keystr' => $keystr, 'qrcode_size' => $qrcode_size];
         is_null($extinfo) || $data['extinfo'] = $extinfo;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -96,7 +96,7 @@ class Scan extends Service
     public function getProductInfo($keystandard, $keystr)
     {
         $url = 'https://api.weixin.qq.com/scan/product/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['keystandard' => $keystandard, 'keystr' => $keystr]);
+        return $this->handler->callPostApi($url, ['keystandard' => $keystandard, 'keystr' => $keystr]);
     }
 
     /**
@@ -114,7 +114,7 @@ class Scan extends Service
         $data = ['offset' => $offset, 'limit' => $limit];
         is_null($status) || $data['status'] = $status;
         is_null($keystr) || $data['keystr'] = $keystr;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -126,7 +126,7 @@ class Scan extends Service
     public function updateProduct(array $data)
     {
         $url = 'https://api.weixin.qq.com/scan/product/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -139,7 +139,7 @@ class Scan extends Service
     public function clearProduct($keystandard, $keystr)
     {
         $url = 'https://api.weixin.qq.com/scan/product/clear?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['keystandard' => $keystandard, 'keystr' => $keystr]);
+        return $this->handler->callPostApi($url, ['keystandard' => $keystandard, 'keystr' => $keystr]);
     }
 
     /**
@@ -151,7 +151,7 @@ class Scan extends Service
     public function checkTicket($ticket)
     {
         $url = 'https://api.weixin.qq.com/scan/scanticket/check?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['ticket' => $ticket]);
+        return $this->handler->callPostApi($url, ['ticket' => $ticket]);
     }
 
     /**
@@ -165,6 +165,6 @@ class Scan extends Service
     public function clearScanTicket($keystandard, $keystr, $extinfo)
     {
         $url = 'https://api.weixin.qq.com/scan/scanticket/check?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['keystandard' => $keystandard, 'keystr' => $keystr, 'extinfo' => $extinfo]);
+        return $this->handler->callPostApi($url, ['keystandard' => $keystandard, 'keystr' => $keystr, 'extinfo' => $extinfo]);
     }
 }

@@ -9,18 +9,17 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform\contract;
+namespace think\wechat\handler;
 
-use think\wechat\Platform;
 use think\wechat\utils\Tools;
 use axguowen\HttpClient;
 
 /**
- * 企业微信服务商应用套件基础类
+ * 企业微信服务商第三方应用套件
  */
-class WorkSuite extends Platform
+class WorkSuiteThird extends Base
 {
-	/**
+    /**
      * 平台配置参数
      * @var array
      */
@@ -36,6 +35,12 @@ class WorkSuite extends Platform
         // 消息加解密密钥
         'encoding_aes_key' => '',
     ];
+
+    /**
+     * 服务的命名空间
+     * @var string
+     */
+    protected $serviceNamespace = '\\think\\wechat\\service\\work\\suitethird\\';
 
     /**
      * 获取接口调用凭证缓存键名

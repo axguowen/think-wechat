@@ -14,9 +14,6 @@ namespace think\wechat\service\official;
 use think\wechat\utils\DataArray;
 use think\wechat\utils\Tools;
 use think\wechat\cryptor\MsgCryptor;
-use think\wechat\exception\InvalidArgumentException;
-use think\wechat\exception\InvalidDecryptException;
-use think\wechat\exception\InvalidResponseException;
 
 /**
  * 公众号推送管理
@@ -70,18 +67,18 @@ class Receive
      * @access public
      * @param array $options 配置参数
      * @param boolean $showEchoStr 回显内容
-     * @throws InvalidResponseException
+     * @throws \Exception
      */
     public function __construct(array $options, $showEchoStr = true)
     {
         if (empty($options['appid'])) {
-            throw new InvalidArgumentException("Missing Config -- [appid]");
+            throw new \Exception("Missing Config -- [appid]");
         }
         if (empty($options['appsecret'])) {
-            throw new InvalidArgumentException("Missing Config -- [appsecret]");
+            throw new \Exception("Missing Config -- [appsecret]");
         }
         if (empty($options['token'])) {
-            throw new InvalidArgumentException("Missing Config -- [token]");
+            throw new \Exception("Missing Config -- [token]");
         }
         // 参数初始化
         $this->config = new DataArray($options);
@@ -93,12 +90,12 @@ class Receive
             $this->encryptType = $this->input->get('encrypt_type');
             if ($this->isEncrypt()) {
                 if (empty($options['encodingaeskey'])) {
-                    throw new InvalidArgumentException("Missing Config -- [encodingaeskey]");
+                    throw new \Exception("Missing Config -- [encodingaeskey]");
                 }
                 $result = Tools::xml2arr($this->postxml);
                 $array = MsgCryptor::decrypt($result['Encrypt'], $this->config->get('encodingaeskey'));
                 if (intval($array[0]) > 0) {
-                    throw new InvalidResponseException($array[1], $array[0]);
+                    throw new \Exception($array[1], $array[0]);
                 }
                 list($this->postxml, $this->appid) = [$array[1], $array[2]];
             }
@@ -109,7 +106,7 @@ class Receive
                 echo($this->input->get('echostr'));
             }
         } else {
-            throw new InvalidResponseException('Invalid interface request.', '0');
+            throw new \Exception('Invalid interface request.', '0');
         }
     }
 
@@ -143,7 +140,7 @@ class Receive
      * @param boolean $return 是否返回XML内容
      * @param boolean $isEncrypt 是否加密内容
      * @return string|void
-     * @throws InvalidDecryptException
+     * @throws \Exception
      */
     public function reply(array $data = [], $return = false, $isEncrypt = false)
     {
@@ -153,7 +150,7 @@ class Receive
             $component_appid = $this->config->get('component_appid');
             $appid = empty($component_appid) ? $this->appid : $component_appid;
             $array = MsgCryptor::encrypt($xml, $appid, $this->config->get('encodingaeskey'));
-            if ($array[0] > 0) throw new InvalidDecryptException('Encrypt Error.', '0');
+            if ($array[0] > 0) throw new \Exception('Encrypt Error.', '0');
             list($timestamp, $encrypt) = [time(), $array[1]];
             $nonce = rand(77, 999) * rand(605, 888) * rand(11, 99);
             $tmpArr = [$this->config->get('token'), $timestamp, $nonce, $encrypt];

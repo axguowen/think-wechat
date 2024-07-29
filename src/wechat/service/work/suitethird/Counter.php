@@ -33,7 +33,7 @@ class Counter extends Service
     public function getOrderList($startTime, $endTime, $testMode = 0)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_order_list?suite_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['start_time' => $startTime, 'end_time' => $endTime, 'test_mode' => $testMode]);
+        return $this->handler->callPostApi($url, ['start_time' => $startTime, 'end_time' => $endTime, 'test_mode' => $testMode]);
     }
 
     /**
@@ -45,7 +45,7 @@ class Counter extends Service
     public function getOrder($orderId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_order?suite_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['orderid' => $orderId]);
+        return $this->handler->callPostApi($url, ['orderid' => $orderId]);
     }
 
     /**
@@ -56,7 +56,7 @@ class Counter extends Service
      */
     public function getPermanentCode($authCode)
     {
-        return $this->platform->service('app_auth', true)->getPermanentCode($authCode);
+        return $this->handler->service('app_auth', true)->getPermanentCode($authCode);
     }
 
     /**
@@ -68,7 +68,7 @@ class Counter extends Service
      */
     public function getAuthInfo($authCorpid, $permanentCode)
     {
-        return $this->platform->service('app_auth', true)->getAuthInfo($authCorpid, $permanentCode);
+        return $this->handler->service('app_auth', true)->getAuthInfo($authCorpid, $permanentCode);
     }
 
     /**
@@ -81,6 +81,6 @@ class Counter extends Service
     public function prolongTry($buyerCorpid, $prolongDays)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/prolong_try?suite_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['buyer_corpid' => $buyerCorpid, 'prolong_days' => $prolongDays,]);
+        return $this->handler->callPostApi($url, ['buyer_corpid' => $buyerCorpid, 'prolong_days' => $prolongDays,]);
     }
 }

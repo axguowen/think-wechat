@@ -27,7 +27,7 @@ class Limit extends Service
     public function clearQuota()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/clear_quota?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['appid' => $this->config->get('appid')]);
+        return $this->handler->callPostApi($url, ['appid' => $this->config->get('appid')]);
     }
 
     /**
@@ -40,7 +40,7 @@ class Limit extends Service
     public function ping($action = 'all', $operator = 'DEFAULT')
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/callback/check?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['action' => $action, 'check_operator' => $operator]);
+        return $this->handler->callPostApi($url, ['action' => $action, 'check_operator' => $operator]);
     }
 
     /**
@@ -51,6 +51,6 @@ class Limit extends Service
     public function getCallbackIp()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 }

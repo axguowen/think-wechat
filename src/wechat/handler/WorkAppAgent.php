@@ -9,16 +9,15 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat\handler;
 
-use think\wechat\Platform;
 use think\wechat\utils\Tools;
 use axguowen\HttpClient;
 
 /**
  * 企业微信服务商代开发应用
  */
-class WorkAppAgent extends Platform
+class WorkAppAgent extends Base
 {
 	/**
      * 平台配置参数

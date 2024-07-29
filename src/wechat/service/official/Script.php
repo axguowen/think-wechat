@@ -14,8 +14,6 @@ namespace think\wechat\service\official;
 use think\facade\Cache;
 use think\wechat\Service;
 use think\wechat\utils\Tools;
-use think\wechat\exception\InvalidResponseException;
-use think\wechat\exception\InvalidArgumentException;
 
 /**
  * 微信前端支持
@@ -55,14 +53,14 @@ class Script extends Service
         }
         $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type={$type}";
         // 获取请求结果
-        $result = $this->platform->callGetApi($url);
+        $result = $this->handler->callGetApi($url);
         // 失败
         if(is_null($result[0])){
             return $result;
         }
         // 结果不存在ticket
         if(empty($result[0]['ticket'])){
-            return [null, new InvalidResponseException('Invalid Resoponse Ticket.', '0')];
+            return [null, new \Exception('Invalid Resoponse Ticket.', '0')];
         }
         // 设置缓存
         Cache::set($cache_name, $result[0]['ticket'], 7000);
@@ -114,7 +112,7 @@ class Script extends Service
     {
         ksort($data);
         if (!function_exists($method)){
-            return [null, new InvalidArgumentException('Invalid Resoponse Ticket.', '0')];
+            return [null, new \Exception('Invalid Resoponse Ticket.', '0')];
         }
         foreach ($data as $k => $v){
             $params[] = "{$k}={$v}";

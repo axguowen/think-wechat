@@ -27,7 +27,7 @@ class Guide extends Service
     public function addGuideAcct($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/addguideacct?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -39,7 +39,7 @@ class Guide extends Service
     public function delGuideAcct($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/delguideacct?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -51,7 +51,7 @@ class Guide extends Service
     public function getGuideAcct($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguideacct?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -62,7 +62,7 @@ class Guide extends Service
     public function getGuideAcctConfig()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguideacctconfig?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url);
+        return $this->handler->callPostApi($url);
     }
 
     /**
@@ -75,7 +75,7 @@ class Guide extends Service
     public function getGuideAcctList($page = 0, $num = 10)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguideacctconfig?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['page' => $page, 'num' => $num]);
+        return $this->handler->callPostApi($url, ['page' => $page, 'num' => $num]);
     }
 
     /**
@@ -87,7 +87,7 @@ class Guide extends Service
     public function getGuideBuyerChatRecord($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguideacct?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -99,7 +99,7 @@ class Guide extends Service
     public function getGuideConfig($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguideconfig?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -111,7 +111,7 @@ class Guide extends Service
     public function guideCreateQrCode($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/guidecreateqrcode?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -123,7 +123,7 @@ class Guide extends Service
     public function pushShowWxaPathMenu($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/pushshowwxapathmenu?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -135,7 +135,7 @@ class Guide extends Service
     public function setGuideAcctConfig($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/setguideacctconfig?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -147,7 +147,7 @@ class Guide extends Service
     public function setGuideConfig($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/setguideconfig?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -159,7 +159,7 @@ class Guide extends Service
     public function updateGuideAcct($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/setguideconfig?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -171,7 +171,7 @@ class Guide extends Service
     public function addGuideBuyerDisplayTag($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/addguidebuyerdisplaytag?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -183,7 +183,7 @@ class Guide extends Service
     public function addGuideBuyerTag($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/addguidebuyertag?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -195,7 +195,7 @@ class Guide extends Service
     public function addGuideTagOption($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/addguidetagoption?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -207,7 +207,7 @@ class Guide extends Service
     public function delGuideBuyerTag($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/delguidebuyertag?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -219,7 +219,7 @@ class Guide extends Service
     public function getGuideBuyerDisplayTag($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguidebuyerdisplaytag?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -231,7 +231,7 @@ class Guide extends Service
     public function getGuideBuyerTag($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguidebuyertag?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -242,7 +242,7 @@ class Guide extends Service
     public function getGuideTagOption()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguidetagoption?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url);
+        return $this->handler->callPostApi($url);
     }
 
     /**
@@ -254,7 +254,7 @@ class Guide extends Service
     public function newGuideTagOption($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/newguidetagoption?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -266,7 +266,7 @@ class Guide extends Service
     public function queryGuideBuyerByTag($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/queryguidebuyerbytag?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -278,7 +278,7 @@ class Guide extends Service
     public function addGuideBuyerRelation($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/addguidebuyerrelation?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -290,7 +290,7 @@ class Guide extends Service
     public function delGuideBuyerRelation($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/delguidebuyerrelation?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -302,7 +302,7 @@ class Guide extends Service
     public function getGuideBuyerRelation($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguidebuyerrelation?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -314,7 +314,7 @@ class Guide extends Service
     public function getGuideBuyerRelationByBuyer($openid)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguidebuyerrelation?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['openid' => $openid]);
+        return $this->handler->callPostApi($url, ['openid' => $openid]);
     }
 
     /**
@@ -326,7 +326,7 @@ class Guide extends Service
     public function getGuideBuyerRelationList($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguidebuyerrelationlist?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -338,7 +338,7 @@ class Guide extends Service
     public function rebindGuideAcctForBuyer($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/rebindguideacctforbuyer?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -350,7 +350,7 @@ class Guide extends Service
     public function updateGuideBuyerRelation($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/updateguidebuyerrelation?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -362,7 +362,7 @@ class Guide extends Service
     public function delGuideCardMaterial($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/delguidecardmaterial?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -374,7 +374,7 @@ class Guide extends Service
     public function delGuideImageMaterial($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/delguideimagematerial?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -386,7 +386,7 @@ class Guide extends Service
     public function delGuideWordMaterial($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/delguidewordmaterial?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -398,7 +398,7 @@ class Guide extends Service
     public function getGuideCardMaterial($type = 0)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguidecardmaterial?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['type' => $type]);
+        return $this->handler->callPostApi($url, ['type' => $type]);
     }
 
     /**
@@ -412,7 +412,7 @@ class Guide extends Service
     public function getGuideImageMaterial($type = 0, $start = 0, $num = 10)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguideimagematerial?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['type' => $type, 'start' => $start, 'num' => $num]);
+        return $this->handler->callPostApi($url, ['type' => $type, 'start' => $start, 'num' => $num]);
     }
 
     /**
@@ -426,7 +426,7 @@ class Guide extends Service
     public function getGuideWordMaterial($type = 0, $start = 0, $num = 10)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/getguidewordmaterial?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['type' => $type, 'start' => $start, 'num' => $num]);
+        return $this->handler->callPostApi($url, ['type' => $type, 'start' => $start, 'num' => $num]);
     }
 
     /**
@@ -438,7 +438,7 @@ class Guide extends Service
     public function setGuideCardMaterial($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/setguidecardmaterial?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -450,7 +450,7 @@ class Guide extends Service
     public function setGuideImageMaterial($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/setguideimagematerial?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -462,6 +462,6 @@ class Guide extends Service
     public function setGuideWordMaterial($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/guide/setguidewordmaterial?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

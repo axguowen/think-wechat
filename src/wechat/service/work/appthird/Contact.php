@@ -40,7 +40,7 @@ class Contact extends Service
             $data['cursor'] = $cursor;
         }
         // 返回
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -52,7 +52,7 @@ class Contact extends Service
     public function userCheckMemberAuth($openUserid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/check_member_auth?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['open_userid' => $openUserid]);
+        return $this->handler->callPostApi($url, ['open_userid' => $openUserid]);
     }
 
     /**
@@ -64,6 +64,6 @@ class Contact extends Service
     public function userListSelectedTicketUser($selectedTicket)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/list_selected_ticket_user?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['selected_ticket' => $selectedTicket]);
+        return $this->handler->callPostApi($url, ['selected_ticket' => $selectedTicket]);
     }
 }

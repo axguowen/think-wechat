@@ -13,7 +13,6 @@ namespace think\wechat\service\work\contract\app;
 
 use think\wechat\Service;
 use think\wechat\utils\Tools;
-use think\wechat\exception\InvalidResponseException;
 
 /**
  * 客户联系服务基础类
@@ -31,7 +30,7 @@ class ExternalContact extends Service
     public function getFollowUserList()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_follow_user_list?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     // +=======================
@@ -46,7 +45,7 @@ class ExternalContact extends Service
     public function list($userid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/externalcontact/list?access_token=ACCESS_TOKEN&userid={$userid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -59,7 +58,7 @@ class ExternalContact extends Service
     public function get($externalUserid, $cursor = '')
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get?access_token=ACCESS_TOKEN&external_userid={$externalUserid}&cursor={$cursor}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -83,7 +82,7 @@ class ExternalContact extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -103,7 +102,7 @@ class ExternalContact extends Service
             'userid' => $userid,
             'external_userid' => $externalUserid,
         ];
-        return $this->platform->callPostApi($url, array_merge($remarkData, $data));
+        return $this->handler->callPostApi($url, array_merge($remarkData, $data));
     }
 
     /**
@@ -125,7 +124,7 @@ class ExternalContact extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -137,7 +136,7 @@ class ExternalContact extends Service
     public function customerStrategyGet($strategyId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/customer_strategy/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['strategy_id' => $strategyId]);
+        return $this->handler->callPostApi($url, ['strategy_id' => $strategyId]);
     }
 
     /**
@@ -161,7 +160,7 @@ class ExternalContact extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -192,7 +191,7 @@ class ExternalContact extends Service
         if(!empty($range)){
             $data['range'] = $range;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -206,7 +205,7 @@ class ExternalContact extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/customer_strategy/edit?access_token=ACCESS_TOKEN';
         $data['strategy_id'] = $strategyId;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -218,7 +217,7 @@ class ExternalContact extends Service
     public function customerStrategyDel($strategyId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/customer_strategy/del?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['strategy_id' => $strategyId]);
+        return $this->handler->callPostApi($url, ['strategy_id' => $strategyId]);
     }
 
     // +=======================
@@ -245,7 +244,7 @@ class ExternalContact extends Service
         if(!empty($groupId)){
             $data['group_id'] = $groupId;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -274,7 +273,7 @@ class ExternalContact extends Service
         if(!empty($groupName)){
             $data['group_name'] = $groupName;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -288,7 +287,7 @@ class ExternalContact extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/edit_corp_tag?access_token=ACCESS_TOKEN';
         $data['id'] = $id;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -312,7 +311,7 @@ class ExternalContact extends Service
         if(!empty($groupId)){
             $data['group_id'] = $groupId;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -341,7 +340,7 @@ class ExternalContact extends Service
         if(!empty($groupId)){
             $data['group_id'] = $groupId;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -372,7 +371,7 @@ class ExternalContact extends Service
         if(!empty($groupName)){
             $data['group_name'] = $groupName;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -386,7 +385,7 @@ class ExternalContact extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/edit_strategy_tag?access_token=ACCESS_TOKEN';
         $data['id'] = $id;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -410,7 +409,7 @@ class ExternalContact extends Service
         if(!empty($groupId)){
             $data['group_id'] = $groupId;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -440,7 +439,7 @@ class ExternalContact extends Service
         if(!empty($removeTag)){
             $data['remove_tag'] = $removeTag;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -470,7 +469,7 @@ class ExternalContact extends Service
         if(!empty($transferSuccessMsg)){
             $data['transfer_success_msg'] = $transferSuccessMsg;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -494,7 +493,7 @@ class ExternalContact extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -507,7 +506,7 @@ class ExternalContact extends Service
     public function onjobTransfer(array $chatIdList, $newOwner)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/groupchat/onjob_transfer?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['chat_id_list' => $chatIdList, 'new_owner' => $newOwner]);
+        return $this->handler->callPostApi($url, ['chat_id_list' => $chatIdList, 'new_owner' => $newOwner]);
     }
 
     // +=======================
@@ -532,7 +531,7 @@ class ExternalContact extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -553,7 +552,7 @@ class ExternalContact extends Service
             'takeover_userid' => $takeoverUserid,
             'external_userid' => $externalUserid,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -577,7 +576,7 @@ class ExternalContact extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -590,7 +589,7 @@ class ExternalContact extends Service
     public function groupchatTransfer(array $chatIdList, $newOwner)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/groupchat/transfer?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['chat_id_list' => $chatIdList, 'new_owner' => $newOwner]);
+        return $this->handler->callPostApi($url, ['chat_id_list' => $chatIdList, 'new_owner' => $newOwner]);
     }
 
     // +=======================
@@ -622,7 +621,7 @@ class ExternalContact extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -641,7 +640,7 @@ class ExternalContact extends Service
             'chat_id' => $chatId,
             'need_name' => $needName,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -653,7 +652,7 @@ class ExternalContact extends Service
     public function opengidToChatid($opengid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/opengid_to_chatid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['opengid' => $opengid]);
+        return $this->handler->callPostApi($url, ['opengid' => $opengid]);
     }
 
     // +=======================
@@ -676,7 +675,7 @@ class ExternalContact extends Service
             'type' => $type,
             'scene' => $scene,
         ];
-        return $this->platform->callPostApi($url, array_merge($data, $options));
+        return $this->handler->callPostApi($url, array_merge($data, $options));
     }
 
     /**
@@ -688,7 +687,7 @@ class ExternalContact extends Service
     public function getContactWay($configId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_contact_way?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['config_id' => $configId]);
+        return $this->handler->callPostApi($url, ['config_id' => $configId]);
     }
 
     /**
@@ -717,7 +716,7 @@ class ExternalContact extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -735,7 +734,7 @@ class ExternalContact extends Service
         $data = [
             'config_id' => $configId,
         ];
-        return $this->platform->callPostApi($url, array_merge($data, $options));
+        return $this->handler->callPostApi($url, array_merge($data, $options));
     }
 
     /**
@@ -747,7 +746,7 @@ class ExternalContact extends Service
     public function delContactWay($configId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/del_contact_way?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['config_id' => $configId,]);
+        return $this->handler->callPostApi($url, ['config_id' => $configId,]);
     }
 
     /**
@@ -760,7 +759,7 @@ class ExternalContact extends Service
     public function closeTempChat($userid, $externalUserid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/close_temp_chat?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['userid' => $userid, 'external_userid' => $externalUserid]);
+        return $this->handler->callPostApi($url, ['userid' => $userid, 'external_userid' => $externalUserid]);
     }
 
     /**
@@ -780,7 +779,7 @@ class ExternalContact extends Service
             'chat_id_list' => $chatIdList,
             'scene' => $scene,
         ];
-        return $this->platform->callPostApi($url, array_merge($data, $options));
+        return $this->handler->callPostApi($url, array_merge($data, $options));
     }
 
     /**
@@ -792,7 +791,7 @@ class ExternalContact extends Service
     public function groupchatGetJoinWay($configId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/groupchat/get_join_way?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['config_id' => $configId]);
+        return $this->handler->callPostApi($url, ['config_id' => $configId]);
     }
 
     /**
@@ -814,7 +813,7 @@ class ExternalContact extends Service
             'chat_id_list' => $chatIdList,
             'scene' => $scene,
         ];
-        return $this->platform->callPostApi($url, array_merge($data, $options));
+        return $this->handler->callPostApi($url, array_merge($data, $options));
     }
 
     /**
@@ -826,7 +825,7 @@ class ExternalContact extends Service
     public function groupchatDelJoinWay($configId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/groupchat/del_join_way?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['config_id' => $configId,]);
+        return $this->handler->callPostApi($url, ['config_id' => $configId,]);
     }
 
     // +=======================
@@ -841,7 +840,7 @@ class ExternalContact extends Service
     public function addMomentTask(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/add_moment_task?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -853,7 +852,7 @@ class ExternalContact extends Service
     public function getMomentTaskResult($jobid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_moment_task_result?access_token=ACCESS_TOKEN&jobid={$jobid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -865,7 +864,7 @@ class ExternalContact extends Service
     public function cancelMomentTask($momentId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/cancel_moment_task?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['moment_id' => $momentId]);
+        return $this->handler->callPostApi($url, ['moment_id' => $momentId]);
     }
     
     /**
@@ -896,7 +895,7 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
     
     /**
@@ -919,7 +918,7 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
     
     /**
@@ -944,7 +943,7 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
     
     /**
@@ -969,7 +968,7 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
     
     /**
@@ -982,7 +981,7 @@ class ExternalContact extends Service
     public function getMomentComments($momentId, $userid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_moment_comments?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, [
+        return $this->handler->callPostApi($url, [
             'moment_id' => $momentId,
             'userid' => $userid,
         ]);
@@ -1006,7 +1005,7 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1018,7 +1017,7 @@ class ExternalContact extends Service
     public function momentStrategyGet($strategyId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/moment_strategy/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['strategy_id' => $strategyId]);
+        return $this->handler->callPostApi($url, ['strategy_id' => $strategyId]);
     }
     
     /**
@@ -1041,7 +1040,7 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
     
     /**
@@ -1053,7 +1052,7 @@ class ExternalContact extends Service
     public function momentStrategyCreate(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/moment_strategy/create?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1067,7 +1066,7 @@ class ExternalContact extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/moment_strategy/edit?access_token=ACCESS_TOKEN';
         $data['strategy_id'] = $strategyId;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1079,7 +1078,7 @@ class ExternalContact extends Service
     public function momentStrategyDel($strategyId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/moment_strategy/del?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['strategy_id' => $strategyId]);
+        return $this->handler->callPostApi($url, ['strategy_id' => $strategyId]);
     }
 
     // +=======================
@@ -1103,7 +1102,7 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1115,7 +1114,7 @@ class ExternalContact extends Service
     public function customerAcquisitionGet($linkId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/customer_acquisition/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['link_id' => $linkId]);
+        return $this->handler->callPostApi($url, ['link_id' => $linkId]);
     }
     
     /**
@@ -1127,7 +1126,7 @@ class ExternalContact extends Service
     public function customerAcquisitionCreateLink(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/customer_acquisition/create_link?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1141,7 +1140,7 @@ class ExternalContact extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/customer_acquisition/update_link?access_token=ACCESS_TOKEN';
         $data['link_id'] = $linkId;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1153,7 +1152,7 @@ class ExternalContact extends Service
     public function customerAcquisitionDeleteLink($linkId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/customer_acquisition/delete_link?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['link_id' => $linkId]);
+        return $this->handler->callPostApi($url, ['link_id' => $linkId]);
     }
 
     /**
@@ -1176,7 +1175,7 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1187,7 +1186,7 @@ class ExternalContact extends Service
     public function customerAcquisitionQuota()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/customer_acquisition_quota?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url);
+        return $this->handler->callPostApi($url);
     }
     
     /**
@@ -1208,7 +1207,7 @@ class ExternalContact extends Service
             'start_time' => $startTime,
             'end_time' => $endTime,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -1223,7 +1222,7 @@ class ExternalContact extends Service
     public function addMsgTemplate(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/add_msg_template?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1235,7 +1234,7 @@ class ExternalContact extends Service
     public function remindGroupmsgSend($msgid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/remind_groupmsg_send?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['msgid' => $msgid]);
+        return $this->handler->callPostApi($url, ['msgid' => $msgid]);
     }
 
     /**
@@ -1247,7 +1246,7 @@ class ExternalContact extends Service
     public function cancelGroupmsgSend($msgid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/cancel_groupmsg_send?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['msgid' => $msgid]);
+        return $this->handler->callPostApi($url, ['msgid' => $msgid]);
     }
     
     /**
@@ -1280,7 +1279,7 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1303,7 +1302,7 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1328,7 +1327,7 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1340,7 +1339,7 @@ class ExternalContact extends Service
     public function sendWelcomeMsg(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/send_welcome_msg?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1352,7 +1351,7 @@ class ExternalContact extends Service
     public function groupWelcomeTemplateAdd(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/group_welcome_template/add?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1366,7 +1365,7 @@ class ExternalContact extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/group_welcome_template/edit?access_token=ACCESS_TOKEN';
         $data['template_id'] = $templateId;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1378,7 +1377,7 @@ class ExternalContact extends Service
     public function groupWelcomeTemplateGet($templateId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/group_welcome_template/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['template_id' => $templateId]);
+        return $this->handler->callPostApi($url, ['template_id' => $templateId]);
     }
 
     /**
@@ -1390,7 +1389,7 @@ class ExternalContact extends Service
     public function groupWelcomeTemplateDel($templateId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/group_welcome_template/del?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['template_id' => $templateId]);
+        return $this->handler->callPostApi($url, ['template_id' => $templateId]);
     }
 
     // +=======================
@@ -1420,7 +1419,7 @@ class ExternalContact extends Service
         if (!empty($partyId)) {
             $data['partyid'] = $partyId;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1432,7 +1431,7 @@ class ExternalContact extends Service
     public function groupchatStatistic(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/groupchat/statistic?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1457,7 +1456,7 @@ class ExternalContact extends Service
         if (!empty($dayEndTime)) {
             $data['day_end_time'] = $dayEndTime;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -1472,7 +1471,7 @@ class ExternalContact extends Service
     public function addProductAlbum(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/add_product_album?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1484,7 +1483,7 @@ class ExternalContact extends Service
     public function getProductAlbum($productId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_product_album?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1505,7 +1504,7 @@ class ExternalContact extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1519,7 +1518,7 @@ class ExternalContact extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/update_product_album?access_token=ACCESS_TOKEN';
         $data['product_id'] = $productId;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1531,7 +1530,7 @@ class ExternalContact extends Service
     public function deleteProductAlbum($productId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/delete_product_album?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['product_id' => $productId]);
+        return $this->handler->callPostApi($url, ['product_id' => $productId]);
     }
 
     // +=======================
@@ -1546,7 +1545,7 @@ class ExternalContact extends Service
     public function addInterceptRule(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/add_intercept_rule?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1557,7 +1556,7 @@ class ExternalContact extends Service
     public function getInterceptRuleList()
     {
         $url = 'ttps://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_intercept_rule_list?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url);
+        return $this->handler->callPostApi($url);
     }
 
     /**
@@ -1569,7 +1568,7 @@ class ExternalContact extends Service
     public function getInterceptRule($ruleId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_intercept_rule?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['rule_id' => $ruleId]);
+        return $this->handler->callPostApi($url, ['rule_id' => $ruleId]);
     }
 
     /**
@@ -1582,7 +1581,7 @@ class ExternalContact extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/update_intercept_rule?access_token=ACCESS_TOKEN';
         $data['rule_id'] = $ruleId;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -1594,6 +1593,6 @@ class ExternalContact extends Service
     public function delInterceptRule($ruleId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/del_intercept_rule?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['rule_id' => $ruleId]);
+        return $this->handler->callPostApi($url, ['rule_id' => $ruleId]);
     }
 }

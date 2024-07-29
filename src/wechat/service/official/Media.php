@@ -13,7 +13,6 @@ namespace think\wechat\service\official;
 
 use think\wechat\Service;
 use think\wechat\utils\Tools;
-use think\wechat\exception\InvalidResponseException;
 
 /**
  * 微信素材管理
@@ -32,10 +31,10 @@ class Media extends Service
     public function add($fileName, $fileContent, $mimeType = null, $type = 'image')
     {
         if (!in_array($type, ['image', 'voice', 'video', 'thumb'])) {
-            throw new InvalidResponseException('Invalid Media Type.', '0');
+            throw new \Exception('Invalid Media Type.', '0');
         }
         $url = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type={$type}";
-        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
+        return $this->handler->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**
@@ -50,7 +49,7 @@ class Media extends Service
         $url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id={$media_id}";
         $this->registerApi($url, __FUNCTION__, func_get_args());
         if ($outType == 'url') return $url;
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -62,7 +61,7 @@ class Media extends Service
     public function addNews($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/material/add_news?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -76,7 +75,7 @@ class Media extends Service
     public function updateNews($media_id, $index, $news)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/material/update_news?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['media_id' => $media_id, 'index' => $index, 'articles' => $news]);
+        return $this->handler->callPostApi($url, ['media_id' => $media_id, 'index' => $index, 'articles' => $news]);
     }
 
     /**
@@ -90,7 +89,7 @@ class Media extends Service
     public function uploadImg($fileName, $fileContent, $mimeType = null)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN';
-        return $this->platform->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
+        return $this->handler->callMultipartPostApi($url, [], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**
@@ -106,10 +105,10 @@ class Media extends Service
     public function addMaterial($fileName, $fileContent, $mimeType = null, $type = 'image', $description = [])
     {
         if (!in_array($type, ['image', 'voice', 'video', 'thumb'])) {
-            throw new InvalidResponseException('Invalid Media Type.', '0');
+            throw new \Exception('Invalid Media Type.', '0');
         }
         $url = "https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=ACCESS_TOKEN&type={$type}";
-        return $this->platform->callMultipartPostApi($url, ['description' => Tools::arr2json($description)], 'media', $fileName, $fileContent, $mimeType);
+        return $this->handler->callMultipartPostApi($url, ['description' => Tools::arr2json($description)], 'media', $fileName, $fileContent, $mimeType);
     }
 
     /**
@@ -123,7 +122,7 @@ class Media extends Service
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/material/get_material?access_token=ACCESS_TOKEN';
         if ($outType == 'url') return $url;
-        return $this->platform->callPostApi($url, ['media_id' => $media_id]);
+        return $this->handler->callPostApi($url, ['media_id' => $media_id]);
     }
 
     /**
@@ -135,7 +134,7 @@ class Media extends Service
     public function delMaterial($mediaId)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/material/del_material?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['media_id' => $mediaId]);
+        return $this->handler->callPostApi($url, ['media_id' => $mediaId]);
     }
 
     /**
@@ -146,7 +145,7 @@ class Media extends Service
     public function getMaterialCount()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/material/get_materialcount?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -160,9 +159,9 @@ class Media extends Service
     public function batchGetMaterial($type = 'image', $offset = 0, $count = 20)
     {
         if (!in_array($type, ['image', 'voice', 'video', 'news'])) {
-            throw new InvalidResponseException('Invalid Media Type.', '0');
+            throw new \Exception('Invalid Media Type.', '0');
         }
         $url = 'https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['type' => $type, 'offset' => $offset, 'count' => $count]);
+        return $this->handler->callPostApi($url, ['type' => $type, 'offset' => $offset, 'count' => $count]);
     }
 }

@@ -30,7 +30,7 @@ class ExternalPay extends Service
     public function getmerchant($mchId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalpay/getmerchant?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['mch_id' => $mchId]);
+        return $this->handler->callPostApi($url, ['mch_id' => $mchId]);
     }
 
     /**
@@ -43,7 +43,7 @@ class ExternalPay extends Service
     public function setMchUseScope($mchId, array $allowUseScope)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalpay/set_mch_use_scope?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['mch_id' => $mchId, 'allow_use_scope' => $allowUseScope]);
+        return $this->handler->callPostApi($url, ['mch_id' => $mchId, 'allow_use_scope' => $allowUseScope]);
     }
 
     /**
@@ -72,6 +72,6 @@ class ExternalPay extends Service
         if (!empty($cursor)) {
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

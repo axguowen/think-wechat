@@ -29,7 +29,7 @@ abstract class School extends Service
     public function getSubscribeQrCode()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_subscribe_qr_code?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -41,7 +41,7 @@ abstract class School extends Service
     public function setSubscribeMode($subscribeMode)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/set_subscribe_mode?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['subscribe_mode' => $subscribeMode]);
+        return $this->handler->callPostApi($url, ['subscribe_mode' => $subscribeMode]);
     }
 
     /**
@@ -52,7 +52,7 @@ abstract class School extends Service
     public function getSubscribeMode()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_subscribe_mode?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url, ['subscribe_mode' => $subscribeMode]);
+        return $this->handler->callGetApi($url, ['subscribe_mode' => $subscribeMode]);
     }
 
     /**
@@ -75,7 +75,7 @@ abstract class School extends Service
             'msgtype' => $msgtype,
             $msgtype => $msgdata,
         ]);
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -86,7 +86,7 @@ abstract class School extends Service
     public function getChatCreateMode()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/get_chat_create_mode?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -98,7 +98,7 @@ abstract class School extends Service
     public function setChatCreateMode($createMode)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/set_chat_create_mode?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['create_mode' => $createMode]);
+        return $this->handler->callPostApi($url, ['create_mode' => $createMode]);
     }
 
     /**
@@ -110,7 +110,7 @@ abstract class School extends Service
     public function convertToOpenid($externalUserid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/convert_to_openid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['external_userid' => $externalUserid]);
+        return $this->handler->callPostApi($url, ['external_userid' => $externalUserid]);
     }
 
     /**
@@ -122,7 +122,7 @@ abstract class School extends Service
     public function agentGetAllowScope()
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/school/agent/get_allow_scope?access_token=ACCESS_TOKEN&agentid={$agentid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
     
     // +=======================
@@ -138,7 +138,7 @@ abstract class School extends Service
      */
     public function getOauthRedirect($redirectUri, $state = '', $scope = 'snsapi_base')
     {
-        $appid = $this->platform->getConfig('corpid');
+        $appid = $this->handler->getConfig('corpid');
         // 如果未编码
         if(!preg_match('/^http(s)?%3A%2F%2F/', $redirectUri)){
             $redirectUri = urlencode($redirectUri);
@@ -155,7 +155,7 @@ abstract class School extends Service
     public function getUserInfo($code)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/auth/getuserinfo?access_token=ACCESS_TOKEN&code={$code}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -167,7 +167,7 @@ abstract class School extends Service
     public function getSchoolUserInfo($code)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/school/getuserinfo?access_token=ACCESS_TOKEN&code={$code}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     // +=======================
@@ -195,7 +195,7 @@ abstract class School extends Service
             'mobile' => $mobile,
             'to_invite' => $toInvite,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -207,7 +207,7 @@ abstract class School extends Service
     public function userDeleteStudent($userid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/school/user/delete_student?access_token=ACCESS_TOKEN&userid={$userid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -221,7 +221,7 @@ abstract class School extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/user/update_student?access_token=ACCESS_TOKEN';
         $data['student_userid'] = $studentUserid;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -233,7 +233,7 @@ abstract class School extends Service
     public function userBatchCreateStudent(array $students)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/user/batch_create_student?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['students' => $students,]);
+        return $this->handler->callPostApi($url, ['students' => $students,]);
     }
 
     /**
@@ -245,7 +245,7 @@ abstract class School extends Service
     public function userBatchDeleteStudent($useridlist)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/user/batch_delete_student?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['useridlist' => $useridlist,]);
+        return $this->handler->callPostApi($url, ['useridlist' => $useridlist,]);
     }
 
     /**
@@ -257,7 +257,7 @@ abstract class School extends Service
     public function userBatchUpdateStudent(array $students)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/user/batch_update_student?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['students' => $students,]);
+        return $this->handler->callPostApi($url, ['students' => $students,]);
     }
 
     /**
@@ -280,7 +280,7 @@ abstract class School extends Service
             'children' => $children,
             'to_invite' => $toInvite,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -292,7 +292,7 @@ abstract class School extends Service
     public function userDeleteParent($userid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/school/user/delete_parent?access_token=ACCESS_TOKEN&userid={$userid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -306,7 +306,7 @@ abstract class School extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/user/update_parent?access_token=ACCESS_TOKEN';
         $data['parent_userid'] = $parentUserid;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -318,7 +318,7 @@ abstract class School extends Service
     public function userBatchCreateParent(array $parents)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/user/batch_create_parent?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['parents' => $parents,]);
+        return $this->handler->callPostApi($url, ['parents' => $parents,]);
     }
 
     /**
@@ -330,7 +330,7 @@ abstract class School extends Service
     public function userBatchDeleteParent($useridlist)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/user/batch_delete_parent?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['useridlist' => $useridlist,]);
+        return $this->handler->callPostApi($url, ['useridlist' => $useridlist,]);
     }
 
     /**
@@ -342,7 +342,7 @@ abstract class School extends Service
     public function userBatchUpdateParent(array $parents)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/user/batch_update_parent?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['parents' => $parents,]);
+        return $this->handler->callPostApi($url, ['parents' => $parents,]);
     }
 
     /**
@@ -354,7 +354,7 @@ abstract class School extends Service
     public function userGet($userid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/school/user/get?access_token=ACCESS_TOKEN&userid={$userid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -366,7 +366,7 @@ abstract class School extends Service
     public function userList($departmentId)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/school/user/list?access_token=ACCESS_TOKEN&department_id={$departmentId}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -378,7 +378,7 @@ abstract class School extends Service
     public function setArchSyncMode($archSyncMode)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/set_arch_sync_mode?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['arch_sync_mode' => $archSyncMode,]);
+        return $this->handler->callPostApi($url, ['arch_sync_mode' => $archSyncMode,]);
     }
 
     /**
@@ -390,7 +390,7 @@ abstract class School extends Service
     public function userListParent($departmentId)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/school/user/list_parent?access_token=ACCESS_TOKEN&department_id={$departmentId}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     // +=======================
@@ -405,7 +405,7 @@ abstract class School extends Service
     public function departmentCreate(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/department/create?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -419,7 +419,7 @@ abstract class School extends Service
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/department/update?access_token=ACCESS_TOKEN';
         $data['id'] = $id;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -431,7 +431,7 @@ abstract class School extends Service
     public function departmentDelete($id)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/school/department/delete?access_token=ACCESS_TOKEN&id={$id}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -447,7 +447,7 @@ abstract class School extends Service
         if($id > 0){
             $data['id'] = $id;
         }
-        return $this->platform->callGetApi($url, $data);
+        return $this->handler->callGetApi($url, $data);
     }
 
     /**
@@ -460,7 +460,7 @@ abstract class School extends Service
     public function setUpgradeInfo($upgradeSwitch = 0, $upgradeTime = 0)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/set_upgrade_info?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, [
+        return $this->handler->callPostApi($url, [
             'upgrade_switch' => $upgradeSwitch,
             'upgrade_time' => $upgradeTime,
         ]);
@@ -490,7 +490,7 @@ abstract class School extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
     
     /**
@@ -502,7 +502,7 @@ abstract class School extends Service
     public function livingGetLivingInfo($livingid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/school/living/get_living_info?access_token=ACCESS_TOKEN&livingid={$livingid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
     
     /**
@@ -524,7 +524,7 @@ abstract class School extends Service
         if(!empty($nextKey)){
             $data['next_key'] = $nextKey;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
     
     /**
@@ -546,7 +546,7 @@ abstract class School extends Service
         if(!empty($nextKey)){
             $data['next_key'] = $nextKey;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
     
     /**
@@ -558,7 +558,7 @@ abstract class School extends Service
     public function livingDeleteReplayData($livingid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/living/delete_replay_data?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['livingid' => $livingid]);
+        return $this->handler->callPostApi($url, ['livingid' => $livingid]);
     }
     
     /**
@@ -580,7 +580,7 @@ abstract class School extends Service
         if(!empty($nextKey)){
             $data['next_key'] = $nextKey;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
     
     /**
@@ -602,7 +602,7 @@ abstract class School extends Service
         if(!empty($nextKey)){
             $data['next_key'] = $nextKey;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -617,7 +617,7 @@ abstract class School extends Service
     public function getPaymentResult($paymentId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/get_payment_result?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['payment_id' => $paymentId]);
+        return $this->handler->callPostApi($url, ['payment_id' => $paymentId]);
     }
 
     /**
@@ -630,6 +630,6 @@ abstract class School extends Service
     public function getTrade($tradeNo)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/school/get_trade?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['payment_id' => $paymentId, 'trade_no' => $tradeNo]);
+        return $this->handler->callPostApi($url, ['payment_id' => $paymentId, 'trade_no' => $tradeNo]);
     }
 }

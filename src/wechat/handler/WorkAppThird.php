@@ -9,16 +9,15 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat\handler;
 
 use think\Wechat;
-use think\wechat\Platform;
 use think\wechat\utils\Tools;
 
 /**
  * 企业微信第三方应用
  */
-class WorkAppThird extends Platform
+class WorkAppThird extends Base
 {
 	/**
      * 平台配置参数

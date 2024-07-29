@@ -27,6 +27,6 @@ class Application extends Service
     public function claimCustomizedApp($suiteAccessToken)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/agent/claim_customized_app?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['suite_access_token' => $suiteAccessToken]);
+        return $this->handler->callPostApi($url, ['suite_access_token' => $suiteAccessToken]);
     }
 }

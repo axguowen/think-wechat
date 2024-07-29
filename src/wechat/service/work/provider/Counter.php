@@ -30,7 +30,7 @@ class Counter extends Service
     public function openOrder(array $options)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/paytool/open_order?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $options);
+        return $this->handler->callPostApi($url, $options);
     }
 
     /**
@@ -53,7 +53,7 @@ class Counter extends Service
             'ts' => $time,
             'sig' => $signature
         ];
-        return $this->platform->callPostApi($url, $options);
+        return $this->handler->callPostApi($url, $options);
     }
 
     /**
@@ -65,7 +65,7 @@ class Counter extends Service
     public function getOrderList(array $options)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/paytool/get_order_list?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $options);
+        return $this->handler->callPostApi($url, $options);
     }
 
     /**
@@ -88,7 +88,7 @@ class Counter extends Service
             'ts' => $time,
             'sig' => $signature
         ];
-        return $this->platform->callPostApi($url, $options);
+        return $this->handler->callPostApi($url, $options);
     }
 
     // +=======================
@@ -120,7 +120,7 @@ class Counter extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -147,6 +147,6 @@ class Counter extends Service
             'invoice_status' => $invoiceStatus,
             'invoice_note' => $invoiceNote,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

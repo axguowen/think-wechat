@@ -51,7 +51,7 @@ class Security extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -66,7 +66,7 @@ class Security extends Service
     public function trustdeviceImport(array $deviceList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/security/trustdevice/import?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['device_list' => $deviceList]);
+        return $this->handler->callPostApi($url, ['device_list' => $deviceList]);
     }
 
     /**
@@ -89,7 +89,7 @@ class Security extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -108,7 +108,7 @@ class Security extends Service
             'last_login_userid' => $lastLoginUserid,
             'type' => $type,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -123,7 +123,7 @@ class Security extends Service
     public function vipSubmitBatchAddJob(array $useridList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/security/vip/submit_batch_add_job?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['userid_list' => $useridList]);
+        return $this->handler->callPostApi($url, ['userid_list' => $useridList]);
     }
 
     /**
@@ -135,7 +135,7 @@ class Security extends Service
     public function vipBatchAddJobResult($jobid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/security/vip/batch_add_job_result?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['jobid' => $jobid]);
+        return $this->handler->callPostApi($url, ['jobid' => $jobid]);
     }
 
     /**
@@ -147,7 +147,7 @@ class Security extends Service
     public function vipSubmitBatchDelJob(array $useridList)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/security/vip/submit_batch_del_job?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['userid_list' => $useridList]);
+        return $this->handler->callPostApi($url, ['userid_list' => $useridList]);
     }
 
     /**
@@ -159,7 +159,7 @@ class Security extends Service
     public function vipBatchDelJobResult($jobid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/security/vip/batch_del_job_result?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['jobid' => $jobid]);
+        return $this->handler->callPostApi($url, ['jobid' => $jobid]);
     }
 
     /**
@@ -180,6 +180,6 @@ class Security extends Service
         if(!empty($cursor)){
             $data['cursor'] = $cursor;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

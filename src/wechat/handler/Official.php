@@ -9,35 +9,38 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat\handler;
 
-use think\wechat\Platform;
 use think\wechat\utils\Tools;
 use axguowen\HttpClient;
 
 /**
- * 微信小程序平台
+ * 微信公众号平台
  */
-class Mini extends Platform
+class Official extends Base
 {
 	/**
      * 平台配置参数
      * @var array
      */
     protected $options = [
-        // 小程序ID
+        // 开发者ID
         'appid' => '',
-        // 小程序密钥
+        // 开发者密码
         'appsecret' => '',
         // 是否使用稳定版接口调用凭证
         'use_stable_access_token' => false,
+        // 接收消息时的校验Token
+        'token' => '',
+        // 消息加解密密钥
+        'encoding_aes_key' => '',
     ];
 
     /**
      * 服务的命名空间
      * @var string
      */
-    protected $serviceNamespace = '\\think\\wechat\\service\\mini\\';
+    protected $serviceNamespace = '\\think\\wechat\\service\\official\\';
 
     /**
      * 获取接口调用凭证缓存键名
@@ -46,7 +49,7 @@ class Mini extends Platform
      */
     protected function getAccessCacheKey()
     {
-        return 'mini_access_token_' . $this->options['appid'];
+        return 'official_access_token_' . $this->options['appid'];
     }
 
     /**

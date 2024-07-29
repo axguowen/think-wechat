@@ -37,7 +37,7 @@ class Corpgroup extends Service
             'chain_id' => $chainId,
             'contact_list' => $contactList
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -49,7 +49,7 @@ class Corpgroup extends Service
     public function getresult($jobid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/corpgroup/getresult?access_token=ACCESS_TOKEN&jobid={$jobid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -74,7 +74,7 @@ class Corpgroup extends Service
         if(!empty($pendingCorpid)){
             $data['pending_corpid'] = $pendingCorpid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -95,7 +95,7 @@ class Corpgroup extends Service
             'corpid' => $corpid,
             'userid' => $userid,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -107,7 +107,7 @@ class Corpgroup extends Service
     public function getCorpSharedChainList($corpid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/corpgroup/get_corp_shared_chain_list?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['corpid' => $corpid]);
+        return $this->handler->callPostApi($url, ['corpid' => $corpid]);
     }
     
     // +=======================
@@ -122,7 +122,7 @@ class Corpgroup extends Service
     public function ruleListIds($chainId)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/corpgroup/rule/list_ids?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['chain_id' => $chainId]);
+        return $this->handler->callPostApi($url, ['chain_id' => $chainId]);
     }
 
     /**
@@ -141,7 +141,7 @@ class Corpgroup extends Service
             'chain_id' => $chainId,
             'rule_id' => $ruleId,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -160,7 +160,7 @@ class Corpgroup extends Service
             'chain_id' => $chainId,
             'rule_id' => $ruleId,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -179,7 +179,7 @@ class Corpgroup extends Service
             'chain_id' => $chainId,
             'rule_info' => $ruleInfo
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -198,6 +198,6 @@ class Corpgroup extends Service
             'chain_id' => $chainId,
             'rule_info' => $ruleInfo
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

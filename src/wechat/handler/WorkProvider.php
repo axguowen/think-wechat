@@ -9,26 +9,25 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\platform;
+namespace think\wechat\handler;
 
-use think\wechat\Platform;
 use think\wechat\utils\Tools;
 use axguowen\HttpClient;
 
 /**
- * 企业微信自建应用
+ * 企业微信服务商平台
  */
-class WorkAppSelf extends Platform
+class WorkProvider extends Base
 {
 	/**
      * 平台配置参数
      * @var array
      */
     protected $options = [
-        // 企业微信corpid
+        // 服务商的corpid
         'corpid' => '',
-        // 企业微信自建应用secret
-        'corpsecret' => '',
+        // 服务商的secret
+        'provider_secret' => '',
         // 接收消息时的校验Token
         'token' => '',
         // 消息加解密密钥
@@ -39,7 +38,7 @@ class WorkAppSelf extends Platform
      * 服务的命名空间
      * @var string
      */
-    protected $serviceNamespace = '\\think\\wechat\\service\\work\\appself\\';
+    protected $serviceNamespace = '\\think\\wechat\\service\\work\\provider\\';
 
     /**
      * 获取接口调用凭证缓存键名
@@ -48,7 +47,7 @@ class WorkAppSelf extends Platform
      */
     protected function getAccessCacheKey()
     {
-        return 'work_app_access_token_' . $this->options['corpsecret'];
+        return 'work_provider_access_token_' . $this->options['corpid'];
     }
 
     /**
@@ -58,15 +57,19 @@ class WorkAppSelf extends Platform
      */
     protected function getAccessTokenForce()
     {
-        // 企业微信corpid
-        $corpid = $this->options['corpid'];
-        // 企业微信自建应用secret
-        $corpsecret = $this->options['corpsecret'];
         // 接口请求地址
-        $requestUrl = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={$corpid}&corpsecret={$corpsecret}";
-        
+        $requestUrl = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_provider_token';
+        // 参数
+        $data = Tools::arr2json([
+            'corpid' => $this->options['corpid'],
+            'provider_secret' => $this->options['provider_secret'],
+        ]);
+        // 请求头
+        $header = [
+            'Content-Type' => 'application/json; charset=utf-8',
+        ];
         // 获取接口调用凭证请求结果
-        $response = HttpClient::get($requestUrl)->body;
+        $response = HttpClient::post($requestUrl, $data, $header)->body;
         // 获取解析结果
         $parseResponseResult = $this->parseResponseData($response);
         // 失败
@@ -76,7 +79,7 @@ class WorkAppSelf extends Platform
         $accessTokenData = $parseResponseResult[0];
         // 返回
         return [[
-            'access_token' => $accessTokenData['access_token'],
+            'access_token' => $accessTokenData['provider_access_token'],
             'expires_in' => $accessTokenData['expires_in'],
         ], null];
     }

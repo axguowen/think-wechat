@@ -33,7 +33,7 @@ class Chatdata extends Service
         if($type > 0){
             $data['type'] = $type;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -45,7 +45,7 @@ class Chatdata extends Service
     public function checkSingleAgree(array $info)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/msgaudit/check_single_agree?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['info' => $info]);
+        return $this->handler->callPostApi($url, ['info' => $info]);
     }
 
     /**
@@ -57,6 +57,6 @@ class Chatdata extends Service
     public function groupchatGet($roomid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/msgaudit/groupchat/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['roomid' => $roomid]);
+        return $this->handler->callPostApi($url, ['roomid' => $roomid]);
     }
 }

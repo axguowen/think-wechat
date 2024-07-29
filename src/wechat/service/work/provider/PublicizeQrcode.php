@@ -42,7 +42,7 @@ class PublicizeQrcode extends Service
             'state' => $state,
             'follow_user' => $followUser,
         ];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -54,6 +54,6 @@ class PublicizeQrcode extends Service
     public function getRegisterInfo($registerCode)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_register_info?provider_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['register_code' => $registerCode]);
+        return $this->handler->callPostApi($url, ['register_code' => $registerCode]);
     }
 }

@@ -13,8 +13,6 @@ namespace think\wechat\service\mini;
 
 use think\wechat\Service;
 use think\wechat\cryptor\MiniCryptor;
-use think\wechat\exception\InvalidResponseException;
-use think\wechat\exception\InvalidDecryptException;
 use axguowen\HttpClient;
 
 /**
@@ -32,7 +30,7 @@ class Crypt extends Service
      */
     public function decode($iv, $sessionKey, $encryptedData)
     {
-        $miniCryptor = new MiniCryptor($this->platform->getConfig('appid'), $sessionKey);
+        $miniCryptor = new MiniCryptor($this->handler->getConfig('appid'), $sessionKey);
         $errCode = $miniCryptor->decryptData($encryptedData, $iv, $data);
         if ($errCode == 0) {
             return json_decode($data, true);
@@ -48,8 +46,8 @@ class Crypt extends Service
      */
     public function session($code)
     {
-        $appid = $this->platform->getConfig('appid');
-        $secret = $this->platform->getConfig('appsecret');
+        $appid = $this->handler->getConfig('appid');
+        $secret = $this->handler->getConfig('appsecret');
         $url = "https://api.weixin.qq.com/sns/jscode2session?appid={$appid}&secret={$secret}&js_code={$code}&grant_type=authorization_code";
         return json_decode(HttpClient::get($url)->body, true);
     }
@@ -61,18 +59,17 @@ class Crypt extends Service
      * @param string $iv 加密算法的初始向量
      * @param string $encryptedData 加密数据( encryptedData )
      * @return array
-     * @throws InvalidResponseException
-     * @throws InvalidDecryptException
+     * @throws \Exception
      */
     public function userInfo($code, $iv, $encryptedData)
     {
         $result = $this->session($code);
         if (empty($result['session_key'])) {
-            return [null, new InvalidResponseException('Code 换取 SessionKey 失败', 403)];
+            return [null, new \Exception('Code 换取 SessionKey 失败', 403)];
         }
         $userinfo = $this->decode($iv, $result['session_key'], $encryptedData);
         if (empty($userinfo)) {
-            return [null, new InvalidDecryptException('用户信息解析失败', 403)];
+            return [null, new \Exception('用户信息解析失败', 403)];
         }
         return [array_merge($result, $userinfo), null];
     }
@@ -86,7 +83,7 @@ class Crypt extends Service
     public function getPhoneNumber($code)
     {
         $url = 'https://api.weixin.qq.com/wxa/business/getuserphonenumber?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['code' => $code]);
+        return $this->handler->callPostApi($url, ['code' => $code]);
     }
 
     /**
@@ -104,6 +101,6 @@ class Crypt extends Service
         if (is_null($mch_id)) $url .= "&mch_id={$mch_id}";
         if (is_null($out_trade_no)) $url .= "&out_trade_no={$out_trade_no}";
         if (is_null($transaction_id)) $url .= "&transaction_id={$transaction_id}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 }

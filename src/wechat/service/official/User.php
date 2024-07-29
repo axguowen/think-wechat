@@ -29,7 +29,7 @@ class User extends Service
     public function updateMark($openid, $remark)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/user/info/updateremark?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['openid' => $openid, 'remark' => $remark]);
+        return $this->handler->callPostApi($url, ['openid' => $openid, 'remark' => $remark]);
     }
 
     /**
@@ -42,7 +42,7 @@ class User extends Service
     public function getUserInfo($openid, $lang = 'zh_CN')
     {
         $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid={$openid}&lang={$lang}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -59,7 +59,7 @@ class User extends Service
         foreach ($openids as $openid) {
             $data['user_list'][] = ['openid' => $openid, 'lang' => $lang];
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -71,7 +71,7 @@ class User extends Service
     public function getUserList($nextOpenid = '')
     {
         $url = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=ACCESS_TOKEN&next_openid={$nextOpenid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -84,7 +84,7 @@ class User extends Service
     public function getUserListByTag($tagid, $nextOpenid = '')
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/user/tag/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['tagid' => $tagid, 'next_openid' => $nextOpenid]);
+        return $this->handler->callPostApi($url, ['tagid' => $tagid, 'next_openid' => $nextOpenid]);
     }
 
     /**
@@ -96,7 +96,7 @@ class User extends Service
     public function getBlackList($beginOpenid = '')
     {
         $url = "https://api.weixin.qq.com/cgi-bin/tags/members/getblacklist?access_token=ACCESS_TOKEN";
-        return $this->platform->callPostApi($url, ['begin_openid' => $beginOpenid]);
+        return $this->handler->callPostApi($url, ['begin_openid' => $beginOpenid]);
     }
 
     /**
@@ -108,7 +108,7 @@ class User extends Service
     public function batchBlackList(array $openids)
     {
         $url = "https://api.weixin.qq.com/cgi-bin/tags/members/batchblacklist?access_token=ACCESS_TOKEN";
-        return $this->platform->callPostApi($url, ['openid_list' => $openids]);
+        return $this->handler->callPostApi($url, ['openid_list' => $openids]);
     }
 
     /**
@@ -120,6 +120,6 @@ class User extends Service
     public function batchUnblackList(array $openids)
     {
         $url = "https://api.weixin.qq.com/cgi-bin/tags/members/batchunblacklist?access_token=ACCESS_TOKEN";
-        return $this->platform->callPostApi($url, ['openid_list' => $openids]);
+        return $this->handler->callPostApi($url, ['openid_list' => $openids]);
     }
 }

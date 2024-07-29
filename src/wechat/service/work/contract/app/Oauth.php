@@ -32,7 +32,7 @@ class Oauth extends Service
      */
     public function getOauthRedirect($redirectUri, $agentid, $state = '', $scope = 'snsapi_base')
     {
-        $appid = $this->platform->getConfig('corpid');
+        $appid = $this->handler->getConfig('corpid');
         // 如果未编码
         if(!preg_match('/^http(s)?%3A%2F%2F/', $redirectUri)){
             $redirectUri = urlencode($redirectUri);
@@ -49,7 +49,7 @@ class Oauth extends Service
     public function getUserInfo($code)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/auth/getuserinfo?access_token=ACCESS_TOKEN&code={$code}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -61,7 +61,7 @@ class Oauth extends Service
     public function getSchoolUserInfo($code)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/school/getuserinfo?access_token=ACCESS_TOKEN&code={$code}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -73,7 +73,7 @@ class Oauth extends Service
     public function getUserDetail($userTicket)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/auth/getuserdetail?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['user_ticket' => $userTicket]);
+        return $this->handler->callPostApi($url, ['user_ticket' => $userTicket]);
     }
 
     // +=======================
@@ -89,7 +89,7 @@ class Oauth extends Service
      */
     public function getWebLoginUrl($redirectUri, $state = '', $lang = 'zh')
     {
-        $suiteId = $this->platform->getConfig('suite_id');
+        $suiteId = $this->handler->getConfig('suite_id');
         // 如果未编码
         if(!preg_match('/^http(s)?%3A%2F%2F/', $redirectUri)){
             $redirectUri = urlencode($redirectUri);

@@ -27,7 +27,7 @@ class Newtmpl extends Service
     public function addCategory($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/wxopen/addcategory?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -38,7 +38,7 @@ class Newtmpl extends Service
     public function getCategory()
     {
         $url = 'https://api.weixin.qq.com/wxaapi/newtmpl/getcategory?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -49,7 +49,7 @@ class Newtmpl extends Service
     public function deleteCategory()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/wxopen/deletecategory?access_token=TOKEN';
-        return $this->platform->callPostApi($url);
+        return $this->handler->callPostApi($url);
     }
 
     /**
@@ -62,7 +62,7 @@ class Newtmpl extends Service
     {
         $url = 'https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatetitles?access_token=ACCESS_TOKEN';
         $url .= '&' . http_build_query(['ids' => $ids, 'start' => '0', 'limit' => '30']);
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -75,7 +75,7 @@ class Newtmpl extends Service
     {
         $url = 'https://api.weixin.qq.com/wxaapi/newtmpl/getpubtemplatekeywords?access_token=ACCESS_TOKEN';
         $url .= '&' . http_build_query(['tid' => $tid]);
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -89,7 +89,7 @@ class Newtmpl extends Service
     public function addTemplate($tid, array $kidList, $sceneDesc = '')
     {
         $url = 'https://api.weixin.qq.com/wxaapi/newtmpl/addtemplate?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, http_build_query([
+        return $this->handler->callPostApi($url, http_build_query([
             'tid' => $tid,
             'kidList' => $kidList,
             'sceneDesc' => $sceneDesc,
@@ -104,7 +104,7 @@ class Newtmpl extends Service
     public function getTemplateList()
     {
         $url = 'https://api.weixin.qq.com/wxaapi/newtmpl/gettemplate?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -116,7 +116,7 @@ class Newtmpl extends Service
     public function delTemplate($priTmplId)
     {
         $url = 'https://api.weixin.qq.com/wxaapi/newtmpl/deltemplate?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['priTmplId' => $priTmplId]);
+        return $this->handler->callPostApi($url, ['priTmplId' => $priTmplId]);
     }
 
     /**
@@ -128,6 +128,6 @@ class Newtmpl extends Service
     public function send(array $data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

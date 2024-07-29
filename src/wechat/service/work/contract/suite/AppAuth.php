@@ -27,7 +27,7 @@ class AppAuth extends Service
     public function getPermanentCode($authCode)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_permanent_code?suite_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['auth_code' => $authCode,]);
+        return $this->handler->callPostApi($url, ['auth_code' => $authCode,]);
     }
 
     /**
@@ -40,6 +40,6 @@ class AppAuth extends Service
     public function getAuthInfo($authCorpid, $permanentCode)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_auth_info?suite_access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['auth_corpid' => $authCorpid, 'permanent_code' => $permanentCode]);
+        return $this->handler->callPostApi($url, ['auth_corpid' => $authCorpid, 'permanent_code' => $permanentCode]);
     }
 }

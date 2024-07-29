@@ -26,7 +26,7 @@ class Template extends Service
     public function getTemplateLibraryList()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/wxopen/template/library/list?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['offset' => '0', 'count' => '20']);
+        return $this->handler->callPostApi($url, ['offset' => '0', 'count' => '20']);
     }
 
     /**
@@ -38,7 +38,7 @@ class Template extends Service
     public function getTemplateLibrary($template_id)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/wxopen/template/library/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['id' => $template_id]);
+        return $this->handler->callPostApi($url, ['id' => $template_id]);
     }
 
     /**
@@ -51,7 +51,7 @@ class Template extends Service
     public function addTemplate($template_id, array $keyword_id_list)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/wxopen/template/add?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['id' => $template_id, 'keyword_id_list' => $keyword_id_list]);
+        return $this->handler->callPostApi($url, ['id' => $template_id, 'keyword_id_list' => $keyword_id_list]);
     }
 
     /**
@@ -62,7 +62,7 @@ class Template extends Service
     public function getTemplateList()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/wxopen/template/list?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['offset' => '0', 'count' => '20']);
+        return $this->handler->callPostApi($url, ['offset' => '0', 'count' => '20']);
     }
 
     /**
@@ -74,7 +74,7 @@ class Template extends Service
     public function delTemplate($template_id)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/wxopen/template/del?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['template_id' => $template_id]);
+        return $this->handler->callPostApi($url, ['template_id' => $template_id]);
     }
 
     /**
@@ -86,6 +86,6 @@ class Template extends Service
     public function send(array $data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

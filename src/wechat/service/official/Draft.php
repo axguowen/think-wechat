@@ -27,7 +27,7 @@ class Draft extends Service
     public function add($articles)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/draft/add?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['articles' => $articles]);
+        return $this->handler->callPostApi($url, ['articles' => $articles]);
     }
 
     /**
@@ -40,7 +40,7 @@ class Draft extends Service
     public function get($mediaId, $outType = null)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/draft/get?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['media_id' => $mediaId]);
+        return $this->handler->callPostApi($url, ['media_id' => $mediaId]);
     }
 
 
@@ -53,7 +53,7 @@ class Draft extends Service
     public function delete($mediaId)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/draft/delete?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['media_id' => $mediaId]);
+        return $this->handler->callPostApi($url, ['media_id' => $mediaId]);
     }
 
     /**
@@ -65,7 +65,7 @@ class Draft extends Service
     public function addNews($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/material/add_news?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -80,7 +80,7 @@ class Draft extends Service
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/draft/update?access_token=ACCESS_TOKEN';
         $data = ['media_id' => $mediaId, 'index' => $index, 'articles' => $articles];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -91,7 +91,7 @@ class Draft extends Service
     public function getCount()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/draft/count?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -105,6 +105,6 @@ class Draft extends Service
     public function batchGet($offset = 0, $count = 20, $noContent = 0)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/draft/batchget?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['no_content' => $noContent, 'offset' => $offset, 'count' => $count]);
+        return $this->handler->callPostApi($url, ['no_content' => $noContent, 'offset' => $offset, 'count' => $count]);
     }
 }

@@ -28,7 +28,7 @@ class Security extends Service
     public function imgSecCheck($media)
     {
         $url = 'https://api.weixin.qq.com/wxa/img_sec_check?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, http_build_query(['media' => $media]), ['Content-Type' => 'application/octet-stream'], false);
+        return $this->handler->callPostApi($url, http_build_query(['media' => $media]), ['Content-Type' => 'application/octet-stream'], false);
     }
 
     /**
@@ -41,7 +41,7 @@ class Security extends Service
     public function mediaCheckAsync($media_url, $media_type)
     {
         $url = 'https://api.weixin.qq.com/wxa/media_check_async?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['media_url' => $media_url, 'media_type' => $media_type]);
+        return $this->handler->callPostApi($url, ['media_url' => $media_url, 'media_type' => $media_type]);
     }
 
     /**
@@ -53,6 +53,6 @@ class Security extends Service
     public function msgSecCheck($content)
     {
         $url = 'https://api.weixin.qq.com/wxa/msg_sec_check?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['content' => $content]);
+        return $this->handler->callPostApi($url, ['content' => $content]);
     }
 }

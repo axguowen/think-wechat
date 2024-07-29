@@ -26,7 +26,7 @@ abstract class General extends Service
     public function getCallbackIp()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/getcallbackip?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -37,6 +37,6 @@ abstract class General extends Service
     public function getApiDomainIp($cardId, $isOpen = true)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/get_api_domain_ip?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 }

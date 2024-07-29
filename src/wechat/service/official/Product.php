@@ -30,7 +30,7 @@ class Product extends Service
     {
         $url = 'https://api.weixin.qq.com/scan/product/modstatus?access_token=ACCESS_TOKEN';
         $data = ['keystandard' => $keystandard, 'keystr' => $keystr, 'status' => $status];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -43,7 +43,7 @@ class Product extends Service
     public function setTestWhiteList(array $openids = [], array $usernames = [])
     {
         $url = 'https://api.weixin.qq.com/scan/testwhitelist/set?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['openid' => $openids, 'username' => $usernames]);
+        return $this->handler->callPostApi($url, ['openid' => $openids, 'username' => $usernames]);
     }
 
     /**
@@ -60,7 +60,7 @@ class Product extends Service
         $url = 'https://api.weixin.qq.com/scan/product/getqrcode?access_token=ACCESS_TOKEN';
         $data = ['keystandard' => $keystandard, 'keystr' => $keystr, 'qrcode_size' => $qrcode_size];
         empty($extinfo) || $data['extinfo'] = $extinfo;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -75,7 +75,7 @@ class Product extends Service
         $url = 'https://api.weixin.qq.com/scan/product/get?access_token=ACCESS_TOKEN';
         $data = ['keystandard' => $keystandard, 'keystr' => $keystr];
         empty($extinfo) || $data['extinfo'] = $extinfo;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -93,7 +93,7 @@ class Product extends Service
         $data = ['offset' => $offset, 'limit' => $limit];
         is_null($status) || $data['status'] = $status;
         empty($keystr) || $data['keystr'] = $keystr;
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -105,7 +105,7 @@ class Product extends Service
     public function updateProduct(array $data)
     {
         $url = 'https://api.weixin.qq.com/scan/product/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -118,7 +118,7 @@ class Product extends Service
     public function clearProduct($keystandard, $keystr)
     {
         $url = 'https://api.weixin.qq.com/scan/product/clear?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['keystandard' => $keystandard, 'keystr' => $keystr]);
+        return $this->handler->callPostApi($url, ['keystandard' => $keystandard, 'keystr' => $keystr]);
     }
 
     /**
@@ -130,7 +130,7 @@ class Product extends Service
     public function scanTicketCheck($ticket)
     {
         $url = 'https://api.weixin.qq.com/scan/scanticket/check?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['ticket' => $ticket]);
+        return $this->handler->callPostApi($url, ['ticket' => $ticket]);
     }
 
     /**
@@ -145,6 +145,6 @@ class Product extends Service
     {
         $url = 'https://api.weixin.qq.com/scan/scanticket/check?access_token=ACCESS_TOKEN';
         $data = ['keystandard' => $keystandard, 'keystr' => $keystr, 'extinfo' => $extinfo];
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 }

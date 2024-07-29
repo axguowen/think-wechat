@@ -30,7 +30,7 @@ abstract class Contact extends Service
     public function userCreate(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/create?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -42,7 +42,7 @@ abstract class Contact extends Service
     public function userGet($userid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token=ACCESS_TOKEN&userid={$userid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -55,7 +55,7 @@ abstract class Contact extends Service
     public function userUpdate($userid, array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, array_merge($data, ['userid' => $userid]));
+        return $this->handler->callPostApi($url, array_merge($data, ['userid' => $userid]));
     }
 
     /**
@@ -67,7 +67,7 @@ abstract class Contact extends Service
     public function userDelete($userid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/user/delete?access_token=ACCESS_TOKEN&userid={$userid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -79,7 +79,7 @@ abstract class Contact extends Service
     public function userBatchDelete(array $useridlist)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/batchdelete?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['useridlist' => $useridlist]);
+        return $this->handler->callPostApi($url, ['useridlist' => $useridlist]);
     }
 
     /**
@@ -91,7 +91,7 @@ abstract class Contact extends Service
     public function userSimplelist($departmentId)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/user/simplelist?access_token=ACCESS_TOKEN&department_id={$departmentId}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -103,7 +103,7 @@ abstract class Contact extends Service
     public function userList($departmentId)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/user/list?access_token=ACCESS_TOKEN&department_id={$departmentId}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -115,7 +115,7 @@ abstract class Contact extends Service
     public function userConvertToOpenid($userid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/convert_to_openid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['userid' => $userid]);
+        return $this->handler->callPostApi($url, ['userid' => $userid]);
     }
 
     /**
@@ -127,7 +127,7 @@ abstract class Contact extends Service
     public function userConvertToUserid($openid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/convert_to_userid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['openid' => $openid]);
+        return $this->handler->callPostApi($url, ['openid' => $openid]);
     }
 
     /**
@@ -153,7 +153,7 @@ abstract class Contact extends Service
         if (!empty($tag)) {
             $data['tag'] = $tag;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -165,7 +165,7 @@ abstract class Contact extends Service
     public function userGetuserid($mobile)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/getuserid?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['mobile' => $mobile]);
+        return $this->handler->callPostApi($url, ['mobile' => $mobile]);
     }
 
     /**
@@ -178,7 +178,7 @@ abstract class Contact extends Service
     public function userGetUseridByEmail($email, $emailType = 1)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/get_userid_by_email?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['email' => $email, 'email_type' => $emailType]);
+        return $this->handler->callPostApi($url, ['email' => $email, 'email_type' => $emailType]);
     }
 
     /**
@@ -200,7 +200,7 @@ abstract class Contact extends Service
             $data['cursor'] = $cursor;
         }
         // 返回
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     // +=======================
@@ -215,7 +215,7 @@ abstract class Contact extends Service
     public function departmentCreate(array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -228,7 +228,7 @@ abstract class Contact extends Service
     public function departmentUpdate($id, array $data)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/department/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, array_merge($data, ['id' => $id]));
+        return $this->handler->callPostApi($url, array_merge($data, ['id' => $id]));
     }
 
     /**
@@ -240,7 +240,7 @@ abstract class Contact extends Service
     public function departmentDelete($id)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=ACCESS_TOKEN&id={$id}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -252,7 +252,7 @@ abstract class Contact extends Service
     public function departmentList($id)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/department/list?access_token=ACCESS_TOKEN&id={$id}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -264,7 +264,7 @@ abstract class Contact extends Service
     public function departmentSimplelist($id)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/department/simplelist?access_token=ACCESS_TOKEN&id={$id}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -276,7 +276,7 @@ abstract class Contact extends Service
     public function departmentGet($id)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/department/get?access_token=ACCESS_TOKEN&id={$id}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     // +=======================
@@ -300,7 +300,7 @@ abstract class Contact extends Service
         if ($tagid > 0) {
             $data['tagid'] = $tagid;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -313,7 +313,7 @@ abstract class Contact extends Service
     public function tagUpdate($tagid, $tagname)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/tag/update?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['tagid' => $tagid, 'tagname' => $tagname]);
+        return $this->handler->callPostApi($url, ['tagid' => $tagid, 'tagname' => $tagname]);
     }
 
     /**
@@ -325,7 +325,7 @@ abstract class Contact extends Service
     public function tagDelete($tagid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/tag/delete?access_token=ACCESS_TOKEN&tagid={$tagid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -337,7 +337,7 @@ abstract class Contact extends Service
     public function tagGet($tagid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/tag/get?access_token=ACCESS_TOKEN&tagid={$tagid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     /**
@@ -362,7 +362,7 @@ abstract class Contact extends Service
         if (!empty($partylist)) {
             $data['partylist'] = $partylist;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -387,7 +387,7 @@ abstract class Contact extends Service
         if (!empty($partylist)) {
             $data['partylist'] = $partylist;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -398,7 +398,7 @@ abstract class Contact extends Service
     public function tagList()
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/tag/list?access_token=ACCESS_TOKEN';
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     // +=======================
@@ -424,7 +424,7 @@ abstract class Contact extends Service
         if (!empty($callback)) {
             $data['callback'] = $callback;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -447,7 +447,7 @@ abstract class Contact extends Service
         if (!empty($callback)) {
             $data['callback'] = $callback;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -468,7 +468,7 @@ abstract class Contact extends Service
         if (!empty($callback)) {
             $data['callback'] = $callback;
         }
-        return $this->platform->callPostApi($url, $data);
+        return $this->handler->callPostApi($url, $data);
     }
 
     /**
@@ -480,7 +480,7 @@ abstract class Contact extends Service
     public function batchGetresult($jobid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/batch/getresult?access_token=ACCESS_TOKEN&jobid={$jobid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 
     // +=======================
@@ -496,7 +496,7 @@ abstract class Contact extends Service
     public function exportSimpleUser($encodingAeskey, $blockSize = 1000000)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/export/simple_user?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, [
+        return $this->handler->callPostApi($url, [
             'encoding_aeskey' => $encodingAeskey,
             'block_size' => $blockSize,
         ]);
@@ -512,7 +512,7 @@ abstract class Contact extends Service
     public function exportUser($encodingAeskey, $blockSize = 1000000)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/export/user?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, [
+        return $this->handler->callPostApi($url, [
             'encoding_aeskey' => $encodingAeskey,
             'block_size' => $blockSize,
         ]);
@@ -528,7 +528,7 @@ abstract class Contact extends Service
     public function exportDepartment($encodingAeskey, $blockSize = 1000000)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/export/department?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, [
+        return $this->handler->callPostApi($url, [
             'encoding_aeskey' => $encodingAeskey,
             'block_size' => $blockSize,
         ]);
@@ -545,7 +545,7 @@ abstract class Contact extends Service
     public function exportTaguser($tagid, $encodingAeskey, $blockSize = 1000000)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/export/taguser?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, [
+        return $this->handler->callPostApi($url, [
             'tagid' => $tagid,
             'encoding_aeskey' => $encodingAeskey,
             'block_size' => $blockSize,
@@ -561,6 +561,6 @@ abstract class Contact extends Service
     public function exportGetResult($jobid)
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/export/get_result?access_token=ACCESS_TOKEN&jobid={$jobid}";
-        return $this->platform->callGetApi($url);
+        return $this->handler->callGetApi($url);
     }
 }

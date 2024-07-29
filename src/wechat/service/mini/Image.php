@@ -28,7 +28,7 @@ class Image extends Service
     public function aiCrop($img_url, $img)
     {
         $url = 'https://api.weixin.qq.com/cv/img/aicrop?access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['img_url' => $img_url, 'img' => $img]);
+        return $this->handler->callPostApi($url, ['img_url' => $img_url, 'img' => $img]);
     }
 
     /**
@@ -41,7 +41,7 @@ class Image extends Service
     public function scanQRCode($img_url, $img)
     {
         $url = 'https://api.weixin.qq.com/cv/img/qrcode?img_url=ENCODE_URL&access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['img_url' => $img_url, 'img' => $img]);
+        return $this->handler->callPostApi($url, ['img_url' => $img_url, 'img' => $img]);
     }
 
     /**
@@ -54,6 +54,6 @@ class Image extends Service
     public function superresolution($img_url, $img)
     {
         $url = 'https://api.weixin.qq.com/cv/img/qrcode?img_url=ENCODE_URL&access_token=ACCESS_TOKEN';
-        return $this->platform->callPostApi($url, ['img_url' => $img_url, 'img' => $img]);
+        return $this->handler->callPostApi($url, ['img_url' => $img_url, 'img' => $img]);
     }
 }
