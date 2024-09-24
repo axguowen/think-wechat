@@ -39,26 +39,4 @@ abstract class General extends Service
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/get_api_domain_ip?access_token=ACCESS_TOKEN';
         return $this->handler->callGetApi($url);
     }
-
-    /**
-     * 获取企业的jsapi_ticket
-     * @access public
-     * @return array
-     */
-    public function getCorpJsapiTicket()
-    {
-        $url = 'https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=ACCESS_TOKEN';
-        return $this->handler->callGetApi($url);
-    }
-
-    /**
-     * 获取应用的jsapi_ticket
-     * @access public
-     * @return array
-     */
-    public function getJsapiTicket()
-    {
-        $url = 'https://qyapi.weixin.qq.com/cgi-bin/ticket/get?access_token=ACCESS_TOKEN&type=agent_config';
-        return $this->handler->callGetApi($url);
-    }
 }
