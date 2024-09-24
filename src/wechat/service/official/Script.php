@@ -95,7 +95,7 @@ class Script extends Service
             'appId'     => $appid,
             'nonceStr'  => $data['noncestr'],
             'timestamp' => $data['timestamp'],
-            'signature' => $this->getSignature($data, 'sha1'),
+            'signature' => (static::signature($data, 'sha1'))[0],
             'jsApiList' => $jsApiList,
         ], null];
     }
@@ -108,11 +108,11 @@ class Script extends Service
      * @param array $params 签名参数
      * @return bool|string 签名值
      */
-    protected function getSignature($data, $method = 'sha1', $params = [])
+    public static function signature($data, $method = 'sha1', $params = [])
     {
         ksort($data);
         if (!function_exists($method)){
-            return [null, new \Exception('Invalid Resoponse Ticket.', '0')];
+            return [null, new \Exception('签名方法不存在')];
         }
         foreach ($data as $k => $v){
             $params[] = "{$k}={$v}";
