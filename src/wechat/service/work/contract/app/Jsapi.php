@@ -57,7 +57,7 @@ abstract class Jsapi extends Service
         // 获取签名结果
         $signResult = static::signature([
             'jsapi_ticket' => $jsapiTicket,
-            'nonceStr' => $nonceStr,
+            'noncestr' => $nonceStr,
             'timestamp' => $timestamp,
             'url' => $url,
         ]);
