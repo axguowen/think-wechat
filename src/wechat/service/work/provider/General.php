@@ -55,4 +55,15 @@ class General extends Service
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_customized_auth_url?provider_access_token=ACCESS_TOKEN';
         return $this->handler->callPostApi($url, ['templateid_list' => $templateidList, 'state' => $state]);
     }
+
+    /**
+     * 获取充值账户余额
+     * @access public
+     * @return array
+     */
+    public function getAccountBalance()
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_account_balance?provider_access_token=ACCESS_TOKEN';
+        return $this->handler->callGetApi($url);
+    }
 }
