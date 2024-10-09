@@ -1209,6 +1209,23 @@ class ExternalContact extends Service
         ];
         return $this->handler->callPostApi($url, $data);
     }
+    
+    /**
+     * 获取获客链接使用成员接受消息数据
+     * @access public
+     * @param string $chatKey 会话信息凭据
+     * @return array
+     */
+    public function customerAcquisitionGetChatInfo($chatKey)
+    {
+        // 请求地址
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/customer_acquisition/get_chat_info?access_token=ACCESS_TOKEN';
+        // 请求参数
+        $data = [
+            'chat_key' => $chatKey,
+        ];
+        return $this->handler->callPostApi($url, $data);
+    }
 
     // +=======================
     // | 消息推送
