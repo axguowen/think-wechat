@@ -135,7 +135,7 @@ class AppAuth extends Service
      * @param int $resultType 结果返回方式, 1二维码图片buffer(默认), 2二维码图片url
      * @return array
      */
-    public function getAppQrcode($state = '', $style = 2, $resultType = 1)
+    public function getAppQrcode($state = '', $style = 2, $resultType = 2)
     {
         $suiteId = $this->handler->getConfig('suite_id');
         // 请求地址
