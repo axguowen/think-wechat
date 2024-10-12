@@ -110,19 +110,6 @@ class AppAuth extends Service
     }
 
     /**
-     * 获取应用的管理员列表
-     * @access public
-     * @param string $authCorpid 授权方corpid
-     * @param string $agentid 授权方安装的应用agentid
-     * @return array
-     */
-    public function getAdminList($authCorpid, $agentid)
-    {
-        $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_admin_list?suite_access_token=ACCESS_TOKEN';
-        return $this->handler->callPostApi($url, ['auth_corpid' => $authCorpid, 'agentid' => $agentid]);
-    }
-
-    /**
      * 获取应用二维码
      * @access public
      * @param string $state 用于区分不同的安装渠道, 可以填写a-zA-Z0-9, 长度不可超过32个字节
