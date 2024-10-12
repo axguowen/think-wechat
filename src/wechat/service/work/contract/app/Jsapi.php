@@ -67,7 +67,7 @@ abstract class Jsapi extends Service
         }
         // 成功
         return [[
-            'nonce_str' => $nonceStr,
+            'nonceStr' => $nonceStr,
             'timestamp' => $timestamp,
             'signature' => $signResult[0],
         ], null];
