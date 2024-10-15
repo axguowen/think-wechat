@@ -36,6 +36,14 @@ class License extends Service
     {
         // 请求地址
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/create_new_order?provider_access_token=ACCESS_TOKEN';
+        // 购买周期
+        $accountDuration = [];
+        if ($months > 0) {
+            $accountDuration['months'] = $months;
+        }
+        if ($days > 0) {
+            $accountDuration['days'] = $days;
+        }
         // 请求参数
         $data = [
             'corpid' => $corpid,
@@ -44,10 +52,7 @@ class License extends Service
                 'base_count' => $baseCount,
                 'external_contact_count' => $externalContactCount,
             ],
-            'account_duration' => [
-                'months' => $months,
-                'days' => $days,
-            ],
+            'account_duration' => $accountDuration,
         ];
         return $this->handler->callPostApi($url, $data);
     }
