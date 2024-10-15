@@ -166,7 +166,7 @@ class License extends Service
     public function listOrderAccount($orderId, $limit = 50, $cursor = '')
     {
         // 请求地址
-        $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/list_order?provider_access_token=ACCESS_TOKEN';
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/list_order_account?provider_access_token=ACCESS_TOKEN';
         // 请求参数
         $data = [
             'order_id' => $orderId,
