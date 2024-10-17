@@ -61,11 +61,11 @@ abstract class Application extends Service
         // 请求地址
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/agent/set_workbench_template?access_token=ACCESS_TOKEN';
         // 请求参数
-        $data = array_merge($options, [
+        $data = [
             'agentid' => $agentid,
             'type' => $type,
             'replace_user_data' => $replaceUserData,
-        ]);
+        ];
         if (!empty($defaultData)) {
             $data[$type] = $defaultData;
         }
@@ -98,13 +98,40 @@ abstract class Application extends Service
         // 请求地址
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/agent/set_workbench_data?access_token=ACCESS_TOKEN';
         // 请求参数
-        $data = array_merge($options, [
+        $data = [
             'agentid' => $agentid,
             'userid' => $userid,
             'type' => $type,
-        ]);
+        ];
         if (!empty($typeData)) {
             $data[$type] = $typeData;
+        }
+        return $this->handler->callPostApi($url, $data);
+    }
+
+    /**
+     * 批量设置应用在用户工作台展示的数据
+     * @access public
+     * @param int $agentid 企业应用的id
+     * @param array $useridList 需要设置的用户的userid列表
+     * @param string $type 模版类型
+     * @param array $typeData 模版数据
+     * @return array
+     */
+    public function batchSetWorkbenchData($agentid, array $useridList, $type = 'keydata', array $typeData = [])
+    {
+        // 请求地址
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/agent/set_workbench_data?access_token=ACCESS_TOKEN';
+        // 请求参数
+        $data = [
+            'agentid' => $agentid,
+            'userid_list' => $useridList,
+            'data' => [
+                'type' => $type,
+            ],
+        ];
+        if (!empty($typeData)) {
+            $data['data'][$type] = $typeData;
         }
         return $this->handler->callPostApi($url, $data);
     }
