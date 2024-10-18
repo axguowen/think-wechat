@@ -12,6 +12,7 @@
 namespace think\wechat\handler;
 
 use think\wechat\utils\Tools;
+use think\wechat\utils\ErrcodeOfficial;
 use axguowen\HttpClient;
 
 /**
@@ -34,6 +35,8 @@ class Official extends Base
         'token' => '',
         // 消息加解密密钥
         'encoding_aes_key' => '',
+        // 是否是调试模式
+        'debug_mode' => false,
     ];
 
     /**
@@ -108,5 +111,34 @@ class Official extends Base
         ];
         // 获取请求结果
         return HttpClient::post($requestUrl, $data, $header)->body;
+    }
+
+    /**
+     * 输出失败信息
+     * @access protected
+     * @param array $responseData
+     * @return mixed
+     */
+    protected function buildErrorMessage(array $responseData)
+    {
+        // 如果是成功或者是调试模式
+        if(!is_null($responseData[0]) || $this->options['debug_mode']){
+            // 直接返回
+            return $responseData;
+        }
+        // 获取错误代码
+        $errorCode = $responseData[1]->getCode();
+        // 如果是空
+        if(empty($errorCode)){
+            // 直接返回
+            return $responseData;
+        }
+        // 如果存在错误信息
+        if(isset(ErrcodeOfficial::$message[$errorCode])){
+            // 返回对应错误信息
+            return [null, new \Exception('接口返回错误: ' . ErrcodeWork::$message[$errorCode], $errorCode)];
+        }
+        // 返回
+        return $responseData;
     }
 }

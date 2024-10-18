@@ -273,7 +273,7 @@ abstract class Base implements HandlerInterface
         $getAccessTokenResult = $this->getAccessToken();
         // 获取接口调用凭证失败
         if(is_null($getAccessTokenResult[0])){
-            return $getAccessTokenResult;
+            return $this->buildErrorMessage($getAccessTokenResult);
         }
         $accessToken = $getAccessTokenResult[0];
         // 替换URL中的参数
@@ -302,7 +302,7 @@ abstract class Base implements HandlerInterface
             $this->accessTokenInvalid = false;
         }
         // 返回
-        return $parseResponseDataResult;
+        return $this->buildErrorMessage($parseResponseDataResult);
     }
 
     /**
@@ -320,7 +320,7 @@ abstract class Base implements HandlerInterface
         $getAccessTokenResult = $this->getAccessToken();
         // 获取接口调用凭证失败
         if(is_null($getAccessTokenResult[0])){
-            return $getAccessTokenResult;
+            return $this->buildErrorMessage($getAccessTokenResult);
         }
         $accessToken = $getAccessTokenResult[0];
         // 替换URL中的参数
@@ -353,7 +353,7 @@ abstract class Base implements HandlerInterface
             $this->accessTokenInvalid = false;
         }
         // 返回
-        return $parseResponseDataResult;
+        return $this->buildErrorMessage($parseResponseDataResult);
     }
 
     /**
@@ -374,7 +374,7 @@ abstract class Base implements HandlerInterface
         $getAccessTokenResult = $this->getAccessToken();
         // 获取接口调用凭证失败
         if(is_null($getAccessTokenResult[0])){
-            return $getAccessTokenResult;
+            return $this->buildErrorMessage($getAccessTokenResult);
         }
         $accessToken = $getAccessTokenResult[0];
         // 替换URL中的参数
@@ -398,7 +398,7 @@ abstract class Base implements HandlerInterface
             $this->accessTokenInvalid = false;
         }
         // 返回
-        return $parseResponseDataResult;
+        return $this->buildErrorMessage($parseResponseDataResult);
     }
 
     /**
@@ -452,6 +452,17 @@ abstract class Base implements HandlerInterface
         }
         // 实例化服务
         return App::invokeClass($class, [$this]);
+    }
+
+    /**
+     * 输出错误信息
+     * @access protected
+     * @param array $responseData
+     * @return mixed
+     */
+    protected function buildErrorMessage(array $responseData)
+    {
+        return $responseData;
     }
 
     /**
