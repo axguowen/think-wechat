@@ -132,7 +132,7 @@ class Mini extends Base
         // 如果存在错误信息
         if(isset(ErrcodeMini::$message[$errorCode])){
             // 返回对应错误信息
-            return [null, new \Exception('接口返回错误: ' . ErrcodeWork::$message[$errorCode], $errorCode)];
+            return [null, new \Exception('接口错误信息: ' . ErrcodeMini::$message[$errorCode] . ', 错误码: ' . $errorCode, $errorCode)];
         }
         // 返回
         return $responseData;
