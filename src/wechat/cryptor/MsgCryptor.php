@@ -84,6 +84,36 @@ class MsgCryptor
     }
 
     /**
+     * 解密私密消息数据
+     * @access public
+     * @param string $encrypted 加密的字符串
+     * @param string $encodingIV 加密向量
+     * @param string $encodingAESKey
+     * @return array
+     */
+    public static function decryptShareInfo($encrypted, $encodingIV, $encodingAESKey)
+    {
+        try {
+            // 解码
+            $encrypted = base64_decode($encrypted);
+            $aesIV = base64_decode($encodingIV);
+            $aesKey = base64_decode($encodingAESKey);
+            // 解密
+            $decrypted = openssl_decrypt($encrypted, 'AES-128-CBC', $aesKey, OPENSSL_RAW_DATA, $aesIV);
+        } catch (\Exception $e) {
+            return [ErrorCode::$DecryptAESError, null];
+        }
+        try {
+            // 补位块删除
+            $result = PKCS7Encoder::decode($decrypted);
+            // 返回
+            return [ErrorCode::$OK, $result];
+        } catch (\Exception $e) {
+            return [ErrorCode::$IllegalBuffer, null];
+        }
+    }
+
+    /**
      * 随机生成16位字符串
      * @access protected
      * @param string $str

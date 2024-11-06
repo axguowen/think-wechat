@@ -115,4 +115,36 @@ abstract class MessageCryptor extends Service
         // 返回
         return [sprintf($format, $encrypted, $localSignature, $timestamp, $nonce), null];
     }
+
+    /**
+     * 解密分享私密消息内容
+     * @access public
+     * @param string $encryptedData 加密的字符串
+     * @param string $iv 加密向量
+     * @param string $ticket agentConfig使用的ticket
+     * @return array
+     */
+    public function decryptShareInfo($encryptedData, $iv, $ticket)
+    {
+        // 解密
+        $result = MsgCryptor::decryptShareInfo($encryptedData, $iv, $ticket);
+        // 解密失败
+        if ($result[0] != ErrorCode::$OK) {
+			return [null, new \Exception(ErrorCode::getErrText($result[0]))];
+		}
+
+        try{
+            // 解密数据转数组
+            $decryptData = Tools::json2arr($result[1]);
+        } catch (\Exception $e) {
+            return [null, $e];
+        }
+
+        // 转换失败
+        if(!is_array($decryptData)){
+            return [null, new \Exception('解析JSON失败')];
+        }
+        // 返回
+        return [$decryptData, null];
+    }
 }
