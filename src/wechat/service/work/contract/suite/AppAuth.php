@@ -26,6 +26,18 @@ class AppAuth extends Service
      */
     public function getPermanentCode($authCode)
     {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/v2/get_permanent_code?suite_access_token=ACCESS_TOKEN';
+        return $this->handler->callPostApi($url, ['auth_code' => $authCode,]);
+    }
+
+    /**
+     * 获取企业永久授权码(旧版接口)
+     * @access public
+     * @param string $authCode 临时授权码
+     * @return array
+     */
+    public function getPermanentCodeOld($authCode)
+    {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_permanent_code?suite_access_token=ACCESS_TOKEN';
         return $this->handler->callPostApi($url, ['auth_code' => $authCode,]);
     }
@@ -38,6 +50,19 @@ class AppAuth extends Service
      * @return array
      */
     public function getAuthInfo($authCorpid, $permanentCode)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/v2/get_auth_info?suite_access_token=ACCESS_TOKEN';
+        return $this->handler->callPostApi($url, ['auth_corpid' => $authCorpid, 'permanent_code' => $permanentCode]);
+    }
+
+    /**
+     * 获取企业授权信息(旧版接口)
+     * @access public
+     * @param string $authCorpid 授权方corpid
+     * @param string $permanentCode 企业永久授权码
+     * @return array
+     */
+    public function getAuthInfoOld($authCorpid, $permanentCode)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/service/get_auth_info?suite_access_token=ACCESS_TOKEN';
         return $this->handler->callPostApi($url, ['auth_corpid' => $authCorpid, 'permanent_code' => $permanentCode]);
