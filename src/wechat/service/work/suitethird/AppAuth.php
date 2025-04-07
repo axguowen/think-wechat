@@ -63,7 +63,7 @@ class AppAuth extends Service
      * @param string $state 为重定向后会带上state参数(填写a-zA-Z0-9的参数值，最多128字节)
      * @param string $preAuthCode 预授权码
      * @param array $options 其它参数
-     * @return string
+     * @return array
      */
     public function getAuthUrl($redirectUri, $state = '', $preAuthCode = '', $options = [])
     {
@@ -78,7 +78,8 @@ class AppAuth extends Service
             $getPreAuthCodeResult = $this->getPreAuthCode();
             // 失败
             if(is_null($getPreAuthCodeResult[0])){
-                return $getPreAuthCodeResult[1]->getMessage();
+                // 返回
+                return $getPreAuthCodeResult;
             }
             // 获取结果
             $preAuthCode = $getPreAuthCodeResult[0]['pre_auth_code'];
@@ -89,11 +90,14 @@ class AppAuth extends Service
             $setSessionInfoResult = $this->setSessionInfo($preAuthCode, $options['auth_type']);
             // 失败
             if(is_null($setSessionInfoResult[0])){
-                return $setSessionInfoResult[1]->getMessage();
+                // 返回
+                return $setSessionInfoResult;
             }
         }
+        // 拼接授权链接
+        $authUrl = "https://open.work.weixin.qq.com/3rdapp/install?suite_id={$suiteId}&pre_auth_code={$preAuthCode}&redirect_uri={$redirectUri}&state={$state}";
         // 返回授权链接
-        return "https://open.work.weixin.qq.com/3rdapp/install?suite_id={$suiteId}&pre_auth_code={$preAuthCode}&redirect_uri={$redirectUri}&state={$state}";
+        return [['auth_url' => $authUrl], null];
     }
 
     /**
