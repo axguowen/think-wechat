@@ -270,7 +270,7 @@ class License extends Service
     public function submitPayJob($orderId, $payerUserid)
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/submit_pay_job?provider_access_token=ACCESS_TOKEN';
-        return $this->handler->callPostApi($url, ['orderid' => $orderId, 'payer_userid' => $payerUserid]);
+        return $this->handler->callPostApi($url, ['order_id' => $orderId, 'payer_userid' => $payerUserid]);
     }
 
     /**
