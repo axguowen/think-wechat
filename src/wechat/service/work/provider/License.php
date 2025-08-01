@@ -192,7 +192,7 @@ class License extends Service
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/cancel_order?provider_access_token=ACCESS_TOKEN';
         // 请求参数
         $data = [
-            'order_id' => $order_id,
+            'order_id' => $orderId,
         ];
         // 指定了企业id
         if(!empty($corpid)){
