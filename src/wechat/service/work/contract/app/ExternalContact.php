@@ -33,6 +33,17 @@ class ExternalContact extends Service
         return $this->handler->callGetApi($url);
     }
 
+    /**
+     * 获取客户可建联成员
+     * @access public
+     * @return array
+     */
+    public function getPermit()
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/customer_acquisition_app/get_permit?access_token=ACCESS_TOKEN';
+        return $this->handler->callGetApi($url);
+    }
+
     // +=======================
     // | 客户管理
     // +=======================
