@@ -609,24 +609,27 @@ class ExternalContact extends Service
     /**
      * 获取客户群列表
      * @access public
-     * @param int $statusFilter 客户群跟进状态过滤
      * @param array $ownerFilter 群主过滤
+     * @param int $statusFilter 客户群跟进状态过滤
      * @param int $limit 返回的最大记录数, 整型, 最大值1000, 默认值50
      * @param string $cursor 用于分页查询的游标
      * @return array
      */
-    public function groupchatList($statusFilter = 0, array $ownerFilter = [], $limit = 50, $cursor = '')
+    public function groupchatList(array $ownerFilter = [], $statusFilter = 0, $limit = 50, $cursor = '')
     {
         // 请求地址
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/groupchat/list?access_token=ACCESS_TOKEN';
         // 请求参数
         $data = [
-            'ownerFilter' => $statusFilter,
             'limit' => $limit,
         ];
         // 指定了群主过滤
         if(!empty($ownerFilter)){
             $data['owner_filter'] = $ownerFilter;
+        }
+        // 指定了状态过滤
+        if(!empty($statusFilter)){
+            $data['status_filter'] = $statusFilter;
         }
         // 指定了分页游标
         if(!empty($cursor)){
