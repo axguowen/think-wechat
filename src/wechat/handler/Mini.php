@@ -29,6 +29,10 @@ class Mini extends Base
         'appid' => '',
         // 小程序密钥
         'appsecret' => '',
+        // 接收消息时的校验Token
+        'token' => '',
+        // 消息加解密密钥
+        'encoding_aes_key' => '',
         // 是否使用稳定版接口调用凭证
         'use_stable_access_token' => false,
         // 是否是调试模式
