@@ -14,7 +14,7 @@ namespace think\wechat\service\work\appthird;
 use think\wechat\service\work\contract\app\Chatdata as Service;
 
 /**
- * 会话内容存档服务
+ * 数据与智能专区服务
  */
 class Chatdata extends Service
 {

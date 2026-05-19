@@ -9,22 +9,26 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace think\wechat\service\work\appself;
+namespace think\wechat\service\work\contract\app;
 
 use think\wechat\Service;
 
 /**
- * 数据与智能专区服务
+ * 数据与智能专区文档存档服务基础类
  */
-class Chatdata extends Service
+abstract class Docdata extends Service
 {
+    // +=======================
+    // | 基础接口
+    // +=======================
     /**
-     * 获取数据与智能专区授权信息
+     * 获取数据与智能专区文档存档授权信息
      * @access public
      * @return array
      */
-    public function getCorpAuthInfo()
+    public function getAuthInfo()
     {
-        return [null, new \Exception('自建应用不支持该方法')];
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/docdata/get_auth_info?access_token=ACCESS_TOKEN';
+        return $this->handler->callPostApi($url);
     }
 }
