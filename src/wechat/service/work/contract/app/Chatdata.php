@@ -222,6 +222,53 @@ abstract class Chatdata extends Service
         return $this->handler->callPostApi($url, ['jobid' => $jobid]);
     }
 
+    /**
+     * 应用开启调试模式
+     * @access public
+     * @param string $programId 应用关联的程序id
+     * @param string $debugToken 程序的调试凭证
+     * @return array
+     */
+    public function openDebugMode($programId, $debugToken)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/open_debug_mode?access_token=ACCESS_TOKEN';
+        $data = [
+            'program_id' => $programId,
+            'debug_token' => $debugToken,
+        ];
+        return $this->handler->callPostApi($url, $data);
+    }
+
+    /**
+     * 应用关闭调试模式
+     * @access public
+     * @param string $programId 应用关联的程序id
+     * @return array
+     */
+    public function closeDebugMode($programId)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/close_debug_mode?access_token=ACCESS_TOKEN';
+        $data = [
+            'program_id' => $programId,
+        ];
+        return $this->handler->callPostApi($url, $data);
+    }
+
+    /**
+     * 应用获取调试模式状态
+     * @access public
+     * @param string $programId 应用关联的程序id
+     * @return array
+     */
+    public function checkDebugMode($programId)
+    {
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/check_debug_mode?access_token=ACCESS_TOKEN';
+        $data = [
+            'program_id' => $programId,
+        ];
+        return $this->handler->callPostApi($url, $data);
+    }
+
     // +=======================
     // | 应用调用程序方法
     // +=======================
