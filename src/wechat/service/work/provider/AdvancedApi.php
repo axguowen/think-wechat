@@ -26,12 +26,12 @@ class AdvancedApi extends Service
      * @access public
      * @param string $customCorpid 客户企业id
      * @param string $buyerUserid 下单人, 服务商企业内成员的明文userid
-     * @param int $orderType 订单类型: 0-新购、1-增购、2-续期、3-升级
      * @param int $advancedApiType 购买的高级接口类型: 1-会话内容数据接口
+     * @param int $orderType 订单类型: 0-新购、1-增购、2-续期、3-升级
      * @param array $options 其他参数
      * @return array
      */
-    public function createOrder($customCorpid, $buyerUserid, $orderType = 0, $advancedApiType = 1, $options = [])
+    public function createOrder($customCorpid, $buyerUserid, $advancedApiType = 1, $orderType = 0, $options = [])
     {
         // 请求地址
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/advanced_api/create_order?provider_access_token=ACCESS_TOKEN';
