@@ -173,13 +173,17 @@ abstract class Chatdata extends Service
     public function syncCallProgram($programId, $abilityId, array $requestData = [], $notifyId = '')
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/sync_call_program?access_token=ACCESS_TOKEN';
-        // 转换为JSON字符串
-        $requestData = json_encode($requestData, JSON_UNESCAPED_UNICODE);
+        // 请求的输入JSON
+        $requestJson = '{}';
+        // 如英国请求数据不为空
+        if(!empty($requestData)){
+            $requestJson = json_encode($requestData, JSON_UNESCAPED_UNICODE);
+        }
         // 请求参数
         $data = [
             'program_id' => $programId,
             'ability_id' => $abilityId,
-            'request_data' => $requestData,
+            'request_data' => $requestJson,
         ];
         // 如果通知ID不为空
         if (!empty($notifyId)) {
@@ -199,13 +203,17 @@ abstract class Chatdata extends Service
     public function asyncCallProgram($programId, $abilityId, array $requestData = [])
     {
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/chatdata/async_call_program?access_token=ACCESS_TOKEN';
-        // 转换为JSON字符串
-        $requestData = json_encode($requestData, JSON_UNESCAPED_UNICODE);
+        // 请求的输入JSON
+        $requestJson = '{}';
+        // 如英国请求数据不为空
+        if(!empty($requestData)){
+            $requestJson = json_encode($requestData, JSON_UNESCAPED_UNICODE);
+        }
         // 请求参数
         $data = [
             'program_id' => $programId,
             'ability_id' => $abilityId,
-            'request_data' => $requestData,
+            'request_data' => $requestJson,
         ];
         return $this->handler->callPostApi($url, $data);
     }
