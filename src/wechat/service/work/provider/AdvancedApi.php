@@ -58,7 +58,7 @@ class AdvancedApi extends Service
     public function cancelOrder($orderId)
     {
         // 请求地址
-        $url = 'https://qyapi.weixin.qq.com/cgi-bin/license/cancel_order?provider_access_token=ACCESS_TOKEN';
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/advanced_api/cancel_order?provider_access_token=ACCESS_TOKEN';
         // 请求参数
         $data = [
             'order_id' => $orderId,
